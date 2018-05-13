@@ -6,6 +6,7 @@ Public Class frm_ServerSettings
         txt_Username.Text = My.Settings.Username
         txt_Password.Text = If(My.Settings.Password <> "", DecryptString(My.Settings.Password), "")
         txt_Database.Text = My.Settings.Database
+        cb_Pooling.Checked = My.Settings.Pooling
     End Sub
 
     Private Sub btn_Save_Click(sender As Object, e As EventArgs) Handles btn_Save.Click
@@ -13,6 +14,7 @@ Public Class frm_ServerSettings
         My.Settings.Username = txt_Username.Text
         My.Settings.Password = EncryptString(txt_Password.Text)
         My.Settings.Database = txt_Database.Text
+        My.Settings.Pooling = cb_Pooling.Checked
         My.Settings.Save()
         MsgBox("Server settings saved successfully.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
         DialogResult = DialogResult.OK
@@ -21,7 +23,7 @@ Public Class frm_ServerSettings
 
     Private Sub btn_TestConnection_Click(sender As Object, e As EventArgs) Handles btn_TestConnection.Click
         Try
-            Dim connection As New SqlConnection(String.Format("Server={0};Initial Catalog={1};User ID={2};Password={3};", txt_Server.Text, txt_Database.Text, txt_Username.Text, txt_Password.Text))
+            Dim connection As New SqlConnection(String.Format("Server={0};Initial Catalog={1};User ID={2};Password={3};Pooling={4};", txt_Server.Text, txt_Database.Text, txt_Username.Text, txt_Password.Text, If(cb_Pooling.Checked, "true", "false")))
 
             If connection.State = ConnectionState.Closed Then
                 connection.Open()

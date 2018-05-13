@@ -113,6 +113,66 @@ Namespace My
                 Me("Database") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property Pooling() As Boolean
+            Get
+                Return CType(Me("Pooling"),Boolean)
+            End Get
+            Set
+                Me("Pooling") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("25")>  _
+        Public Property ProvisonalSlip_TopMargin() As Integer
+            Get
+                Return CType(Me("ProvisonalSlip_TopMargin"),Integer)
+            End Get
+            Set
+                Me("ProvisonalSlip_TopMargin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("10")>  _
+        Public Property ProvisonalSlip_BottomMargin() As Integer
+            Get
+                Return CType(Me("ProvisonalSlip_BottomMargin"),Integer)
+            End Get
+            Set
+                Me("ProvisonalSlip_BottomMargin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("100")>  _
+        Public Property ProvisonalSlip_LeftMargin() As Integer
+            Get
+                Return CType(Me("ProvisonalSlip_LeftMargin"),Integer)
+            End Get
+            Set
+                Me("ProvisonalSlip_LeftMargin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("100")>  _
+        Public Property ProvisonalSlip_RightMargin() As Integer
+            Get
+                Return CType(Me("ProvisonalSlip_RightMargin"),Integer)
+            End Get
+            Set
+                Me("ProvisonalSlip_RightMargin") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

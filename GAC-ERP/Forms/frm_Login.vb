@@ -34,33 +34,38 @@ Public Class frm_Login
 
     Private Sub btn_Login_Click(sender As Object, e As EventArgs) Handles btn_Login.Click
 
-        ErrorProvider.ClearErrors()
-        Dim connection As New SqlConnection(String.Format("Server={0};Initial Catalog={1};User ID={2};Password={3};", My.Settings.Server, My.Settings.Database, My.Settings.Username, DecryptString(My.Settings.Password)))
-        If (connection.State = ConnectionState.Closed) Then connection.Open()
+        Try
+            ErrorProvider.ClearErrors()
+            Dim connection As SqlConnection = GetConnection()
+            If (connection.State = ConnectionState.Closed) Then connection.Open()
 
-        Dim cmd1 As New SqlCommand("SELECT COUNT(*) FROM Staffs WHERE Username = @Username", connection)
-        cmd1.Parameters.Add(New SqlParameter("@Username", txt_Username.Text))
-        Dim count1 As Integer = cmd1.ExecuteScalar
+            Dim cmd1 As New SqlCommand("SELECT COUNT(*) FROM Staffs WHERE Username = @Username", connection)
+            cmd1.Parameters.Add(New SqlParameter("@Username", txt_Username.Text.Trim.ToLower))
+            Dim count1 As Integer = cmd1.ExecuteScalar
 
-        If count1 = 1 Then
-            Dim cmd2 As New SqlCommand("SELECT COUNT(*) FROM Staffs WHERE Username = @Username AND Password = @Password", connection)
-            cmd2.Parameters.Add(New SqlParameter("@Username", txt_Username.Text))
-            cmd2.Parameters.Add(New SqlParameter("@Password", EncryptString(txt_Password.Text)))
-            Dim count2 As Integer = cmd2.ExecuteScalar
-            If count2 = 1 Then
-                'Login success
+            If count1 = 1 Then
+                Dim cmd2 As New SqlCommand("SELECT COUNT(*) FROM Staffs WHERE Username = @Username AND Password = @Password", connection)
+                cmd2.Parameters.Add(New SqlParameter("@Username", txt_Username.Text.Trim.ToLower))
+                cmd2.Parameters.Add(New SqlParameter("@Password", EncryptString(txt_Password.Text)))
+                Dim count2 As Integer = cmd2.ExecuteScalar
+                If count2 = 1 Then
+                    Dim Staff As Staff = GetStaff(txt_Username.Text.Trim.ToLower, connection)
+                    Dim d As New frm_Main(Staff)
+                    d.Show()
+                    Me.Close()
+                Else
+                    ErrorProvider.SetIconAlignment(txt_Password, ErrorIconAlignment.MiddleRight)
+                    ErrorProvider.SetError(txt_Password, "Invalid password!")
+                End If
             Else
-                ErrorProvider.SetIconAlignment(txt_Password, ErrorIconAlignment.MiddleRight)
-                ErrorProvider.SetError(txt_Password, "Invalid password!")
+                ErrorProvider.SetIconAlignment(txt_Username, ErrorIconAlignment.MiddleRight)
+                ErrorProvider.SetError(txt_Username, "Invalid username!")
             End If
-        Else
-            ErrorProvider.SetIconAlignment(txt_Username, ErrorIconAlignment.MiddleRight)
-            ErrorProvider.SetError(txt_Username, "Invalid username!")
-        End If
 
-        connection.Close()
-
-        Threading.Thread.Sleep(3000)
+            connection.Close()
+        Catch ex As Exception
+            ShowError(ex)
+        End Try
 
     End Sub
 End Class

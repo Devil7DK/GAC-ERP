@@ -33,10 +33,12 @@ Partial Class frm_ServerSettings
         Me.btn_TestConnection = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.txt_Database = New DevExpress.XtraEditors.TextEdit()
+        Me.cb_Pooling = New DevExpress.XtraEditors.CheckEdit()
         CType(Me.txt_Server.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_Username.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_Password.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_Database.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cb_Pooling.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LabelControl1
@@ -87,6 +89,7 @@ Partial Class frm_ServerSettings
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt_Password.Location = New System.Drawing.Point(71, 87)
         Me.txt_Password.Name = "txt_Password"
+        Me.txt_Password.Properties.UseSystemPasswordChar = True
         Me.txt_Password.Size = New System.Drawing.Size(207, 20)
         Me.txt_Password.TabIndex = 3
         '
@@ -94,7 +97,7 @@ Partial Class frm_ServerSettings
         '
         Me.btn_Save.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btn_Save.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources.save
-        Me.btn_Save.Location = New System.Drawing.Point(203, 117)
+        Me.btn_Save.Location = New System.Drawing.Point(203, 138)
         Me.btn_Save.Name = "btn_Save"
         Me.btn_Save.Size = New System.Drawing.Size(75, 25)
         Me.btn_Save.TabIndex = 4
@@ -103,7 +106,7 @@ Partial Class frm_ServerSettings
         'btn_TestConnection
         '
         Me.btn_TestConnection.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btn_TestConnection.Location = New System.Drawing.Point(12, 119)
+        Me.btn_TestConnection.Location = New System.Drawing.Point(12, 140)
         Me.btn_TestConnection.Name = "btn_TestConnection"
         Me.btn_TestConnection.Size = New System.Drawing.Size(98, 23)
         Me.btn_TestConnection.TabIndex = 4
@@ -127,11 +130,20 @@ Partial Class frm_ServerSettings
         Me.txt_Database.Size = New System.Drawing.Size(207, 20)
         Me.txt_Database.TabIndex = 1
         '
+        'cb_Pooling
+        '
+        Me.cb_Pooling.Location = New System.Drawing.Point(71, 113)
+        Me.cb_Pooling.Name = "cb_Pooling"
+        Me.cb_Pooling.Properties.Caption = "Pooling"
+        Me.cb_Pooling.Size = New System.Drawing.Size(53, 19)
+        Me.cb_Pooling.TabIndex = 5
+        '
         'frm_ServerSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(290, 154)
+        Me.ClientSize = New System.Drawing.Size(290, 175)
+        Me.Controls.Add(Me.cb_Pooling)
         Me.Controls.Add(Me.btn_TestConnection)
         Me.Controls.Add(Me.btn_Save)
         Me.Controls.Add(Me.txt_Password)
@@ -153,6 +165,7 @@ Partial Class frm_ServerSettings
         CType(Me.txt_Username.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_Password.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_Database.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cb_Pooling.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -168,4 +181,5 @@ Partial Class frm_ServerSettings
     Friend WithEvents btn_TestConnection As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents txt_Database As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents cb_Pooling As DevExpress.XtraEditors.CheckEdit
 End Class

@@ -47,13 +47,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Office.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Printing.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v17.2.Export, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Snap.v17.2">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Snap.v17.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Utils.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraBars.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraRichEdit.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -77,12 +85,53 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Database.vb" />
     <Compile Include="Classes\PublicFunctions.vb" />
+    <Compile Include="Classes\PublicSubs.vb" />
+    <Compile Include="Classes\RichTextBoxPrintCtrl.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Classes\TripleDES.vb" />
+    <Compile Include="Dialogs\frm_Courses.Designer.vb">
+      <DependentUpon>frm_Courses.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\frm_Courses.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\frm_FeesStructure.Designer.vb">
+      <DependentUpon>frm_FeesStructure.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\frm_FeesStructure.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\frm_InputBox.Designer.vb">
+      <DependentUpon>frm_InputBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\frm_InputBox.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\frm_PageSettings.Designer.vb">
+      <DependentUpon>frm_PageSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\frm_PageSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Dialogs\frm_ServerSettings.Designer.vb">
       <DependentUpon>frm_ServerSettings.vb</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\frm_ServerSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\frm_AdmissionList.Designer.vb">
+      <DependentUpon>frm_AdmissionList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\frm_AdmissionList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frm_Main.Designer.vb">
+      <DependentUpon>frm_Main.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frm_Main.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frm_Splash.Designer.vb">
@@ -115,10 +164,33 @@
     <Compile Include="Classes\XtraFormTmp.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Objects\AdmissionEntry.vb" />
+    <Compile Include="Objects\Course.vb" />
+    <Compile Include="Objects\FeesStructure.vb" />
+    <Compile Include="Objects\Permissions.vb" />
+    <Compile Include="Objects\Staff.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Dialogs\frm_Courses.resx">
+      <DependentUpon>frm_Courses.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\frm_FeesStructure.resx">
+      <DependentUpon>frm_FeesStructure.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\frm_InputBox.resx">
+      <DependentUpon>frm_InputBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\frm_PageSettings.resx">
+      <DependentUpon>frm_PageSettings.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\frm_ServerSettings.resx">
       <DependentUpon>frm_ServerSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\frm_AdmissionList.resx">
+      <DependentUpon>frm_AdmissionList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frm_Main.resx">
+      <DependentUpon>frm_Main.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Splash.resx">
       <DependentUpon>frm_Splash.vb</DependentUpon>
@@ -145,6 +217,9 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="Templates\Admission_Slip_Template.rtf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\SecureScreen.png" />
@@ -160,6 +235,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\lg.curve-bars-loading-indicator.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

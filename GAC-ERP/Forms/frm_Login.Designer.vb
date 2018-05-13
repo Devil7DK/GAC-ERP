@@ -29,14 +29,14 @@ Partial Class frm_Login
         Me.txt_Username = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.txt_Password = New DevExpress.XtraEditors.TextEdit()
+        Me.ErrorProvider = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
         Me.btn_ServerSettings = New DevExpress.XtraEditors.SimpleButton()
         Me.btn_Login = New DevExpress.XtraEditors.SimpleButton()
         Me.LogoPictureBox = New System.Windows.Forms.PictureBox()
-        Me.ErrorProvider = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
         CType(Me.txt_Username.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_Password.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LabelControl1
@@ -75,6 +75,10 @@ Partial Class frm_Login
         Me.txt_Password.Size = New System.Drawing.Size(248, 20)
         Me.txt_Password.TabIndex = 2
         '
+        'ErrorProvider
+        '
+        Me.ErrorProvider.ContainerControl = Me
+        '
         'btn_ServerSettings
         '
         Me.btn_ServerSettings.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources.server_settings
@@ -96,17 +100,14 @@ Partial Class frm_Login
         '
         'LogoPictureBox
         '
+        Me.LogoPictureBox.Dock = System.Windows.Forms.DockStyle.Left
         Me.LogoPictureBox.Image = Global.GAC_ERP.My.Resources.Resources.SecureScreen
-        Me.LogoPictureBox.Location = New System.Drawing.Point(0, -18)
+        Me.LogoPictureBox.Location = New System.Drawing.Point(0, 0)
         Me.LogoPictureBox.Name = "LogoPictureBox"
-        Me.LogoPictureBox.Size = New System.Drawing.Size(149, 192)
+        Me.LogoPictureBox.Size = New System.Drawing.Size(149, 162)
         Me.LogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.LogoPictureBox.TabIndex = 0
         Me.LogoPictureBox.TabStop = False
-        '
-        'ErrorProvider
-        '
-        Me.ErrorProvider.ContainerControl = Me
         '
         'frm_Login
         '
@@ -129,8 +130,8 @@ Partial Class frm_Login
         Me.Text = "Login"
         CType(Me.txt_Username.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_Password.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
