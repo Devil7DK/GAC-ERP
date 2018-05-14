@@ -106,14 +106,14 @@ Partial Class frm_AdmissionList
         Me.LabelControl37 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl38 = New DevExpress.XtraEditors.LabelControl()
         Me.txt_Department = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl39 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl40 = New DevExpress.XtraEditors.LabelControl()
+        Me.txt_State = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.grp_Data = New DevExpress.XtraEditors.GroupControl()
         Me.SplitterControl1 = New DevExpress.XtraEditors.SplitterControl()
         Me.PrintPreviewDialog1 = New System.Windows.Forms.PrintPreviewDialog()
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
-        Me.LabelControl39 = New DevExpress.XtraEditors.LabelControl()
-        Me.LabelControl40 = New DevExpress.XtraEditors.LabelControl()
-        Me.txt_State = New DevExpress.XtraEditors.ComboBoxEdit()
         CType(Me.grp_Entries, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grp_Entries.SuspendLayout()
         CType(Me.gc_AdmissionEntries, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -145,9 +145,9 @@ Partial Class frm_AdmissionList
         CType(Me.cb_SpecialQuota, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_Remarks.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_Department.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txt_State.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.grp_Data, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grp_Data.SuspendLayout()
-        CType(Me.txt_State.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'grp_Entries
@@ -1010,6 +1010,37 @@ Partial Class frm_AdmissionList
         Me.txt_Department.TabIndex = 0
         Me.txt_Department.TabStop = False
         '
+        'LabelControl39
+        '
+        Me.LabelControl39.Dock = System.Windows.Forms.DockStyle.Left
+        Me.LabelControl39.Location = New System.Drawing.Point(3, 178)
+        Me.LabelControl39.Name = "LabelControl39"
+        Me.LabelControl39.Size = New System.Drawing.Size(26, 13)
+        Me.LabelControl39.TabIndex = 39
+        Me.LabelControl39.Text = "State"
+        '
+        'LabelControl40
+        '
+        Me.LabelControl40.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.LabelControl40.Location = New System.Drawing.Point(118, 178)
+        Me.LabelControl40.Name = "LabelControl40"
+        Me.LabelControl40.Size = New System.Drawing.Size(2, 19)
+        Me.LabelControl40.TabIndex = 40
+        Me.LabelControl40.Text = ":"
+        '
+        'txt_State
+        '
+        Me.txt_State.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txt_State.EditValue = "Tamil Nadu"
+        Me.txt_State.Location = New System.Drawing.Point(126, 178)
+        Me.txt_State.MenuManager = Me.BarManager1
+        Me.txt_State.Name = "txt_State"
+        Me.txt_State.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.txt_State.Properties.Items.AddRange(New Object() {"Andaman and Nicobar Islands", "Andra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadar and Nagar Haveli", "Daman and Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadeep", "Madya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Tripura", "Uttar Pradesh", "Uttaranchal", "West Bengal"})
+        Me.txt_State.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor
+        Me.txt_State.Size = New System.Drawing.Size(440, 20)
+        Me.txt_State.TabIndex = 41
+        '
         'grp_Data
         '
         Me.grp_Data.Controls.Add(Me.panel_Data)
@@ -1049,37 +1080,6 @@ Partial Class frm_AdmissionList
         Me.PrintDialog1.Document = Me.PrintDocument1
         Me.PrintDialog1.UseEXDialog = True
         '
-        'LabelControl39
-        '
-        Me.LabelControl39.Dock = System.Windows.Forms.DockStyle.Left
-        Me.LabelControl39.Location = New System.Drawing.Point(3, 178)
-        Me.LabelControl39.Name = "LabelControl39"
-        Me.LabelControl39.Size = New System.Drawing.Size(26, 13)
-        Me.LabelControl39.TabIndex = 39
-        Me.LabelControl39.Text = "State"
-        '
-        'LabelControl40
-        '
-        Me.LabelControl40.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LabelControl40.Location = New System.Drawing.Point(118, 178)
-        Me.LabelControl40.Name = "LabelControl40"
-        Me.LabelControl40.Size = New System.Drawing.Size(2, 19)
-        Me.LabelControl40.TabIndex = 40
-        Me.LabelControl40.Text = ":"
-        '
-        'txt_State
-        '
-        Me.txt_State.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txt_State.EditValue = "Tamil Nadu"
-        Me.txt_State.Location = New System.Drawing.Point(126, 178)
-        Me.txt_State.MenuManager = Me.BarManager1
-        Me.txt_State.Name = "txt_State"
-        Me.txt_State.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.txt_State.Properties.Items.AddRange(New Object() {"Andaman and Nicobar Islands", "Andra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadar and Nagar Haveli", "Daman and Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadeep", "Madya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Tripura", "Uttar Pradesh", "Uttaranchal", "West Bengal"})
-        Me.txt_State.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor
-        Me.txt_State.Size = New System.Drawing.Size(440, 20)
-        Me.txt_State.TabIndex = 41
-        '
         'frm_AdmissionList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1093,6 +1093,7 @@ Partial Class frm_AdmissionList
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
         Me.Controls.Add(Me.barDockControlTop)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MinimizeBox = False
         Me.MinimumSize = New System.Drawing.Size(600, 500)
         Me.Name = "frm_AdmissionList"
@@ -1131,9 +1132,9 @@ Partial Class frm_AdmissionList
         CType(Me.cb_SpecialQuota, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_Remarks.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_Department.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txt_State.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.grp_Data, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grp_Data.ResumeLayout(False)
-        CType(Me.txt_State.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -17,8 +17,7 @@
         Me.DialogResult = DialogResult.OK
         Me.Close()
     End Sub
-
-    Private Sub txt_Text_KeyUp(sender As Object, e As KeyEventArgs) Handles txt_Text.KeyUp
+    Private Sub txt_Text_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_Text.KeyDown
         If e.KeyCode = Keys.Enter Then
             btn_Ok.PerformClick()
         End If

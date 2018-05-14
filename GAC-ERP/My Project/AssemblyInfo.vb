@@ -8,11 +8,11 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("GAC-ERP")>
-<Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("GAC-ERP")>
-<Assembly: AssemblyCopyright("Copyright ©  2018")>
+<Assembly: AssemblyTitle("Government Arts College - Administration Automation")>
+<Assembly: AssemblyDescription("Office automation & management system for Govt. Arts College - CBE")>
+<Assembly: AssemblyCompany("Devil7-Softwares")>
+<Assembly: AssemblyProduct("Devil7-Automation")>
+<Assembly: AssemblyCopyright("Copyright © Devil7 2018")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>

@@ -22,6 +22,7 @@ Partial Class frm_FeesStructure
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_FeesStructure))
         Me.btn_AddGroup = New DevExpress.XtraEditors.SimpleButton()
         Me.btn_RemoveGroup = New DevExpress.XtraEditors.SimpleButton()
         Me.btn_AddHead = New DevExpress.XtraEditors.SimpleButton()
@@ -313,7 +314,7 @@ Partial Class frm_FeesStructure
         Me.SplitterControl2.TabIndex = 9
         Me.SplitterControl2.TabStop = False
         '
-        'frm_DefaultFeesStructure
+        'frm_FeesStructure
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -321,11 +322,10 @@ Partial Class frm_FeesStructure
         Me.Controls.Add(Me.panel_Main)
         Me.Controls.Add(Me.btn_Save)
         Me.Controls.Add(Me.btn_Cancel)
-        Me.MaximizeBox = False
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MinimizeBox = False
         Me.MinimumSize = New System.Drawing.Size(400, 510)
-        Me.Name = "frm_DefaultFeesStructure"
-        Me.ShowIcon = False
+        Me.Name = "frm_FeesStructure"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Default Fees Structure"

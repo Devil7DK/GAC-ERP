@@ -25,15 +25,16 @@ Partial Class frm_Login
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_Login))
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.txt_Username = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.txt_Password = New DevExpress.XtraEditors.TextEdit()
         Me.ErrorProvider = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
+        Me.Worker_Login = New System.ComponentModel.BackgroundWorker()
         Me.btn_ServerSettings = New DevExpress.XtraEditors.SimpleButton()
         Me.btn_Login = New DevExpress.XtraEditors.SimpleButton()
         Me.LogoPictureBox = New System.Windows.Forms.PictureBox()
-        Me.Worker_Login = New System.ComponentModel.BackgroundWorker()
         CType(Me.txt_Username.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_Password.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -80,6 +81,9 @@ Partial Class frm_Login
         '
         Me.ErrorProvider.ContainerControl = Me
         '
+        'Worker_Login
+        '
+        '
         'btn_ServerSettings
         '
         Me.btn_ServerSettings.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources.server_settings
@@ -110,9 +114,6 @@ Partial Class frm_Login
         Me.LogoPictureBox.TabIndex = 0
         Me.LogoPictureBox.TabStop = False
         '
-        'Worker_Login
-        '
-        '
         'frm_Login
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -126,6 +127,7 @@ Partial Class frm_Login
         Me.Controls.Add(Me.LabelControl1)
         Me.Controls.Add(Me.LogoPictureBox)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frm_Login"

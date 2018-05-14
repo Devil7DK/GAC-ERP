@@ -39,14 +39,17 @@ Partial Class frm_InputBox
         '
         'txt_Text
         '
+        Me.txt_Text.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt_Text.Location = New System.Drawing.Point(12, 31)
         Me.txt_Text.Name = "txt_Text"
-        Me.txt_Text.Size = New System.Drawing.Size(266, 20)
+        Me.txt_Text.Size = New System.Drawing.Size(242, 20)
         Me.txt_Text.TabIndex = 1
         '
         'btn_Ok
         '
-        Me.btn_Ok.Location = New System.Drawing.Point(203, 57)
+        Me.btn_Ok.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btn_Ok.Location = New System.Drawing.Point(179, 58)
         Me.btn_Ok.Name = "btn_Ok"
         Me.btn_Ok.Size = New System.Drawing.Size(75, 23)
         Me.btn_Ok.TabIndex = 2
@@ -54,7 +57,8 @@ Partial Class frm_InputBox
         '
         'btn_Cancel
         '
-        Me.btn_Cancel.Location = New System.Drawing.Point(12, 57)
+        Me.btn_Cancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btn_Cancel.Location = New System.Drawing.Point(12, 58)
         Me.btn_Cancel.Name = "btn_Cancel"
         Me.btn_Cancel.Size = New System.Drawing.Size(75, 23)
         Me.btn_Cancel.TabIndex = 2
@@ -64,7 +68,7 @@ Partial Class frm_InputBox
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(282, 84)
+        Me.ClientSize = New System.Drawing.Size(266, 93)
         Me.ControlBox = False
         Me.Controls.Add(Me.btn_Cancel)
         Me.Controls.Add(Me.btn_Ok)

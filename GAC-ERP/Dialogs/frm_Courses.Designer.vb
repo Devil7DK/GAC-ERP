@@ -23,8 +23,17 @@ Partial Class frm_Courses
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_Courses))
         Me.grp_Controls = New DevExpress.XtraEditors.GroupControl()
         Me.btn_FeesStructure = New DevExpress.XtraEditors.DropDownButton()
+        Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu(Me.components)
+        Me.btn_DefaultFeesStructure = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
+        Me.Bar3 = New DevExpress.XtraBars.Bar()
+        Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
         Me.SeparatorControl2 = New DevExpress.XtraEditors.SeparatorControl()
         Me.SimpleButton4 = New DevExpress.XtraEditors.SimpleButton()
         Me.SimpleButton3 = New DevExpress.XtraEditors.SimpleButton()
@@ -35,24 +44,16 @@ Partial Class frm_Courses
         Me.gc_Courses = New DevExpress.XtraGrid.GridControl()
         Me.gv_Courses = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.Worker_LoadCourses = New System.ComponentModel.BackgroundWorker()
-        Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
-        Me.Bar3 = New DevExpress.XtraBars.Bar()
-        Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl()
-        Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
-        Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
-        Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
-        Me.btn_DefaultFeesStructure = New DevExpress.XtraBars.BarButtonItem()
-        Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu(Me.components)
         CType(Me.grp_Controls, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grp_Controls.SuspendLayout()
+        CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SeparatorControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SeparatorControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.grp_Courses, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grp_Courses.SuspendLayout()
         CType(Me.gc_Courses, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gv_Courses, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'grp_Controls
@@ -80,6 +81,74 @@ Partial Class frm_Courses
         Me.btn_FeesStructure.Size = New System.Drawing.Size(166, 44)
         Me.btn_FeesStructure.TabIndex = 6
         Me.btn_FeesStructure.Text = "Set / Change Fees Structure"
+        '
+        'PopupMenu1
+        '
+        Me.PopupMenu1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.btn_DefaultFeesStructure)})
+        Me.PopupMenu1.Manager = Me.BarManager1
+        Me.PopupMenu1.Name = "PopupMenu1"
+        '
+        'btn_DefaultFeesStructure
+        '
+        Me.btn_DefaultFeesStructure.Caption = "Reset Fees Structure to Default"
+        Me.btn_DefaultFeesStructure.Id = 0
+        Me.btn_DefaultFeesStructure.Name = "btn_DefaultFeesStructure"
+        '
+        'BarManager1
+        '
+        Me.BarManager1.Bars.AddRange(New DevExpress.XtraBars.Bar() {Me.Bar3})
+        Me.BarManager1.DockControls.Add(Me.barDockControlTop)
+        Me.BarManager1.DockControls.Add(Me.barDockControlBottom)
+        Me.BarManager1.DockControls.Add(Me.barDockControlLeft)
+        Me.BarManager1.DockControls.Add(Me.barDockControlRight)
+        Me.BarManager1.Form = Me
+        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.btn_DefaultFeesStructure})
+        Me.BarManager1.MaxItemId = 1
+        Me.BarManager1.StatusBar = Me.Bar3
+        '
+        'Bar3
+        '
+        Me.Bar3.BarName = "Status bar"
+        Me.Bar3.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Bottom
+        Me.Bar3.DockCol = 0
+        Me.Bar3.DockRow = 0
+        Me.Bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom
+        Me.Bar3.OptionsBar.AllowQuickCustomization = False
+        Me.Bar3.OptionsBar.DrawDragBorder = False
+        Me.Bar3.OptionsBar.UseWholeRow = True
+        Me.Bar3.Text = "Status bar"
+        '
+        'barDockControlTop
+        '
+        Me.barDockControlTop.CausesValidation = False
+        Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
+        Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
+        Me.barDockControlTop.Manager = Me.BarManager1
+        Me.barDockControlTop.Size = New System.Drawing.Size(589, 0)
+        '
+        'barDockControlBottom
+        '
+        Me.barDockControlBottom.CausesValidation = False
+        Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 238)
+        Me.barDockControlBottom.Manager = Me.BarManager1
+        Me.barDockControlBottom.Size = New System.Drawing.Size(589, 23)
+        '
+        'barDockControlLeft
+        '
+        Me.barDockControlLeft.CausesValidation = False
+        Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
+        Me.barDockControlLeft.Location = New System.Drawing.Point(0, 0)
+        Me.barDockControlLeft.Manager = Me.BarManager1
+        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 238)
+        '
+        'barDockControlRight
+        '
+        Me.barDockControlRight.CausesValidation = False
+        Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
+        Me.barDockControlRight.Location = New System.Drawing.Point(589, 0)
+        Me.barDockControlRight.Manager = Me.BarManager1
+        Me.barDockControlRight.Size = New System.Drawing.Size(0, 238)
         '
         'SeparatorControl2
         '
@@ -167,74 +236,6 @@ Partial Class frm_Courses
         'Worker_LoadCourses
         '
         '
-        'BarManager1
-        '
-        Me.BarManager1.Bars.AddRange(New DevExpress.XtraBars.Bar() {Me.Bar3})
-        Me.BarManager1.DockControls.Add(Me.barDockControlTop)
-        Me.BarManager1.DockControls.Add(Me.barDockControlBottom)
-        Me.BarManager1.DockControls.Add(Me.barDockControlLeft)
-        Me.BarManager1.DockControls.Add(Me.barDockControlRight)
-        Me.BarManager1.Form = Me
-        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.btn_DefaultFeesStructure})
-        Me.BarManager1.MaxItemId = 1
-        Me.BarManager1.StatusBar = Me.Bar3
-        '
-        'Bar3
-        '
-        Me.Bar3.BarName = "Status bar"
-        Me.Bar3.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Bottom
-        Me.Bar3.DockCol = 0
-        Me.Bar3.DockRow = 0
-        Me.Bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom
-        Me.Bar3.OptionsBar.AllowQuickCustomization = False
-        Me.Bar3.OptionsBar.DrawDragBorder = False
-        Me.Bar3.OptionsBar.UseWholeRow = True
-        Me.Bar3.Text = "Status bar"
-        '
-        'barDockControlTop
-        '
-        Me.barDockControlTop.CausesValidation = False
-        Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
-        Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
-        Me.barDockControlTop.Manager = Me.BarManager1
-        Me.barDockControlTop.Size = New System.Drawing.Size(589, 0)
-        '
-        'barDockControlBottom
-        '
-        Me.barDockControlBottom.CausesValidation = False
-        Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 238)
-        Me.barDockControlBottom.Manager = Me.BarManager1
-        Me.barDockControlBottom.Size = New System.Drawing.Size(589, 23)
-        '
-        'barDockControlLeft
-        '
-        Me.barDockControlLeft.CausesValidation = False
-        Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
-        Me.barDockControlLeft.Location = New System.Drawing.Point(0, 0)
-        Me.barDockControlLeft.Manager = Me.BarManager1
-        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 238)
-        '
-        'barDockControlRight
-        '
-        Me.barDockControlRight.CausesValidation = False
-        Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.barDockControlRight.Location = New System.Drawing.Point(589, 0)
-        Me.barDockControlRight.Manager = Me.BarManager1
-        Me.barDockControlRight.Size = New System.Drawing.Size(0, 238)
-        '
-        'btn_DefaultFeesStructure
-        '
-        Me.btn_DefaultFeesStructure.Caption = "Reset Fees Structure to Default"
-        Me.btn_DefaultFeesStructure.Id = 0
-        Me.btn_DefaultFeesStructure.Name = "btn_DefaultFeesStructure"
-        '
-        'PopupMenu1
-        '
-        Me.PopupMenu1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.btn_DefaultFeesStructure)})
-        Me.PopupMenu1.Manager = Me.BarManager1
-        Me.PopupMenu1.Name = "PopupMenu1"
-        '
         'frm_Courses
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -246,22 +247,22 @@ Partial Class frm_Courses
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
         Me.Controls.Add(Me.barDockControlTop)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MinimizeBox = False
         Me.Name = "frm_Courses"
-        Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Courses"
         CType(Me.grp_Controls, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grp_Controls.ResumeLayout(False)
+        CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SeparatorControl2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SeparatorControl1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.grp_Courses, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grp_Courses.ResumeLayout(False)
         CType(Me.gc_Courses, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gv_Courses, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

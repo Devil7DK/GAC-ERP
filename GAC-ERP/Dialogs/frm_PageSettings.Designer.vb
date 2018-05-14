@@ -132,7 +132,7 @@ Partial Class frm_PageSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(323, 106)
+        Me.ClientSize = New System.Drawing.Size(319, 102)
         Me.ControlBox = False
         Me.Controls.Add(Me.txt_RightMargin)
         Me.Controls.Add(Me.txt_LeftMargin)
@@ -146,6 +146,8 @@ Partial Class frm_PageSettings
         Me.Controls.Add(Me.btn_Save)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Name = "frm_PageSettings"
+        Me.ShowIcon = False
+        Me.ShowInTaskbar = False
         Me.Text = "Page Settings"
         CType(Me.txt_TopMargin.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_BottomMargin.Properties, System.ComponentModel.ISupportInitialize).EndInit()

@@ -159,6 +159,7 @@ Partial Class frm_ServerSettings
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frm_ServerSettings"
+        Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Server Settings"
         CType(Me.txt_Server.Properties, System.ComponentModel.ISupportInitialize).EndInit()
