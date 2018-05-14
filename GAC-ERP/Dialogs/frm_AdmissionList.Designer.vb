@@ -180,7 +180,6 @@ Partial Class frm_AdmissionList
         Me.gv_AdmissionEntries.OptionsBehavior.Editable = False
         Me.gv_AdmissionEntries.OptionsBehavior.ReadOnly = True
         Me.gv_AdmissionEntries.OptionsClipboard.ClipboardMode = DevExpress.Export.ClipboardMode.Formatted
-        Me.gv_AdmissionEntries.OptionsClipboard.PasteMode = DevExpress.Export.PasteMode.None
         Me.gv_AdmissionEntries.OptionsCustomization.AllowColumnMoving = False
         Me.gv_AdmissionEntries.OptionsLayout.Columns.AddNewColumns = False
         '

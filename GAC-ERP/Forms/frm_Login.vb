@@ -33,7 +33,26 @@ Public Class frm_Login
     End Sub
 
     Private Sub btn_Login_Click(sender As Object, e As EventArgs) Handles btn_Login.Click
+        Worker_Login.RunWorkerAsync()
+    End Sub
 
+    Sub EnableControls()
+        txt_Username.Enabled = True
+        txt_Password.Enabled = True
+        btn_Login.Enabled = True
+        btn_ServerSettings.Enabled = True
+        ControlBox = True
+    End Sub
+    Sub DisableControls()
+        txt_Username.Enabled = False
+        txt_Password.Enabled = False
+        btn_Login.Enabled = False
+        btn_ServerSettings.Enabled = False
+        ControlBox = False
+    End Sub
+    Private Sub Worker_Login_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles Worker_Login.DoWork
+        DisableControls()
+        Me.Cursor = Cursors.WaitCursor
         Try
             ErrorProvider.ClearErrors()
             Dim connection As SqlConnection = GetConnection()
@@ -50,9 +69,11 @@ Public Class frm_Login
                 Dim count2 As Integer = cmd2.ExecuteScalar
                 If count2 = 1 Then
                     Dim Staff As Staff = GetStaff(txt_Username.Text.Trim.ToLower, connection)
-                    Dim d As New frm_Main(Staff)
-                    d.Show()
-                    Me.Close()
+                    Me.Invoke(Sub()
+                                  Dim d As New frm_Main(Staff)
+                                  d.Show()
+                                  Me.Close()
+                              End Sub)
                 Else
                     ErrorProvider.SetIconAlignment(txt_Password, ErrorIconAlignment.MiddleRight)
                     ErrorProvider.SetError(txt_Password, "Invalid password!")
@@ -66,6 +87,11 @@ Public Class frm_Login
         Catch ex As Exception
             ShowError(ex)
         End Try
+        Me.Cursor = Cursors.Default
+        EnableControls()
+    End Sub
 
+    Private Sub frm_Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        CheckForIllegalCrossThreadCalls = False
     End Sub
 End Class

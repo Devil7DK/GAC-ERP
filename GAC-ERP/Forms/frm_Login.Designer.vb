@@ -33,6 +33,7 @@ Partial Class frm_Login
         Me.btn_ServerSettings = New DevExpress.XtraEditors.SimpleButton()
         Me.btn_Login = New DevExpress.XtraEditors.SimpleButton()
         Me.LogoPictureBox = New System.Windows.Forms.PictureBox()
+        Me.Worker_Login = New System.ComponentModel.BackgroundWorker()
         CType(Me.txt_Username.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_Password.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -109,6 +110,9 @@ Partial Class frm_Login
         Me.LogoPictureBox.TabIndex = 0
         Me.LogoPictureBox.TabStop = False
         '
+        'Worker_Login
+        '
+        '
         'frm_Login
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -144,4 +148,5 @@ Partial Class frm_Login
     Friend WithEvents btn_Login As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents btn_ServerSettings As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents ErrorProvider As DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider
+    Friend WithEvents Worker_Login As System.ComponentModel.BackgroundWorker
 End Class
