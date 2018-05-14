@@ -20,11 +20,12 @@ Partial Class frm_Main
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_Main))
         Me.RibbonControl = New DevExpress.XtraBars.Ribbon.RibbonControl()
         Me.ApplicationMenu1 = New DevExpress.XtraBars.Ribbon.ApplicationMenu(Me.components)
-        Me.menu_Exit = New DevExpress.XtraBars.BarButtonItem()
-        Me.btn_AdmissionList = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_DefaultFeesStructure = New DevExpress.XtraBars.BarButtonItem()
+        Me.btn_Exit = New DevExpress.XtraBars.BarButtonItem()
+        Me.btn_AdmissionList = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_Courses = New DevExpress.XtraBars.BarButtonItem()
         Me.rp_Home = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.rpg_Admission = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -38,43 +39,53 @@ Partial Class frm_Main
         '
         Me.RibbonControl.ApplicationButtonDropDownControl = Me.ApplicationMenu1
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.menu_Exit, Me.btn_AdmissionList, Me.btn_DefaultFeesStructure, Me.btn_Courses})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_Exit, Me.btn_AdmissionList, Me.btn_DefaultFeesStructure, Me.btn_Courses})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
         Me.RibbonControl.MaxItemId = 6
         Me.RibbonControl.Name = "RibbonControl"
         Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_Home})
-        Me.RibbonControl.Size = New System.Drawing.Size(475, 143)
+        Me.RibbonControl.Size = New System.Drawing.Size(617, 143)
         Me.RibbonControl.StatusBar = Me.RibbonStatusBar
         '
         'ApplicationMenu1
         '
-        Me.ApplicationMenu1.ItemLinks.Add(Me.menu_Exit)
+        Me.ApplicationMenu1.ItemLinks.Add(Me.btn_DefaultFeesStructure)
+        Me.ApplicationMenu1.ItemLinks.Add(Me.btn_Exit)
         Me.ApplicationMenu1.Name = "ApplicationMenu1"
         Me.ApplicationMenu1.Ribbon = Me.RibbonControl
         '
-        'menu_Exit
+        'btn_DefaultFeesStructure
         '
-        Me.menu_Exit.Caption = "Exit"
-        Me.menu_Exit.Id = 1
-        Me.menu_Exit.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources._exit
-        Me.menu_Exit.Name = "menu_Exit"
+        Me.btn_DefaultFeesStructure.Caption = "Default Fees Structure"
+        Me.btn_DefaultFeesStructure.Description = "Set / Change Default Fees Structure"
+        Me.btn_DefaultFeesStructure.Id = 4
+        Me.btn_DefaultFeesStructure.ImageOptions.Image = CType(resources.GetObject("btn_DefaultFeesStructure.ImageOptions.Image"), System.Drawing.Image)
+        Me.btn_DefaultFeesStructure.Name = "btn_DefaultFeesStructure"
+        Me.btn_DefaultFeesStructure.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText
+        '
+        'btn_Exit
+        '
+        Me.btn_Exit.Caption = "Exit"
+        Me.btn_Exit.Description = "Close the Application & Logout"
+        Me.btn_Exit.Id = 1
+        Me.btn_Exit.ImageOptions.Image = CType(resources.GetObject("menu_Exit.ImageOptions.Image"), System.Drawing.Image)
+        Me.btn_Exit.Name = "btn_Exit"
+        Me.btn_Exit.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText
         '
         'btn_AdmissionList
         '
         Me.btn_AdmissionList.Caption = "Admission List"
         Me.btn_AdmissionList.Id = 3
+        Me.btn_AdmissionList.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources.admission
+        Me.btn_AdmissionList.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources.admission
         Me.btn_AdmissionList.Name = "btn_AdmissionList"
-        '
-        'btn_DefaultFeesStructure
-        '
-        Me.btn_DefaultFeesStructure.Caption = "Default Fees Structure"
-        Me.btn_DefaultFeesStructure.Id = 4
-        Me.btn_DefaultFeesStructure.Name = "btn_DefaultFeesStructure"
         '
         'btn_Courses
         '
         Me.btn_Courses.Caption = "Courses"
         Me.btn_Courses.Id = 5
+        Me.btn_Courses.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources.courses
+        Me.btn_Courses.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources.courses
         Me.btn_Courses.Name = "btn_Courses"
         '
         'rp_Home
@@ -91,7 +102,6 @@ Partial Class frm_Main
         '
         'RibbonPageGroup1
         '
-        Me.RibbonPageGroup1.ItemLinks.Add(Me.btn_DefaultFeesStructure)
         Me.RibbonPageGroup1.ItemLinks.Add(Me.btn_Courses)
         Me.RibbonPageGroup1.Name = "RibbonPageGroup1"
         Me.RibbonPageGroup1.Text = "Settings"
@@ -101,19 +111,19 @@ Partial Class frm_Main
         Me.RibbonStatusBar.Location = New System.Drawing.Point(0, 418)
         Me.RibbonStatusBar.Name = "RibbonStatusBar"
         Me.RibbonStatusBar.Ribbon = Me.RibbonControl
-        Me.RibbonStatusBar.Size = New System.Drawing.Size(475, 31)
+        Me.RibbonStatusBar.Size = New System.Drawing.Size(617, 31)
         '
         'frm_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(475, 449)
+        Me.ClientSize = New System.Drawing.Size(617, 449)
         Me.Controls.Add(Me.RibbonStatusBar)
         Me.Controls.Add(Me.RibbonControl)
         Me.Name = "frm_Main"
         Me.Ribbon = Me.RibbonControl
         Me.StatusBar = Me.RibbonStatusBar
-        Me.Text = "frm_Main"
+        Me.Text = "Government Arts College (Autonomous)"
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ApplicationMenu1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -126,7 +136,7 @@ Partial Class frm_Main
     Friend WithEvents rpg_Admission As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents RibbonStatusBar As DevExpress.XtraBars.Ribbon.RibbonStatusBar
     Friend WithEvents ApplicationMenu1 As DevExpress.XtraBars.Ribbon.ApplicationMenu
-    Friend WithEvents menu_Exit As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents btn_Exit As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents btn_AdmissionList As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents btn_DefaultFeesStructure As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents RibbonPageGroup1 As DevExpress.XtraBars.Ribbon.RibbonPageGroup

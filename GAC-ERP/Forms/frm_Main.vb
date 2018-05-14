@@ -1,4 +1,6 @@
-﻿Public Class frm_Main
+﻿Imports DevExpress.XtraBars
+
+Public Class frm_Main
     Private CurrentUser As Staff
     Sub New(ByVal User As Staff)
         InitializeComponent()
@@ -64,4 +66,7 @@
         End Try
     End Sub
 
+    Private Sub btn_Exit_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_Exit.ItemClick
+        Me.Close()
+    End Sub
 End Class
