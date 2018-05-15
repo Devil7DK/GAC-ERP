@@ -12,6 +12,7 @@ Public Class frm_AdmissionList
     Dim Action As String = ""
     Dim ID As Integer = -1
     Dim Slip_Base As String
+    Dim Loaded As Boolean = False
     Private Sub btn_Load_Click(sender As Object, e As EventArgs) Handles btn_Load.Click
         Worker_LoadEntries.RunWorkerAsync()
     End Sub
@@ -136,7 +137,10 @@ Public Class frm_AdmissionList
         CheckForIllegalCrossThreadCalls = False
         DisableEditing()
         Slip_Base = My.Computer.FileSystem.ReadAllText(System.IO.Path.Combine(Application.StartupPath, "Templates", "Admission_Slip_Template.rtf"))
-        Worker_LoadEntries.RunWorkerAsync()
+        If Loaded = False Then
+            Worker_LoadEntries.RunWorkerAsync()
+            Loaded = True
+        End If
     End Sub
 
     Private Sub txt_CourseID_EditValueChanged(sender As Object, e As EventArgs) Handles txt_CourseID.EditValueChanged
@@ -333,41 +337,43 @@ Public Class frm_AdmissionList
             e.HasMorePages = False
         End If
     End Sub
+    Sub PrepareRTF()
+        Dim f As AdmissionEntry = gv_AdmissionEntries.GetRow(gv_AdmissionEntries.GetSelectedRows(0))
+        Dim course As Course = GetCourse(f.CourseID, Courses)
 
+        Dim RTF As String = Slip_Base
+
+        RTF = RTF.Replace("<<ACADEMIC YEAR>>", Now.Year & "-" & Now.Year - 1)
+        RTF = RTF.Replace("<<NAME>>", f.Name)
+        RTF = RTF.Replace("<<GENDER>>", f.Gender)
+        RTF = RTF.Replace("<<REGNO>>", f.Registration)
+        RTF = RTF.Replace("<<RANK>>", f.Rank)
+        RTF = RTF.Replace("<<APPLICATION>>", f.Application)
+        RTF = RTF.Replace("<<COMMUNITY>>", f.Community)
+        RTF = RTF.Replace("<<CUTOFF>>", f.CutOff)
+        RTF = RTF.Replace("<<COURSE>>", If(course Is Nothing, f.Course, String.Format("{0} ({1})", f.Course, course.Department)))
+        RTF = RTF.Replace("<<SHIFT>>", f.Shift)
+        RTF = RTF.Replace("<<MEDIUM>>", f.Medium)
+        RTF = RTF.Replace("<<STREAM>>", f.Stream)
+        RTF = RTF.Replace("<<QUOTA>>", f.Quota)
+        RTF = RTF.Replace("<<ALLOT_GENDER>>", f.AllottedGender)
+        RTF = RTF.Replace("<<ALLOT_STREAM>>", f.AllottedStream)
+        RTF = RTF.Replace("<<ALLOT_COMMUNITY>>", f.AllottedCommunity)
+        RTF = RTF.Replace("<<REMARKS>>", f.Remarks)
+        RTF = RTF.Replace("<<DOA>>", f.AdmissionDate)
+        RTF = RTF.Replace("<<FEES>>", If(f.State = "Tamil Nadu", course.Fees1, course.Fees2))
+        RTF = RTF.Replace("<<CLPFEES>>", "700")
+        RTC.Rtf = RTF
+
+        PrintDocument1.DefaultPageSettings.Margins.Top = My.Settings.ProvisonalSlip_TopMargin
+        PrintDocument1.DefaultPageSettings.Margins.Bottom = My.Settings.ProvisonalSlip_BottomMargin
+        PrintDocument1.DefaultPageSettings.Margins.Left = My.Settings.ProvisonalSlip_LeftMargin
+        PrintDocument1.DefaultPageSettings.Margins.Right = My.Settings.ProvisonalSlip_RightMargin
+
+    End Sub
     Private Sub btn_PrintSlip_Click(sender As Object, e As EventArgs) Handles btn_PrintSlip.Click
         If gv_AdmissionEntries.SelectedRowsCount = 1 Then
-            Dim f As AdmissionEntry = gv_AdmissionEntries.GetRow(gv_AdmissionEntries.GetSelectedRows(0))
-            Dim course As Course = GetCourse(f.CourseID, Courses)
-
-            Dim RTF As String = Slip_Base
-
-            RTF = RTF.Replace("<<ACADEMIC YEAR>>", Now.Year & "-" & Now.Year - 1)
-            RTF = RTF.Replace("<<NAME>>", f.Name)
-            RTF = RTF.Replace("<<GENDER>>", f.Gender)
-            RTF = RTF.Replace("<<REGNO>>", f.Registration)
-            RTF = RTF.Replace("<<RANK>>", f.Rank)
-            RTF = RTF.Replace("<<APPLICATION>>", f.Application)
-            RTF = RTF.Replace("<<COMMUNITY>>", f.Community)
-            RTF = RTF.Replace("<<CUTOFF>>", f.CutOff)
-            RTF = RTF.Replace("<<COURSE>>", If(course Is Nothing, f.Course, String.Format("{0} ({1})", f.Course, course.Department)))
-            RTF = RTF.Replace("<<SHIFT>>", f.Shift)
-            RTF = RTF.Replace("<<MEDIUM>>", f.Medium)
-            RTF = RTF.Replace("<<STREAM>>", f.Stream)
-            RTF = RTF.Replace("<<QUOTA>>", f.Quota)
-            RTF = RTF.Replace("<<ALLOT_GENDER>>", f.AllottedGender)
-            RTF = RTF.Replace("<<ALLOT_STREAM>>", f.AllottedStream)
-            RTF = RTF.Replace("<<ALLOT_COMMUNITY>>", f.AllottedCommunity)
-            RTF = RTF.Replace("<<REMARKS>>", f.Remarks)
-            RTF = RTF.Replace("<<DOA>>", f.AdmissionDate)
-            RTF = RTF.Replace("<<FEES>>", If(f.State = "Tamil Nadu", course.Fees1, course.Fees2))
-            RTF = RTF.Replace("<<CLPFEES>>", "700")
-            RTC.Rtf = RTF
-
-            PrintDocument1.DefaultPageSettings.Margins.Top = My.Settings.ProvisonalSlip_TopMargin
-            PrintDocument1.DefaultPageSettings.Margins.Bottom = My.Settings.ProvisonalSlip_BottomMargin
-            PrintDocument1.DefaultPageSettings.Margins.Left = My.Settings.ProvisonalSlip_LeftMargin
-            PrintDocument1.DefaultPageSettings.Margins.Right = My.Settings.ProvisonalSlip_RightMargin
-
+            PrepareRTF
             If PrintDialog1.ShowDialog() = DialogResult.OK Then
                 PrintDocument1.Print()
             End If
@@ -382,37 +388,7 @@ Public Class frm_AdmissionList
 
     Private Sub btn_PrintPreview_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_PrintPreview.ItemClick
         If gv_AdmissionEntries.SelectedRowsCount = 1 Then
-            Dim f As AdmissionEntry = gv_AdmissionEntries.GetRow(gv_AdmissionEntries.GetSelectedRows(0))
-            Dim course As Course = GetCourse(f.CourseID, Courses)
-
-            Dim RTF As String = Slip_Base
-
-            RTF = RTF.Replace("<<ACADEMIC YEAR>>", Now.Year & "-" & Now.Year - 1)
-            RTF = RTF.Replace("<<NAME>>", f.Name)
-            RTF = RTF.Replace("<<GENDER>>", f.Gender)
-            RTF = RTF.Replace("<<REGNO>>", f.Registration)
-            RTF = RTF.Replace("<<RANK>>", f.Rank)
-            RTF = RTF.Replace("<<APPLICATION>>", f.Application)
-            RTF = RTF.Replace("<<COMMUNITY>>", f.Community)
-            RTF = RTF.Replace("<<CUTOFF>>", f.CutOff)
-            RTF = RTF.Replace("<<COURSE>>", If(course Is Nothing, f.Course, String.Format("{0} ({1})", f.Course, course.Department)))
-            RTF = RTF.Replace("<<SHIFT>>", f.Shift)
-            RTF = RTF.Replace("<<MEDIUM>>", f.Medium)
-            RTF = RTF.Replace("<<STREAM>>", f.Stream)
-            RTF = RTF.Replace("<<QUOTA>>", f.Quota)
-            RTF = RTF.Replace("<<ALLOT_GENDER>>", f.AllottedGender)
-            RTF = RTF.Replace("<<ALLOT_STREAM>>", f.AllottedStream)
-            RTF = RTF.Replace("<<ALLOT_COMMUNITY>>", f.AllottedCommunity)
-            RTF = RTF.Replace("<<REMARKS>>", f.Remarks)
-            RTF = RTF.Replace("<<DOA>>", f.AdmissionDate)
-
-            RTC.Rtf = RTF
-
-            PrintDocument1.DefaultPageSettings.Margins.Top = My.Settings.ProvisonalSlip_TopMargin
-            PrintDocument1.DefaultPageSettings.Margins.Bottom = My.Settings.ProvisonalSlip_BottomMargin
-            PrintDocument1.DefaultPageSettings.Margins.Left = My.Settings.ProvisonalSlip_LeftMargin
-            PrintDocument1.DefaultPageSettings.Margins.Right = My.Settings.ProvisonalSlip_RightMargin
-
+            PrepareRTF()
             PrintPreviewDialog1.ShowDialog()
         End If
     End Sub
