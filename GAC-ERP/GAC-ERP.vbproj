@@ -106,34 +106,40 @@
     <Compile Include="Dialogs\AdmissionList\frm_AdmissionList_View.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\frm_Courses.Designer.vb">
-      <DependentUpon>frm_Courses.vb</DependentUpon>
+    <Compile Include="Dialogs\Course\frm_Courses_View.Designer.vb">
+      <DependentUpon>frm_Courses_View.vb</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\frm_Courses.vb">
+    <Compile Include="Dialogs\Course\frm_Courses_View.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\frm_FeesStructure.Designer.vb">
+    <Compile Include="Dialogs\Course\frm_Courses_Add_Edit.Designer.vb">
+      <DependentUpon>frm_Courses_Add_Edit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Course\frm_Courses_Add_Edit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Course\frm_FeesStructure.Designer.vb">
       <DependentUpon>frm_FeesStructure.vb</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\frm_FeesStructure.vb">
+    <Compile Include="Dialogs\Course\frm_FeesStructure.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\frm_InputBox.Designer.vb">
+    <Compile Include="Dialogs\Misc\frm_InputBox.Designer.vb">
       <DependentUpon>frm_InputBox.vb</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\frm_InputBox.vb">
+    <Compile Include="Dialogs\Misc\frm_InputBox.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\frm_PageSettings.Designer.vb">
+    <Compile Include="Dialogs\Settings\frm_PageSettings.Designer.vb">
       <DependentUpon>frm_PageSettings.vb</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\frm_PageSettings.vb">
+    <Compile Include="Dialogs\Settings\frm_PageSettings.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\frm_ServerSettings.Designer.vb">
+    <Compile Include="Dialogs\Settings\frm_ServerSettings.Designer.vb">
       <DependentUpon>frm_ServerSettings.vb</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\frm_ServerSettings.vb">
+    <Compile Include="Dialogs\Settings\frm_ServerSettings.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frm_Main.Designer.vb">
@@ -188,19 +194,22 @@
     <EmbeddedResource Include="Dialogs\AdmissionList\frm_AdmissionList_View.resx">
       <DependentUpon>frm_AdmissionList_View.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\frm_Courses.resx">
-      <DependentUpon>frm_Courses.vb</DependentUpon>
+    <EmbeddedResource Include="Dialogs\Course\frm_Courses_View.resx">
+      <DependentUpon>frm_Courses_View.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\frm_FeesStructure.resx">
+    <EmbeddedResource Include="Dialogs\Course\frm_Courses_Add_Edit.resx">
+      <DependentUpon>frm_Courses_Add_Edit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Course\frm_FeesStructure.resx">
       <DependentUpon>frm_FeesStructure.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\frm_InputBox.resx">
+    <EmbeddedResource Include="Dialogs\Misc\frm_InputBox.resx">
       <DependentUpon>frm_InputBox.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\frm_PageSettings.resx">
+    <EmbeddedResource Include="Dialogs\Settings\frm_PageSettings.resx">
       <DependentUpon>frm_PageSettings.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\frm_ServerSettings.resx">
+    <EmbeddedResource Include="Dialogs\Settings\frm_ServerSettings.resx">
       <DependentUpon>frm_ServerSettings.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frm_Main.resx">
@@ -273,6 +282,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\feesstructure_reset.ico" />
+    <None Include="Resources\feesstructure_edit.ico" />
+    <None Include="Resources\courses_remove.ico" />
+    <None Include="Resources\courses_edit.ico" />
+    <None Include="Resources\courses_reload.ico" />
+    <None Include="Resources\courses_add.ico" />
     <None Include="Resources\refresh_entries.ico" />
     <None Include="Resources\save_entry.ico" />
     <None Include="Resources\new_entry.ico" />

@@ -252,6 +252,103 @@ Public Module Database
         Return r
     End Function
 
+    Function NewCourse(ByVal Code As String, ByVal Name As String, ByVal Medium As String, ByVal Shift As String, ByVal Department As String, ByVal Duration As String, ByVal MaxSeats As String) As Integer
+        Try
+            Dim Connection As SqlConnection = GetConnection()
+            If Connection.State = ConnectionState.Closed Then
+                Connection.Open()
+            End If
+            Dim query As String = "INSERT INTO Courses "
+            query &= "(Code,Name,Medium,Shift,Department,Duration,MaxSeats)  "
+            query &= "VALUES (@Code,@Name,@Medium,@Shift,@Department,@Duration,@MaxSeats);SELECT SCOPE_IDENTITY()"
+
+
+            Using comm As New SqlCommand()
+                With comm
+                    .Connection = Connection
+                    .CommandType = CommandType.Text
+                    .CommandText = query
+                    .Parameters.AddWithValue("@Code", Code)
+                    .Parameters.AddWithValue("@Name", Name)
+                    .Parameters.AddWithValue("@Medium", Medium)
+                    .Parameters.AddWithValue("@Shift", Shift)
+                    .Parameters.AddWithValue("@Department", Department)
+                    .Parameters.AddWithValue("@Duration", Duration)
+                    .Parameters.AddWithValue("@MaxSeats", MaxSeats)
+                End With
+                Try
+                    Return comm.ExecuteScalar
+                Catch ex As SqlException
+                    MsgBox("Error when executing sql command " & vbNewLine & vbNewLine & ex.Message.ToString(), MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Error")
+                End Try
+            End Using
+            Connection.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message.ToString(), MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Error")
+        End Try
+        Return 0
+    End Function
+
+    Function EditCourse(ByVal ID As Integer, ByVal Code As String, ByVal Name As String, ByVal Medium As String, ByVal Shift As String, ByVal Department As String, ByVal Duration As String, ByVal MaxSeats As String) As Integer
+        Dim r As Integer = 0
+        Try
+            Dim Connection As SqlConnection = GetConnection()
+            If Connection.State = ConnectionState.Closed Then
+                Connection.Open()
+            End If
+            Dim query As String = "UPDATE Courses SET "
+            query &= "Code = @Code, Name = @Name, Medium = @Medium, Shift = @Shift, Department = @Department, Duration = @Duration, MaxSeats = @MaxSeats"
+            query &= " WHERE ID = @ID"
+
+
+            Using comm As New SqlCommand()
+                With comm
+                    .Connection = Connection
+                    .CommandType = CommandType.Text
+                    .CommandText = query
+                    .Parameters.AddWithValue("@ID", ID)
+                    .Parameters.AddWithValue("@Code", Code)
+                    .Parameters.AddWithValue("@Name", Name)
+                    .Parameters.AddWithValue("@Medium", Medium)
+                    .Parameters.AddWithValue("@Shift", Shift)
+                    .Parameters.AddWithValue("@Department", Department)
+                    .Parameters.AddWithValue("@Duration", Duration)
+                    .Parameters.AddWithValue("@MaxSeats", MaxSeats)
+                End With
+
+                Try
+                    r = comm.ExecuteNonQuery()
+                Catch ex As SqlException
+                    MsgBox("Error when executing sql command " & vbNewLine & vbNewLine & ex.Message.ToString(), MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Error")
+                End Try
+            End Using
+            Connection.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message.ToString(), MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Error")
+        End Try
+        Return r
+    End Function
+
+    Function DeleteCourse(ByVal ID As Integer) As Integer
+        Dim r As Integer = 0
+        Dim con As SqlConnection = GetConnection()
+        Dim cmd As New SqlCommand
+        Try
+            If con.State = ConnectionState.Closed Then
+                con.Open()
+            End If
+            cmd.Connection = con
+            cmd.CommandText = "DELETE FROM Courses WHERE ID = @ID"
+            cmd.Parameters.Add(New SqlParameter("@ID", ID))
+            r = cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            MsgBox("Error while deleting record " & ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Error")
+        Finally
+            con.Close()
+        End Try
+        Return r
+    End Function
+
     Function UpdateCourseFeesDetails(ByVal ID As Integer, ByVal FeesStructureXML As String)
         Dim r As Integer = 0
         Try

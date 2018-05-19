@@ -1,25 +1,18 @@
 ﻿Public Class Course
     Property ID As Integer
-
     <System.ComponentModel.DisplayName("Course ID")>
     Property Code As String
-
     <System.ComponentModel.DisplayName("Course Name")>
     Property Name As String
-
     <System.ComponentModel.DisplayName("Medium of Course")>
     Property Medium As String
     Property Shift As String
-
     <System.ComponentModel.DisplayName("Department / Branch")>
     Property Department As String
-
     <System.ComponentModel.DisplayName("Duration of Course")>
     Property Duration As String
-
     <System.ComponentModel.DisplayName("Maximum Seats Available")>
     Property MaxSeats As String
-
     <System.ComponentModel.DisplayName("Basic Course Fees")>
     ReadOnly Property Fees1 As Integer
         Get
@@ -35,9 +28,6 @@
         End Get
     End Property
     Dim Fees_2 As Integer = 0
-
-
-
     Dim FeesStructure As FeesStructure
     Function GetFeesStructure() As FeesStructure
         Return If(FeesStructure Is Nothing, New FeesStructure, FeesStructure)
@@ -90,6 +80,22 @@
     End Sub
     Sub New(ByVal ID As Integer, ByVal Code As String, ByVal Name As String, ByVal Medium As String, ByVal Shift As String, ByVal Department As String, ByVal Duration As String, ByVal MaxSeats As String, ByVal FeesStructureXML As String)
         Me.ID = ID
+        Me.Code = Code
+        Me.Name = Name
+        Me.Medium = Medium
+        Me.Department = Department
+        Me.Duration = Duration
+        Me.MaxSeats = MaxSeats
+        Me.Shift = Shift
+        If FeesStructureXML <> "" Then
+            Try
+                SetFeesStructure(FeesStructureXML)
+            Catch ex As Exception
+
+            End Try
+        End If
+    End Sub
+    Sub Update(ByVal Code As String, ByVal Name As String, ByVal Medium As String, ByVal Shift As String, ByVal Department As String, ByVal Duration As String, ByVal MaxSeats As String, ByVal FeesStructureXML As String)
         Me.Code = Code
         Me.Name = Name
         Me.Medium = Medium

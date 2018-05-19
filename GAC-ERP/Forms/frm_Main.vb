@@ -55,8 +55,8 @@ Public Class frm_Main
     Private Sub btn_Courses_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btn_Courses.ItemClick
         If CurrentUser.HasPermission(Permission.Billing) Or CurrentUser.HasPermission(Permission.Courses) Then
             Try
-                frm_Courses.User = CurrentUser
-                frm_Courses.ShowDialog()
+                frm_Courses_View.User = CurrentUser
+                frm_Courses_View.ShowDialog()
             Catch ex As Exception
 
             End Try

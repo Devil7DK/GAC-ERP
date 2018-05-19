@@ -940,7 +940,7 @@ Partial Class frm_AdmissionList_Add_Edit
         Me.txt_State.Size = New System.Drawing.Size(526, 20)
         Me.txt_State.TabIndex = 7
         '
-        'frm_AdmissionList_Add
+        'frm_AdmissionList_Add_Edit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -950,7 +950,7 @@ Partial Class frm_AdmissionList_Add_Edit
         Me.Controls.Add(Me.RibbonControl)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MinimizeBox = False
-        Me.Name = "frm_AdmissionList_Add"
+        Me.Name = "frm_AdmissionList_Add_Edit"
         Me.Ribbon = Me.RibbonControl
         Me.RibbonVisibility = DevExpress.XtraBars.Ribbon.RibbonVisibility.Visible
         Me.ShowInTaskbar = False
