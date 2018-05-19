@@ -212,7 +212,7 @@
         1hWnNwJOc+dBSuzWIJksBBJvJQgk3jqwEvo3lUB3epqvIoMAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="menu_Exit.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btn_Exit.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         wwAADsMBx2+oZAAAAXNJREFUWEfd17FLhFAcwHH9B2wpUSuFDi4ocK+lXfA/aIhGp5YahDCEBm+5qfFw

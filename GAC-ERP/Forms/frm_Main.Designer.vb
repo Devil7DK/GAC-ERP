@@ -27,6 +27,7 @@ Partial Class frm_Main
         Me.btn_Exit = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_AdmissionList = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_Courses = New DevExpress.XtraBars.BarButtonItem()
+        Me.btn_AdmissionList_View = New DevExpress.XtraBars.BarButtonItem()
         Me.rp_Home = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.rpg_Admission = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -39,9 +40,9 @@ Partial Class frm_Main
         '
         Me.RibbonControl.ApplicationButtonDropDownControl = Me.ApplicationMenu1
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_Exit, Me.btn_AdmissionList, Me.btn_DefaultFeesStructure, Me.btn_Courses})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_Exit, Me.btn_AdmissionList, Me.btn_DefaultFeesStructure, Me.btn_Courses, Me.btn_AdmissionList_View})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 6
+        Me.RibbonControl.MaxItemId = 7
         Me.RibbonControl.Name = "RibbonControl"
         Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_Home})
         Me.RibbonControl.Size = New System.Drawing.Size(617, 143)
@@ -68,7 +69,7 @@ Partial Class frm_Main
         Me.btn_Exit.Caption = "Exit"
         Me.btn_Exit.Description = "Close the Application & Logout"
         Me.btn_Exit.Id = 1
-        Me.btn_Exit.ImageOptions.Image = CType(resources.GetObject("menu_Exit.ImageOptions.Image"), System.Drawing.Image)
+        Me.btn_Exit.ImageOptions.Image = CType(resources.GetObject("btn_Exit.ImageOptions.Image"), System.Drawing.Image)
         Me.btn_Exit.Name = "btn_Exit"
         Me.btn_Exit.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText
         '
@@ -76,8 +77,8 @@ Partial Class frm_Main
         '
         Me.btn_AdmissionList.Caption = "Admission List"
         Me.btn_AdmissionList.Id = 3
-        Me.btn_AdmissionList.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources.admission
-        Me.btn_AdmissionList.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources.admission
+        Me.btn_AdmissionList.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources.admission_add
+        Me.btn_AdmissionList.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources.admission_add
         Me.btn_AdmissionList.Name = "btn_AdmissionList"
         '
         'btn_Courses
@@ -88,6 +89,14 @@ Partial Class frm_Main
         Me.btn_Courses.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources.courses
         Me.btn_Courses.Name = "btn_Courses"
         '
+        'btn_AdmissionList_View
+        '
+        Me.btn_AdmissionList_View.Caption = "View List"
+        Me.btn_AdmissionList_View.Id = 6
+        Me.btn_AdmissionList_View.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources.admission_view
+        Me.btn_AdmissionList_View.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources.admission_view
+        Me.btn_AdmissionList_View.Name = "btn_AdmissionList_View"
+        '
         'rp_Home
         '
         Me.rp_Home.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Admission, Me.RibbonPageGroup1})
@@ -97,6 +106,7 @@ Partial Class frm_Main
         'rpg_Admission
         '
         Me.rpg_Admission.ItemLinks.Add(Me.btn_AdmissionList)
+        Me.rpg_Admission.ItemLinks.Add(Me.btn_AdmissionList_View)
         Me.rpg_Admission.Name = "rpg_Admission"
         Me.rpg_Admission.Text = "Admission"
         '
@@ -141,4 +151,5 @@ Partial Class frm_Main
     Friend WithEvents btn_DefaultFeesStructure As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents RibbonPageGroup1 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents btn_Courses As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents btn_AdmissionList_View As DevExpress.XtraBars.BarButtonItem
 End Class

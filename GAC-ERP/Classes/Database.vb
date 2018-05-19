@@ -8,21 +8,22 @@ Public Module Database
         If Connection.State = ConnectionState.Closed Then
             Connection.Open()
         End If
-        Dim cmd1 As New SqlCommand("SELECT * FROM Staffs WHERE Username = @Username", Connection)
-        cmd1.Parameters.Add(New SqlParameter("@Username", Username))
-        Dim Reader As SqlDataReader = cmd1.ExecuteReader
+        Using cmd1 As New SqlCommand("SELECT * FROM Staffs WHERE Username = @Username", Connection)
+            cmd1.Parameters.Add(New SqlParameter("@Username", Username))
+            Using Reader As SqlDataReader = cmd1.ExecuteReader
 
-        While Reader.Read
-            Dim Name As String = Reader.Item("Name")
-            Dim Permissions As New List(Of Permission)
-            If Reader.Item("Permissions") IsNot Nothing Then
-                On Error Resume Next
-                For Each i As Integer In Reader.Item("Permissions").ToString.Split(",")
-                    Permissions.Add(i)
-                Next
-            End If
-            staff = New Staff(Name, Username, Permissions)
-        End While
+                While Reader.Read
+                    Dim Name As String = Reader.Item("Name")
+                    Dim Permissions As New List(Of Permission)
+                    If Reader.Item("Permissions") IsNot Nothing Then
+                        For Each i As Integer In Reader.Item("Permissions").ToString.Split(",")
+                            Permissions.Add(i)
+                        Next
+                    End If
+                    staff = New Staff(Name, Username, Permissions)
+                End While
+            End Using
+        End Using
 
         Connection.Close()
 
@@ -34,89 +35,92 @@ Public Module Database
         If Connection.State = ConnectionState.Closed Then
             Connection.Open()
         End If
-        Dim cmd1 As New SqlCommand("SELECT * FROM Staffs WHERE Username = @Username", Connection)
-        cmd1.Parameters.Add(New SqlParameter("@Username", Username))
-        Dim Reader As SqlDataReader = cmd1.ExecuteReader
+        Using cmd1 As New SqlCommand("SELECT * FROM Staffs WHERE Username = @Username", Connection)
+            cmd1.Parameters.Add(New SqlParameter("@Username", Username))
+            Using Reader As SqlDataReader = cmd1.ExecuteReader
+                While Reader.Read
+                    Dim Name As String = Reader.Item("Name")
+                    Dim Permissions As New List(Of Permission)
+                    If Reader.Item("Permissions") IsNot Nothing Then
+                        For Each i As Integer In Reader.Item("Permissions").ToString.Split(",")
+                            Permissions.Add(i)
+                        Next
+                    End If
+                    staff = New Staff(Name, Username, Permissions)
+                End While
+            End Using
+        End Using
 
-        While Reader.Read
-            Dim Name As String = Reader.Item("Name")
-            Dim Permissions As New List(Of Permission)
-            If Reader.Item("Permissions") IsNot Nothing Then
-                On Error Resume Next
-                For Each i As Integer In Reader.Item("Permissions").ToString.Split(",")
-                    Permissions.Add(i)
-                Next
-            End If
-            staff = New Staff(Name, Username, Permissions)
-        End While
-
-
-        Return staff
+            Return staff
     End Function
-    Function GetAdmissionEntries() As List(Of AdmissionEntry)
+    Function GetAdmissionEntries(ByVal CloseConnectionOnFinish As Boolean) As List(Of AdmissionEntry)
         Dim r As New List(Of AdmissionEntry)
         Try
             Dim conn As SqlConnection = GetConnection()
             If (conn.State = ConnectionState.Closed) Then
                 conn.Open()
             End If
-            Dim cmd As New SqlCommand("SELECT *  FROM Admission", conn)
-            Dim dr As SqlDataReader = cmd.ExecuteReader
-            While dr.Read
-                Dim ID As Integer = dr.Item("ID")
-                Dim RegNo As Integer = dr.Item("Registration")
-                Dim ApplicationNo As Integer = dr.Item("Application")
-                Dim NameofCandidate As String = dr.Item("Name").ToString
-                Dim Gender As String = dr.Item("Gender").ToString
-                Dim Stream As String = dr.Item("Stream").ToString
-                Dim Rank As Integer = dr.Item("Rank")
-                Dim Community As String = dr.Item("Community").ToString
-                Dim CutOff As Integer = dr.Item("CutOff")
-                Dim Course As String = dr.Item("Course").ToString
-                Dim Shift As String = dr.Item("Shift").ToString
-                Dim Medium As String = dr.Item("Medium").ToString
-                Dim Quota As String = dr.Item("Quota").ToString
-                Dim SpecialQuota As String = dr.Item("SpecialQuota").ToString
-                Dim DateOfAdmission As Date = If(Date.TryParse(dr.Item("AdmissionDate"), DateOfAdmission), Date.Parse(dr.Item("AdmissionDate")), Now)
-                Dim CourseID As String = dr.Item("CourseID").ToString
-                Dim AllottedGender As String = dr.Item("AllottedGender").ToString
-                Dim AllottedStream As String = dr.Item("AllottedStream").ToString
-                Dim AllottedCommunity As String = dr.Item("AllottedCommunity").ToString
-                Dim Remarks As String = dr.Item("Remarks").ToString
-                Dim FeesPaid As Boolean = dr.Item("FeesPaid")
-                Dim FessPaidAmount As Integer = dr.Item("FeesPaidAmount")
-                Dim State As String = dr.Item("State")
-                r.Add(New AdmissionEntry(ID, NameofCandidate, Gender, RegNo, Rank, ApplicationNo, Community, CutOff, Course, Shift, Medium, Stream, Quota, AllottedGender, AllottedStream, AllottedCommunity, Remarks, DateOfAdmission, FeesPaid, FessPaidAmount, SpecialQuota, CourseID, State))
-            End While
-            conn.Close()
+            Using cmd As New SqlCommand("SELECT *  FROM Admission", conn)
+                Using dr As SqlDataReader = cmd.ExecuteReader
+                    While dr.Read
+                        Dim ID As Integer = dr.Item("ID")
+                        Dim RegNo As Integer = dr.Item("Registration")
+                        Dim ApplicationNo As Integer = dr.Item("Application")
+                        Dim NameofCandidate As String = dr.Item("Name").ToString
+                        Dim Gender As String = dr.Item("Gender").ToString
+                        Dim Stream As String = dr.Item("Stream").ToString
+                        Dim Rank As Integer = dr.Item("Rank")
+                        Dim Community As String = dr.Item("Community").ToString
+                        Dim CutOff As Integer = dr.Item("CutOff")
+                        Dim Course As String = dr.Item("Course").ToString
+                        Dim Shift As String = dr.Item("Shift").ToString
+                        Dim Medium As String = dr.Item("Medium").ToString
+                        Dim Quota As String = dr.Item("Quota").ToString
+                        Dim SpecialQuota As String = dr.Item("SpecialQuota").ToString
+                        Dim DateOfAdmission As Date = If(Date.TryParse(dr.Item("AdmissionDate"), DateOfAdmission), Date.Parse(dr.Item("AdmissionDate")), Now)
+                        Dim CourseID As String = dr.Item("CourseID").ToString
+                        Dim AllottedGender As String = dr.Item("AllottedGender").ToString
+                        Dim AllottedStream As String = dr.Item("AllottedStream").ToString
+                        Dim AllottedCommunity As String = dr.Item("AllottedCommunity").ToString
+                        Dim Remarks As String = dr.Item("Remarks").ToString
+                        Dim FeesPaid As Boolean = dr.Item("FeesPaid")
+                        Dim FessPaidAmount As Integer = dr.Item("FeesPaidAmount")
+                        Dim State As String = dr.Item("State")
+                        r.Add(New AdmissionEntry(ID, NameofCandidate, Gender, RegNo, Rank, ApplicationNo, Community, CutOff, Course, Shift, Medium, Stream, Quota, AllottedGender, AllottedStream, AllottedCommunity, Remarks, DateOfAdmission, FeesPaid, FessPaidAmount, SpecialQuota, CourseID, State))
+                    End While
+                End Using
+            End Using
+            If CloseConnectionOnFinish Then conn.Close()
         Catch ex As Exception
             MsgBox("Error while loading courses" & vbNewLine & ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Error")
         End Try
         Return r
     End Function
-    Function GetCoureses() As List(Of Course)
+    Function GetCoureses(ByVal CloseConnectionOnFinish As Boolean) As List(Of Course)
         Dim r As New List(Of Course)
         Try
             Dim conn As SqlConnection = GetConnection()
             If (conn.State = ConnectionState.Closed) Then
                 conn.Open()
             End If
-            Dim cmd As New SqlCommand("SELECT *  FROM Courses", conn)
-            Dim dr As SqlDataReader = cmd.ExecuteReader
-            While dr.Read
-                Dim ID As Integer = dr.Item("ID")
-                Dim Code As String = dr.Item("Code").ToString
-                Dim CourseName As String = dr.Item("Name").ToString
-                Dim Medium As String = dr.Item("Medium").ToString
-                Dim Shift As String = dr.Item("Shift").ToString
-                Dim Department As String = dr.Item("Department").ToString
-                Dim Duration As Integer = dr.Item("Duration")
-                Dim MaxSeats As Integer = dr.Item("MaxSeats")
-                Dim FeesStructure As String = dr.Item("FeesStructure").ToString
+            Using cmd As New SqlCommand("SELECT *  FROM Courses", conn)
+                Using dr As SqlDataReader = cmd.ExecuteReader
+                    While dr.Read
+                        Dim ID As Integer = dr.Item("ID")
+                        Dim Code As String = dr.Item("Code").ToString
+                        Dim CourseName As String = dr.Item("Name").ToString
+                        Dim Medium As String = dr.Item("Medium").ToString
+                        Dim Shift As String = dr.Item("Shift").ToString
+                        Dim Department As String = dr.Item("Department").ToString
+                        Dim Duration As Integer = dr.Item("Duration")
+                        Dim MaxSeats As Integer = dr.Item("MaxSeats")
+                        Dim FeesStructure As String = dr.Item("FeesStructure").ToString
 
-                r.Add(New Course(ID, Code, CourseName, Medium, Shift, Department, Duration, MaxSeats, FeesStructure))
-            End While
-            conn.Close()
+                        r.Add(New Course(ID, Code, CourseName, Medium, Shift, Department, Duration, MaxSeats, FeesStructure))
+                    End While
+                End Using
+            End Using
+            If CloseConnectionOnFinish Then conn.Close()
         Catch ex As Exception
             MsgBox("Error while loading courses" & vbNewLine & ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Error")
         End Try
