@@ -1,7 +1,8 @@
 ﻿Imports System.ComponentModel
+Imports System.Xml.Serialization
 
 Public Class AdmissionEntry
-    Property ID As Integer
+    Property ID As Int64
 
     <DisplayName("Name of Candidate")>
     Property Name As String
@@ -23,13 +24,9 @@ Public Class AdmissionEntry
     Property AllottedCommunity As String
     Property Remarks As String
     Property AdmissionDate As Date
-    Property FeesPaid As Boolean
-    Property FeesPaidAmount As Integer
     Property SpecialQuota As String
     Property CourseID As String
-
     Property State As String
-
     Sub New()
         Me.AdmissionDate = Now
         Me.AllottedCommunity = ""
@@ -40,8 +37,6 @@ Public Class AdmissionEntry
         Me.Course = ""
         Me.CourseID = ""
         Me.CutOff = 0
-        Me.FeesPaid = False
-        Me.FeesPaidAmount = 0
         Me.Gender = ""
         Me.ID = 0
         Me.Medium = ""
@@ -55,7 +50,7 @@ Public Class AdmissionEntry
         Me.Stream = ""
         Me.State = ""
     End Sub
-    Sub New(ByVal ID As Integer, ByVal Name As String, ByVal Gender As String, ByVal Registration As String, ByVal Rank As Integer, ByVal Application As String, ByVal Community As String, ByVal CutOff As Integer, ByVal Course As String, ByVal Shift As String, ByVal Medium As String, ByVal Stream As String, ByVal Quota As String, ByVal AllottedGender As String, ByVal AllottedStream As String, ByVal AllottedCommunity As String, ByVal Remarks As String, ByVal AdmissionDate As Date, ByVal FeesPaid As Boolean, ByVal FeesPaidAmount As Integer, ByVal SpecialQuota As String, ByVal CourseID As String, ByVal State As String)
+    Sub New(ByVal ID As Int64, ByVal Name As String, ByVal Gender As String, ByVal Registration As String, ByVal Rank As Integer, ByVal Application As String, ByVal Community As String, ByVal CutOff As Integer, ByVal Course As String, ByVal Shift As String, ByVal Medium As String, ByVal Stream As String, ByVal Quota As String, ByVal AllottedGender As String, ByVal AllottedStream As String, ByVal AllottedCommunity As String, ByVal Remarks As String, ByVal AdmissionDate As Date, ByVal SpecialQuota As String, ByVal CourseID As String, ByVal State As String)
         Me.AdmissionDate = AdmissionDate
         Me.AllottedCommunity = AllottedCommunity
         Me.AllottedGender = AllottedGender
@@ -65,8 +60,6 @@ Public Class AdmissionEntry
         Me.Course = Course
         Me.CourseID = CourseID
         Me.CutOff = CutOff
-        Me.FeesPaid = FeesPaid
-        Me.FeesPaidAmount = FeesPaidAmount
         Me.Gender = Gender
         Me.ID = ID
         Me.Medium = Medium
@@ -101,4 +94,29 @@ Public Class AdmissionEntry
         Me.Stream = Stream
         Me.State = State
     End Sub
+    Public Shared Function WriteToXML(ByVal AdmissionEntry As AdmissionEntry) As String
+        Dim r As String = ""
+        Try
+            Dim objStreamWriter As New IO.MemoryStream
+            Dim xsSerialize As New XmlSerializer(AdmissionEntry.GetType)
+            xsSerialize.Serialize(objStreamWriter, AdmissionEntry)
+            r = Text.Encoding.ASCII.GetString(objStreamWriter.ToArray)
+            objStreamWriter.Close()
+        Catch ex As Exception
+
+        End Try
+        Return r
+    End Function
+    Public Shared Function ReadXML(ByVal XML As String) As AdmissionEntry
+        Dim r As New AdmissionEntry
+        Try
+            Dim objStreamReader As New IO.MemoryStream(Text.Encoding.ASCII.GetBytes(XML))
+            Dim xsDeserialize As New XmlSerializer(r.GetType)
+            r = xsDeserialize.Deserialize(objStreamReader)
+            objStreamReader.Close()
+        Catch ex As Exception
+
+        End Try
+        Return r
+    End Function
 End Class

@@ -58,6 +58,7 @@ Public Class frm_AdmissionList_Add_Edit
         txt_AllottedStream.ReadOnly = True
         cb_SpecialQuota.Enabled = False
         txt_Remarks.ReadOnly = True
+        txt_State.ReadOnly = True
     End Sub
     Sub EnableEditing()
         ControlBox = False
@@ -77,6 +78,7 @@ Public Class frm_AdmissionList_Add_Edit
         txt_AllottedStream.ReadOnly = False
         cb_SpecialQuota.Enabled = True
         txt_Remarks.ReadOnly = False
+        txt_State.ReadOnly = False
     End Sub
     Sub ClearControls()
         txt_Name.Text = ""
@@ -96,6 +98,7 @@ Public Class frm_AdmissionList_Add_Edit
             i.CheckState = CheckState.Unchecked
         Next
         txt_Remarks.Text = ""
+        txt_State.SelectedItem = "Tamil Nadu"
     End Sub
     Sub LoadValues(ByVal AdmissionEntry As AdmissionEntry)
         txt_Name.Text = AdmissionEntry.Name
@@ -222,7 +225,7 @@ Public Class frm_AdmissionList_Add_Edit
             Dim r As Integer = NewAdmissionEntry(txt_RegistrationNumber.Text, txt_ApplicationNumber.Text, txt_Name.Text, txt_Gender.EditValue, txt_Stream.EditValue, txt_Rank.Text, txt_Community.EditValue, txt_CutOff.Text, txt_Course.Text, txt_Shift.Text, txt_Medium.Text, txt_Quota.EditValue, GetString(cb_SpecialQuota.CheckedItems), DOA, txt_CourseID.EditValue, txt_AllottedGender.EditValue, txt_AllottedStream.EditValue, txt_AllottedCommunity.EditValue, txt_Remarks.EditValue, txt_State.EditValue)
             If r > 0 Then
                 Status_ = Status.Saved
-                Me.EditEntry = New AdmissionEntry(r, txt_Name.Text, txt_Gender.EditValue, txt_RegistrationNumber.Text, txt_Rank.Text, txt_ApplicationNumber.Text, txt_Community.EditValue, txt_CutOff.Text, txt_Course.Text, txt_Shift.Text, txt_Medium.Text, txt_Stream.EditValue, txt_Quota.EditValue, txt_AllottedGender.EditValue, txt_AllottedStream.EditValue, txt_AllottedCommunity.EditValue, txt_Remarks.EditValue, DOA, False, 0, GetString(cb_SpecialQuota.CheckedItems), txt_CourseID.EditValue, txt_State.EditValue)
+                Me.EditEntry = New AdmissionEntry(r, txt_Name.Text, txt_Gender.EditValue, txt_RegistrationNumber.Text, txt_Rank.Text, txt_ApplicationNumber.Text, txt_Community.EditValue, txt_CutOff.Text, txt_Course.Text, txt_Shift.Text, txt_Medium.Text, txt_Stream.EditValue, txt_Quota.EditValue, txt_AllottedGender.EditValue, txt_AllottedStream.EditValue, txt_AllottedCommunity.EditValue, txt_Remarks.EditValue, DOA, GetString(cb_SpecialQuota.CheckedItems), txt_CourseID.EditValue, txt_State.EditValue)
             Else
                 MsgBox("Unknown error in adding entry.", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Error")
             End If

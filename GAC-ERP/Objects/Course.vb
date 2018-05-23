@@ -1,4 +1,6 @@
-﻿Public Class Course
+﻿Imports System.Xml.Serialization
+
+Public Class Course
     Property ID As Integer
     <System.ComponentModel.DisplayName("Course ID")>
     Property Code As String
@@ -111,4 +113,29 @@
             End Try
         End If
     End Sub
+    Public Shared Function WriteToXML(ByVal Course As Course) As String
+        Dim r As String = ""
+        Try
+            Dim objStreamWriter As New IO.MemoryStream
+            Dim xsSerialize As New XmlSerializer(Course.GetType)
+            xsSerialize.Serialize(objStreamWriter, Course)
+            r = Text.Encoding.ASCII.GetString(objStreamWriter.ToArray)
+            objStreamWriter.Close()
+        Catch ex As Exception
+
+        End Try
+        Return r
+    End Function
+    Public Shared Function ReadXML(ByVal XML As String) As Course
+        Dim r As New Course
+        Try
+            Dim objStreamReader As New IO.MemoryStream(Text.Encoding.ASCII.GetBytes(XML))
+            Dim xsDeserialize As New XmlSerializer(r.GetType)
+            r = xsDeserialize.Deserialize(objStreamReader)
+            objStreamReader.Close()
+        Catch ex As Exception
+
+        End Try
+        Return r
+    End Function
 End Class

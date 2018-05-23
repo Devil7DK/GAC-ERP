@@ -55,4 +55,19 @@ Module PublicFunctions
     Function GetDefaultFeesStructureXMLPath() As String
         Return IO.Path.Combine(Application.StartupPath, "Templates", "DefaultFeesStructure.xml")
     End Function
+    Function GetBillPrinterSettingsXMLPath() As String
+        Return IO.Path.Combine(Application.StartupPath, "Settings", "BillPrinter.xml")
+    End Function
+    Function GetReceiptNumber(ByVal ID As Int64)
+        Return "ADM" & Now.ToString("yy") & ID.ToString("00000")
+    End Function
+    Function GetDates(ByVal FromDate As Date, ByVal ToDate As Date) As List(Of Date)
+        Dim Dates As New List(Of Date)
+        Dim CurrentDate As Date = FromDate
+        Do While (CurrentDate <= ToDate)
+            CurrentDate = CurrentDate.AddDays(1)
+            Dates.Add(CurrentDate)
+        Loop
+        Return Dates
+    End Function
 End Module

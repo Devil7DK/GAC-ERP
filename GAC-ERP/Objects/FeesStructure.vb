@@ -97,7 +97,6 @@ Public Class FeesGroup
         End Try
     End Sub
 End Class
-
 Public Class FeesStructureIO
     Public Shared Function Write2XML(ByVal FeesStructure As FeesStructure) As String
         Dim r As String = ""
@@ -125,7 +124,6 @@ Public Class FeesStructureIO
         Return r
     End Function
 End Class
-
 Public Class FeesStructure
     Property PrimaryFeesGroups As List(Of FeesGroup)
     Property AdditionalFeesHeads As List(Of FeesHead)

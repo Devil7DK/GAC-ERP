@@ -1,4 +1,5 @@
-﻿Imports DevExpress.XtraBars
+﻿Imports System.ComponentModel
+Imports DevExpress.XtraBars
 
 Public Class frm_Main
     Private CurrentUser As Staff
@@ -79,5 +80,42 @@ Public Class frm_Main
         Else
             ShowPermissionErrorMessage()
         End If
+    End Sub
+
+    Private Sub btn_AdmissionFees_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_AdmissionFees.ItemClick
+        If CurrentUser.HasPermission(Permission.Billing) Then
+            Try
+                frm_AdmissionFees.ShowDialog()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Error")
+            End Try
+        End If
+    End Sub
+
+    Private Sub btn_BillPrinter_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_BillPrinter.ItemClick
+        Dim XML_Path As String = GetBillPrinterSettingsXMLPath()
+        Dim BillPrinerSetting As New BillPrinterSettings
+        Dim fi As New IO.FileInfo(XML_Path)
+        If Not fi.Directory.Exists Then
+            fi.Directory.Create()
+        End If
+        If fi.Exists Then
+            Try
+                BillPrinerSetting = BillPrinterSettings.ReadFile(XML_Path)
+            Catch ex As Exception
+
+            End Try
+        End If
+        Dim d As New frm_PropertyEditor(BillPrinerSetting)
+        If d.ShowDialog = DialogResult.OK Then
+            BillPrinterSettings.Write2File(d.SelectedObject, XML_Path)
+        End If
+    End Sub
+
+    Private Sub frm_Main_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        On Error Resume Next
+        frm_Courses_View.Close()
+        frm_AdmissionList_View.Close()
+        frm_AdmissionFees.Close()
     End Sub
 End Class

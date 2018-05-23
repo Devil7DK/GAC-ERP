@@ -50,11 +50,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Docs.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Office.v17.1.Core, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Printing.v17.1.Core, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.RichEdit.v17.1.Core, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.RichEdit.v17.1.Export, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Snap.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Spreadsheet.v17.1.Core, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Utils.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraBars.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -62,6 +64,7 @@
     <Reference Include="DevExpress.XtraLayout.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraPrinting.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraRichEdit.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraVerticalGrid.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -86,7 +89,22 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Currency.vb" />
     <Compile Include="Classes\Database.vb" />
+    <Compile Include="Classes\DFC.vb" />
+    <Compile Include="Classes\Printing\BillPrinter.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\Printing\PageImageList.vb" />
+    <Compile Include="Classes\Printing\PrintPreviewControlEx.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Classes\Printing\PrintPreviewDialogEx.designer.vb">
+      <DependentUpon>PrintPreviewDialogEx.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\Printing\PrintPreviewDialogEx.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Classes\Printing\ProvisionalSlip.vb" />
     <Compile Include="Classes\PublicFunctions.vb" />
     <Compile Include="Classes\PublicSubs.vb" />
@@ -104,6 +122,18 @@
       <DependentUpon>frm_AdmissionList_View.vb</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\AdmissionList\frm_AdmissionList_View.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Billing\AdmissionFees\frm_AdmissionEntries_SearchResult.Designer.vb">
+      <DependentUpon>frm_AdmissionEntries_SearchResult.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Billing\AdmissionFees\frm_AdmissionEntries_SearchResult.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Billing\AdmissionFees\frm_AdmissionFees.Designer.vb">
+      <DependentUpon>frm_AdmissionFees.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Billing\AdmissionFees\frm_AdmissionFees.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\Course\frm_Courses_View.Designer.vb">
@@ -134,6 +164,12 @@
       <DependentUpon>frm_PageSettings.vb</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\Settings\frm_PageSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Settings\frm_PropertyEditor.Designer.vb">
+      <DependentUpon>frm_PropertyEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Settings\frm_PropertyEditor.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\Settings\frm_ServerSettings.Designer.vb">
@@ -179,12 +215,16 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Objects\AdmissionEntry.vb" />
+    <Compile Include="Objects\AdmissionReceipt.vb" />
     <Compile Include="Objects\Course.vb" />
     <Compile Include="Objects\FeesStructure.vb" />
     <Compile Include="Objects\Permissions.vb" />
     <Compile Include="Objects\Staff.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Classes\Printing\PrintPreviewDialogEx.resx">
+      <DependentUpon>PrintPreviewDialogEx.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Classes\Printing\ProvisionalSlip.resx">
       <DependentUpon>ProvisionalSlip.vb</DependentUpon>
     </EmbeddedResource>
@@ -193,6 +233,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AdmissionList\frm_AdmissionList_View.resx">
       <DependentUpon>frm_AdmissionList_View.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Billing\AdmissionFees\frm_AdmissionEntries_SearchResult.resx">
+      <DependentUpon>frm_AdmissionEntries_SearchResult.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Billing\AdmissionFees\frm_AdmissionFees.resx">
+      <DependentUpon>frm_AdmissionFees.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Course\frm_Courses_View.resx">
       <DependentUpon>frm_Courses_View.vb</DependentUpon>
@@ -208,6 +255,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Settings\frm_PageSettings.resx">
       <DependentUpon>frm_PageSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Settings\frm_PropertyEditor.resx">
+      <DependentUpon>frm_PropertyEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Settings\frm_ServerSettings.resx">
       <DependentUpon>frm_ServerSettings.vb</DependentUpon>
@@ -282,6 +332,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\Next.png" />
+    <None Include="Resources\Logout.png" />
+    <None Include="Resources\Last.png" />
+    <None Include="Resources\full_page_w.png" />
+    <None Include="Resources\full_page.png" />
+    <None Include="Resources\First.png" />
+    <None Include="Resources\Back.png" />
+    <None Include="Resources\100-percent-zoom-symbol_318-57674.png" />
+    <None Include="Resources\2page.png" />
+    <None Include="Resources\GAC-LOGO.png" />
+    <None Include="Resources\print_invoice.ico" />
+    <None Include="Resources\paid_true.ico" />
+    <None Include="Resources\paid_false.ico" />
+    <None Include="Resources\admission_fees.ico" />
     <None Include="Resources\feesstructure_reset.ico" />
     <None Include="Resources\feesstructure_edit.ico" />
     <None Include="Resources\courses_remove.ico" />

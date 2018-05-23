@@ -28,9 +28,14 @@ Partial Class frm_Main
         Me.btn_AdmissionList = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_Courses = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_AdmissionList_View = New DevExpress.XtraBars.BarButtonItem()
+        Me.btn_AdmissionFees = New DevExpress.XtraBars.BarButtonItem()
+        Me.btn_BillPrinter = New DevExpress.XtraBars.BarButtonItem()
         Me.rp_Home = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.rpg_Admission = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
-        Me.RibbonPageGroup1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.rpg_Billing = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.rpg_Settings = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.rp_Settings = New DevExpress.XtraBars.Ribbon.RibbonPage()
+        Me.rpg_Printing = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ApplicationMenu1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -40,11 +45,11 @@ Partial Class frm_Main
         '
         Me.RibbonControl.ApplicationButtonDropDownControl = Me.ApplicationMenu1
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_Exit, Me.btn_AdmissionList, Me.btn_DefaultFeesStructure, Me.btn_Courses, Me.btn_AdmissionList_View})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_Exit, Me.btn_AdmissionList, Me.btn_DefaultFeesStructure, Me.btn_Courses, Me.btn_AdmissionList_View, Me.btn_AdmissionFees, Me.btn_BillPrinter})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 7
+        Me.RibbonControl.MaxItemId = 9
         Me.RibbonControl.Name = "RibbonControl"
-        Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_Home})
+        Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_Home, Me.rp_Settings})
         Me.RibbonControl.Size = New System.Drawing.Size(617, 143)
         Me.RibbonControl.StatusBar = Me.RibbonStatusBar
         '
@@ -97,9 +102,25 @@ Partial Class frm_Main
         Me.btn_AdmissionList_View.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources.admission_view
         Me.btn_AdmissionList_View.Name = "btn_AdmissionList_View"
         '
+        'btn_AdmissionFees
+        '
+        Me.btn_AdmissionFees.Caption = "Admission Fees"
+        Me.btn_AdmissionFees.Id = 7
+        Me.btn_AdmissionFees.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources.admission_fees
+        Me.btn_AdmissionFees.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources.admission_fees
+        Me.btn_AdmissionFees.Name = "btn_AdmissionFees"
+        '
+        'btn_BillPrinter
+        '
+        Me.btn_BillPrinter.Caption = "Admission Fees Receipt"
+        Me.btn_BillPrinter.Id = 8
+        Me.btn_BillPrinter.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources.print_invoice
+        Me.btn_BillPrinter.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources.print_invoice
+        Me.btn_BillPrinter.Name = "btn_BillPrinter"
+        '
         'rp_Home
         '
-        Me.rp_Home.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Admission, Me.RibbonPageGroup1})
+        Me.rp_Home.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Admission, Me.rpg_Billing, Me.rpg_Settings})
         Me.rp_Home.Name = "rp_Home"
         Me.rp_Home.Text = "Home"
         '
@@ -108,13 +129,35 @@ Partial Class frm_Main
         Me.rpg_Admission.ItemLinks.Add(Me.btn_AdmissionList)
         Me.rpg_Admission.ItemLinks.Add(Me.btn_AdmissionList_View)
         Me.rpg_Admission.Name = "rpg_Admission"
+        Me.rpg_Admission.ShowCaptionButton = False
         Me.rpg_Admission.Text = "Admission"
         '
-        'RibbonPageGroup1
+        'rpg_Billing
         '
-        Me.RibbonPageGroup1.ItemLinks.Add(Me.btn_Courses)
-        Me.RibbonPageGroup1.Name = "RibbonPageGroup1"
-        Me.RibbonPageGroup1.Text = "Settings"
+        Me.rpg_Billing.ItemLinks.Add(Me.btn_AdmissionFees)
+        Me.rpg_Billing.Name = "rpg_Billing"
+        Me.rpg_Billing.ShowCaptionButton = False
+        Me.rpg_Billing.Text = "Billing"
+        '
+        'rpg_Settings
+        '
+        Me.rpg_Settings.ItemLinks.Add(Me.btn_Courses)
+        Me.rpg_Settings.Name = "rpg_Settings"
+        Me.rpg_Settings.ShowCaptionButton = False
+        Me.rpg_Settings.Text = "Others"
+        '
+        'rp_Settings
+        '
+        Me.rp_Settings.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Printing})
+        Me.rp_Settings.Name = "rp_Settings"
+        Me.rp_Settings.Text = "Settings"
+        '
+        'rpg_Printing
+        '
+        Me.rpg_Printing.ItemLinks.Add(Me.btn_BillPrinter)
+        Me.rpg_Printing.Name = "rpg_Printing"
+        Me.rpg_Printing.ShowCaptionButton = False
+        Me.rpg_Printing.Text = "Printing"
         '
         'RibbonStatusBar
         '
@@ -130,6 +173,7 @@ Partial Class frm_Main
         Me.ClientSize = New System.Drawing.Size(617, 449)
         Me.Controls.Add(Me.RibbonStatusBar)
         Me.Controls.Add(Me.RibbonControl)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frm_Main"
         Me.Ribbon = Me.RibbonControl
         Me.StatusBar = Me.RibbonStatusBar
@@ -149,7 +193,12 @@ Partial Class frm_Main
     Friend WithEvents btn_Exit As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents btn_AdmissionList As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents btn_DefaultFeesStructure As DevExpress.XtraBars.BarButtonItem
-    Friend WithEvents RibbonPageGroup1 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents rpg_Settings As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents btn_Courses As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents btn_AdmissionList_View As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents rpg_Billing As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents btn_AdmissionFees As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents btn_BillPrinter As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents rp_Settings As DevExpress.XtraBars.Ribbon.RibbonPage
+    Friend WithEvents rpg_Printing As DevExpress.XtraBars.Ribbon.RibbonPageGroup
 End Class
