@@ -14,9 +14,9 @@ Public Class BillPrinter : Inherits PrintDocument
 
         Dim RectY_1 As Integer = 0
         Dim RectY_2 As Integer = RectHeight + GapBetweenRect
-        PrintBill(e.Graphics, New Rectangle(0, RectY_1, RectWidth, RectHeight), Settings.PrintBorder, "Student's Copy", Receipt.ReceiptNumber)
+        PrintBill(e.Graphics, New Rectangle(0, RectY_1, RectWidth, RectHeight), Settings.PrintBorder, If(Settings.PutInstituteCopyInFirst, "Institute's Copy", "Student's Copy"), Receipt.ReceiptNumber)
         PrintCutHereLine(e.Graphics, New Rectangle(CutHereLine_MarginAdjustment * -1, RectY_1 + RectHeight, RectWidth + (CutHereLine_MarginAdjustment * 2), GapBetweenRect))
-        PrintBill(e.Graphics, New Rectangle(0, RectY_2, RectWidth, RectHeight), Settings.PrintBorder, "Institute's Copy", Receipt.ReceiptNumber)
+        PrintBill(e.Graphics, New Rectangle(0, RectY_2, RectWidth, RectHeight), Settings.PrintBorder, If(Settings.PutInstituteCopyInFirst, "Student's Copy", "Institute's Copy"), Receipt.ReceiptNumber)
     End Sub
 
     Sub PrintBill(ByVal g As Graphics, ByVal Rect As Rectangle, ByVal DrawOutline As Boolean, ByVal BillType As String, ByVal ReceiptNumber As String)
@@ -270,7 +270,7 @@ End Class
 Public Class BillPrinterSettings
     Sub New()
     End Sub
-    Sub New(ByVal Margin As Integer, ByVal ScissorsCount As Integer, ByVal TextMargin As Integer, ByVal Heading1 As String, ByVal Heading1Font As Font, ByVal Heading2 As String, ByVal Heading2Font As Font, ByVal ReceiptTitle As String, ByVal ReceiptTitleFont As Font, ByVal BillCopyFont As Font, ByVal FieldNameFont As Font, ByVal FieldValueFont As Font, ByVal SignatureLine As String, ByVal SignatureLineFont As Font, ByVal TableHeadingFont As Font, ByVal TableBodyFont As Font, ByVal TitleSerialNo As String, ByVal TitleFeesHead As String, ByVal TitleAmount As String, ByVal TitleTotal As String, ByVal PrintBorder As Boolean)
+    Sub New(ByVal Margin As Integer, ByVal ScissorsCount As Integer, ByVal TextMargin As Integer, ByVal Heading1 As String, ByVal Heading1Font As Font, ByVal Heading2 As String, ByVal Heading2Font As Font, ByVal ReceiptTitle As String, ByVal ReceiptTitleFont As Font, ByVal BillCopyFont As Font, ByVal FieldNameFont As Font, ByVal FieldValueFont As Font, ByVal SignatureLine As String, ByVal SignatureLineFont As Font, ByVal TableHeadingFont As Font, ByVal TableBodyFont As Font, ByVal TitleSerialNo As String, ByVal TitleFeesHead As String, ByVal TitleAmount As String, ByVal TitleTotal As String, ByVal PrintBorder As Boolean, ByVal PutInstituteCopyInFirst As Boolean)
         Me.Margin = Margin
         Me.ScissorsCount = ScissorsCount
         Me.TextMargin = TextMargin
@@ -292,6 +292,7 @@ Public Class BillPrinterSettings
         Me.TitleAmount = TitleAmount
         Me.TitleTotal = TitleTotal
         Me.PrintBorder = PrintBorder
+        Me.PutInstituteCopyInFirst = PutInstituteCopyInFirst
     End Sub
     Property Margin As Integer = 50
     Property ScissorsCount As Integer = 3
@@ -314,8 +315,9 @@ Public Class BillPrinterSettings
     Property TitleAmount As String = "Amount"
     Property TitleTotal As String = "Total Amount"
     Property PrintBorder As Boolean = True
+    Property PutInstituteCopyInFirst As Boolean = False
     Function Clone() As BillPrinterSettings
-        Return New BillPrinterSettings(Margin, ScissorsCount, TextMargin, Heading1, Heading1Font, Heading2, Heading2Font, ReceiptTitle, ReceiptTitleFont, BillCopyFont, FieldNameFont, FieldValueFont, SignatureLine, SignatureLineFont, TableHeadingFont, TableBodyFont, TitleSerialNo, TitleFeesHead, TitleAmount, TitleTotal, PrintBorder)
+        Return New BillPrinterSettings(Margin, ScissorsCount, TextMargin, Heading1, Heading1Font, Heading2, Heading2Font, ReceiptTitle, ReceiptTitleFont, BillCopyFont, FieldNameFont, FieldValueFont, SignatureLine, SignatureLineFont, TableHeadingFont, TableBodyFont, TitleSerialNo, TitleFeesHead, TitleAmount, TitleTotal, PrintBorder, PutInstituteCopyInFirst)
     End Function
     Public Shared Sub Write2File(ByVal BillPrinterSettings As BillPrinterSettings, ByVal Path As String)
         Dim stream As FileStream = File.Create(Path)
