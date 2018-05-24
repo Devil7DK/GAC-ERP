@@ -428,7 +428,7 @@ Public Module Database
             If (conn.State = ConnectionState.Closed) Then
                 conn.Open()
             End If
-            Using cmd As New SqlCommand("SELECT *  FROM AdmissionReceipts WHERE Date = @Date ORDERBY ID", conn)
+            Using cmd As New SqlCommand("SELECT *  FROM AdmissionReceipts WHERE Date = @Date ORDER BY ID", conn)
                 cmd.Parameters.Add("@Date", SqlDbType.Date).Value = Date2Search
                 Using dr As SqlDataReader = cmd.ExecuteReader
                     While dr.Read
