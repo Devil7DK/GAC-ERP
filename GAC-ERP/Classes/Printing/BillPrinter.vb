@@ -8,7 +8,7 @@ Public Class BillPrinter : Inherits PrintDocument
     Property Settings As New BillPrinterSettings
     Private Sub BillPrinter_PrintPage(sender As Object, e As PrintPageEventArgs) Handles Me.PrintPage
         Dim CutHereLine_MarginAdjustment As Integer = e.PageSettings.Margins.Left - 20
-        Dim GapBetweenRect As Integer = Settings.Margin * 2
+        Dim GapBetweenRect As Integer = Settings.Margin
         Dim RectWidth As Integer = e.MarginBounds.Width
         Dim RectHeight As Integer = (e.MarginBounds.Height / 2) - (GapBetweenRect / 2)
 
@@ -140,7 +140,7 @@ Public Class BillPrinter : Inherits PrintDocument
         Dim SignatureLine As String = Settings.SignatureLine
         Dim SignatureLine_Font As Font = Settings.SignatureLineFont
         Dim SignatureSize As Size = g.MeasureString(SignatureLine, SignatureLine_Font).ToSize
-        Dim SignatureLocation As New Point(Rect.Location.X + Rect.Size.Width - SignatureSize.Width - 30, Rect.Location.Y + Rect.Size.Height - SignatureSize.Height - 20)
+        Dim SignatureLocation As New Point(Rect.Location.X + Rect.Size.Width - SignatureSize.Width - 30, Rect.Location.Y + Rect.Size.Height - SignatureSize.Height)
         g.DrawString(SignatureLine, SignatureLine_Font, Brushes.Black, SignatureLocation)
 #End Region
 
@@ -159,13 +159,16 @@ Public Class BillPrinter : Inherits PrintDocument
         Dim Width_Total As Integer = 0
         Dim Width_SubTotal As Integer = 0
         Dim Fees_X_Adjustment As Integer = 50
-        Dim Table_Height As Integer = (SignatureLocation.Y - CurrentY) - 40
+        Dim Table_Height As Integer = (SignatureLocation.Y - CurrentY) - 60
         Dim Height_Body As Integer = g.MeasureString("T", BodyFont).Height + 3
         Dim Fees_X As Integer = 0
         Dim Amount_X As Integer = 0
         Dim Fees_Amount_Width As Integer = 0
         Dim SNo_X As Integer = 0
-        Dim Total_Y
+        Dim Total_Y As Integer = 0
+        Dim AmountInWordsLocation As Point
+        Dim AmountInWordsMaxWidth As Integer = 0
+
 
         Dim Total As Integer = 0
         Dim SNo As Integer = 0
@@ -192,6 +195,9 @@ Public Class BillPrinter : Inherits PrintDocument
         g.DrawLine(New Pen(Color.Black, 2), New Point(CurrentX + TextMargin + Width_SNo, CurrentY), New Point(CurrentX + TextMargin + Width_SNo, CurrentY + Table_Height))
         g.DrawLine(New Pen(Color.Black, 2), New Point(CurrentX + TextMargin + Width_SNo + Fees_X_Adjustment + Width_FeesHead, CurrentY), New Point(CurrentX + TextMargin + Width_SNo + Fees_X_Adjustment + Width_FeesHead, CurrentY + Table_Height))
         g.DrawLine(New Pen(Color.Black, 2), New Point(CurrentX + TextMargin, CurrentY + Table_Height), New Point(CurrentX + Rect.Width - TextMargin, CurrentY + Table_Height))
+
+        AmountInWordsLocation = New Point(CurrentX + TextMargin, CurrentY + Table_Height + 10)
+        AmountInWordsMaxWidth = Rect.Width
 
         g.DrawLine(New Pen(Color.Black, 2), New Point(CurrentX + TextMargin, CurrentY + Table_Height - Height_Total), New Point(CurrentX + Rect.Width - TextMargin, CurrentY + Table_Height - Height_Total))
         g.DrawString(Total_Text, HeadingFont, Brushes.Black, New Rectangle(CurrentX + TextMargin + Width_SNo + Fees_X_Adjustment + Width_FeesHead - Width_Total, CurrentY + Table_Height - Height_Total, Width_Total, Height_Total), New StringFormat With {.LineAlignment = StringAlignment.Center, .Alignment = StringAlignment.Near})
@@ -235,6 +241,15 @@ Public Class BillPrinter : Inherits PrintDocument
         Next
         g.DrawString(AmountToComma(Total), HeadingFont, Brushes.Black, New Rectangle(Amount_X, Total_Y, Fees_Amount_Width, Height_Total), AmountStringFormat)
 #End Region
+
+#Region "AmountInWords"
+        If Settings.PrintAmountInWords Then
+            Dim AmountInWords_ As String = "Total : " & AmountInWords(Total)
+            Dim AmountInWordsSize As Size = g.MeasureString(AmountInWords_, Settings.AmountInWordsFont, AmountInWordsMaxWidth).ToSize
+            AmountInWordsSize.Width += 10
+            g.DrawString(AmountInWords_, Settings.AmountInWordsFont, Brushes.Black, New Rectangle(AmountInWordsLocation, AmountInWordsSize))
+        End If
+#End Region
     End Sub
 
     Public Sub PrintCutHereLine(ByVal g As Graphics, ByVal Rect As Rectangle)
@@ -270,7 +285,7 @@ End Class
 Public Class BillPrinterSettings
     Sub New()
     End Sub
-    Sub New(ByVal Margin As Integer, ByVal ScissorsCount As Integer, ByVal TextMargin As Integer, ByVal Heading1 As String, ByVal Heading1Font As Font, ByVal Heading2 As String, ByVal Heading2Font As Font, ByVal ReceiptTitle As String, ByVal ReceiptTitleFont As Font, ByVal BillCopyFont As Font, ByVal FieldNameFont As Font, ByVal FieldValueFont As Font, ByVal SignatureLine As String, ByVal SignatureLineFont As Font, ByVal TableHeadingFont As Font, ByVal TableBodyFont As Font, ByVal TitleSerialNo As String, ByVal TitleFeesHead As String, ByVal TitleAmount As String, ByVal TitleTotal As String, ByVal PrintBorder As Boolean, ByVal PutInstituteCopyInFirst As Boolean)
+    Sub New(ByVal Margin As Integer, ByVal ScissorsCount As Integer, ByVal TextMargin As Integer, ByVal Heading1 As String, ByVal Heading1Font As Font, ByVal Heading2 As String, ByVal Heading2Font As Font, ByVal ReceiptTitle As String, ByVal ReceiptTitleFont As Font, ByVal BillCopyFont As Font, ByVal FieldNameFont As Font, ByVal FieldValueFont As Font, ByVal SignatureLine As String, ByVal SignatureLineFont As Font, ByVal TableHeadingFont As Font, ByVal TableBodyFont As Font, ByVal TitleSerialNo As String, ByVal TitleFeesHead As String, ByVal TitleAmount As String, ByVal TitleTotal As String, ByVal PrintBorder As Boolean, ByVal PutInstituteCopyInFirst As Boolean, ByVal PrintAmountInWords As Boolean, ByVal AmountInWordsFont As Font)
         Me.Margin = Margin
         Me.ScissorsCount = ScissorsCount
         Me.TextMargin = TextMargin
@@ -293,6 +308,8 @@ Public Class BillPrinterSettings
         Me.TitleTotal = TitleTotal
         Me.PrintBorder = PrintBorder
         Me.PutInstituteCopyInFirst = PutInstituteCopyInFirst
+        Me.PrintAmountInWords = PrintAmountInWords
+        Me.AmountInWordsFont = AmountInWordsFont
     End Sub
     Property Margin As Integer = 50
     Property ScissorsCount As Integer = 3
@@ -316,8 +333,10 @@ Public Class BillPrinterSettings
     Property TitleTotal As String = "Total Amount"
     Property PrintBorder As Boolean = True
     Property PutInstituteCopyInFirst As Boolean = False
+    Property PrintAmountInWords As Boolean = True
+    Property AmountInWordsFont As New Font("Consolas", 12, FontStyle.Regular)
     Function Clone() As BillPrinterSettings
-        Return New BillPrinterSettings(Margin, ScissorsCount, TextMargin, Heading1, Heading1Font, Heading2, Heading2Font, ReceiptTitle, ReceiptTitleFont, BillCopyFont, FieldNameFont, FieldValueFont, SignatureLine, SignatureLineFont, TableHeadingFont, TableBodyFont, TitleSerialNo, TitleFeesHead, TitleAmount, TitleTotal, PrintBorder, PutInstituteCopyInFirst)
+        Return New BillPrinterSettings(Margin, ScissorsCount, TextMargin, Heading1, Heading1Font, Heading2, Heading2Font, ReceiptTitle, ReceiptTitleFont, BillCopyFont, FieldNameFont, FieldValueFont, SignatureLine, SignatureLineFont, TableHeadingFont, TableBodyFont, TitleSerialNo, TitleFeesHead, TitleAmount, TitleTotal, PrintBorder, PutInstituteCopyInFirst, PrintAmountInWords, AmountInWordsFont)
     End Function
     Public Shared Sub Write2File(ByVal BillPrinterSettings As BillPrinterSettings, ByVal Path As String)
         Dim stream As FileStream = File.Create(Path)
