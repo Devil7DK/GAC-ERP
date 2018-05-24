@@ -31,7 +31,7 @@ Public Class frm_Main
 
             If fi.Exists Then
                 Try
-                    f = FeesStructureIO.ReadXML(My.Computer.FileSystem.ReadAllText(XML_Path))
+                    f = FeesStructure.ReadXML(My.Computer.FileSystem.ReadAllText(XML_Path))
                 Catch ex As Exception
 
                 End Try
@@ -43,7 +43,7 @@ Public Class frm_Main
                     My.Computer.FileSystem.CreateDirectory(fi.Directory.FullName)
                 End If
                 Try
-                    My.Computer.FileSystem.WriteAllText(XML_Path, FeesStructureIO.Write2XML(d.FeesStructure), False)
+                    My.Computer.FileSystem.WriteAllText(XML_Path, FeesStructure.Write2XML(d.FeesStructure), False)
                 Catch ex As Exception
 
                 End Try
@@ -117,5 +117,12 @@ Public Class frm_Main
         frm_Courses_View.Close()
         frm_AdmissionList_View.Close()
         frm_AdmissionFees.Close()
+    End Sub
+
+    Private Sub btn_DFC_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_DFC.ItemClick
+        If CurrentUser.HasPermission(Permission.Billing) Then
+            Dim d As New frm_AdmissionFeesDFC
+            d.ShowDialog()
+        End If
     End Sub
 End Class

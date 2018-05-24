@@ -93,7 +93,7 @@ Public Class BillPrinter : Inherits PrintDocument
         Dim FieldX_2 As Integer = 0
 
         Details.Add("Receipt No.", ReceiptNumber)
-        Details.Add("Date", Now.ToString("dd/MM/yyyy"))
+        Details.Add("Date", Receipt.ReceiptDate.ToString("dd/MM/yyyy"))
         Details.Add("Student Name", Receipt.AdmissionEntry.Name)
         Details.Add("Reg. No.", Receipt.AdmissionEntry.Registration)
         Details.Add("Course", Receipt.Course.Name)
@@ -208,6 +208,7 @@ Public Class BillPrinter : Inherits PrintDocument
         g.DrawLine(New Pen(Color.Black, 2), New Point(CurrentX + TextMargin, CurrentY), New Point(CurrentX + Rect.Width - TextMargin, CurrentY))
         CurrentY += 5
 
+        Dim OptionalFeesHeads As New List(Of FeesHead)
         For Each i As FeesGroup In Receipt.AmountDetails.PrimaryFeesGroups
             i.CalculateTotal()
             Dim FeesAmount As Integer = If(PrimaryTotal, i.Total1, i.Total2)
@@ -217,8 +218,13 @@ Public Class BillPrinter : Inherits PrintDocument
             g.DrawString(i.Name, BodyFont, Brushes.Black, New Rectangle(Fees_X, CurrentY, Width_FeesHead, Height_Body), FeesHeadStringFormat)
             g.DrawString(AmountToComma(FeesAmount), BodyFont, Brushes.Black, New Rectangle(Amount_X, CurrentY, Fees_Amount_Width, Height_Body), AmountStringFormat)
             CurrentY += Height_Body
+            For Each h As FeesHead In i.FeesHeads
+                If h.isOptional Then
+                    OptionalFeesHeads.Add(h)
+                End If
+            Next
         Next
-        For Each i As FeesHead In Receipt.AmountDetails.AdditionalFeesHeads
+        For Each i As FeesHead In OptionalFeesHeads
             Dim FeesAmount As Integer = If(PrimaryTotal, i.Value1, i.Value2)
             SNo += 1
             Total += FeesAmount

@@ -97,7 +97,17 @@ Public Class FeesGroup
         End Try
     End Sub
 End Class
-Public Class FeesStructureIO
+Public Class FeesStructure
+    Property PrimaryFeesGroups As List(Of FeesGroup)
+    Sub New()
+        Me.PrimaryFeesGroups = New List(Of FeesGroup)
+    End Sub
+    Sub New(ByVal PrimaryFeesGroups As List(Of FeesGroup))
+        Me.PrimaryFeesGroups = PrimaryFeesGroups
+    End Sub
+    Sub New(ByVal PrimaryFeesGroups As List(Of FeesGroup), ByVal AdditionalFeesHeads As List(Of FeesHead))
+        Me.PrimaryFeesGroups = PrimaryFeesGroups
+    End Sub
     Public Shared Function Write2XML(ByVal FeesStructure As FeesStructure) As String
         Dim r As String = ""
         Try
@@ -123,20 +133,4 @@ Public Class FeesStructureIO
         End Try
         Return r
     End Function
-End Class
-Public Class FeesStructure
-    Property PrimaryFeesGroups As List(Of FeesGroup)
-    Property AdditionalFeesHeads As List(Of FeesHead)
-    Sub New()
-        Me.PrimaryFeesGroups = New List(Of FeesGroup)
-        Me.AdditionalFeesHeads = New List(Of FeesHead)
-    End Sub
-    Sub New(ByVal PrimaryFeesGroups As List(Of FeesGroup))
-        Me.PrimaryFeesGroups = PrimaryFeesGroups
-        Me.AdditionalFeesHeads = New List(Of FeesHead)
-    End Sub
-    Sub New(ByVal PrimaryFeesGroups As List(Of FeesGroup), ByVal AdditionalFeesHeads As List(Of FeesHead))
-        Me.PrimaryFeesGroups = PrimaryFeesGroups
-        Me.AdditionalFeesHeads = AdditionalFeesHeads
-    End Sub
 End Class

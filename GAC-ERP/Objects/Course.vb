@@ -35,7 +35,7 @@ Public Class Course
         Return If(FeesStructure Is Nothing, New FeesStructure, FeesStructure)
     End Function
     Sub SetFeesStructure(ByVal XML As String)
-        FeesStructure = FeesStructureIO.ReadXML(XML)
+        FeesStructure = FeesStructure.ReadXML(XML)
         If FeesStructure IsNot Nothing Then
             Fees_1 = 0
             Fees_2 = 0
@@ -43,12 +43,6 @@ Public Class Course
                 i.CalculateTotal()
                 Fees_1 += i.Total1
                 Fees_2 += i.Total2
-            Next
-            For Each i As FeesHead In FeesStructure.AdditionalFeesHeads
-                If Not i.isOptional Then
-                    Fees_1 += i.Value1
-                    Fees_2 += i.Value2
-                End If
             Next
         End If
     End Sub
@@ -61,12 +55,6 @@ Public Class Course
                 i.CalculateTotal()
                 Fees_1 += i.Total1
                 Fees_2 += i.Total2
-            Next
-            For Each i As FeesHead In FeesStructure.AdditionalFeesHeads
-                If Not i.isOptional Then
-                    Fees_1 += i.Value1
-                    Fees_2 += i.Value2
-                End If
             Next
         End If
     End Sub

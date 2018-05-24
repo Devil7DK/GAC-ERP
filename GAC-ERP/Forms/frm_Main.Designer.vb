@@ -30,10 +30,13 @@ Partial Class frm_Main
         Me.btn_AdmissionList_View = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_AdmissionFees = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_BillPrinter = New DevExpress.XtraBars.BarButtonItem()
+        Me.btn_DFC = New DevExpress.XtraBars.BarButtonItem()
         Me.rp_Home = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.rpg_Admission = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rpg_Billing = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rpg_Settings = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.rp_Reports = New DevExpress.XtraBars.Ribbon.RibbonPage()
+        Me.rpg_Accounts = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rp_Settings = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.rpg_Printing = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
@@ -45,11 +48,11 @@ Partial Class frm_Main
         '
         Me.RibbonControl.ApplicationButtonDropDownControl = Me.ApplicationMenu1
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_Exit, Me.btn_AdmissionList, Me.btn_DefaultFeesStructure, Me.btn_Courses, Me.btn_AdmissionList_View, Me.btn_AdmissionFees, Me.btn_BillPrinter})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_Exit, Me.btn_AdmissionList, Me.btn_DefaultFeesStructure, Me.btn_Courses, Me.btn_AdmissionList_View, Me.btn_AdmissionFees, Me.btn_BillPrinter, Me.btn_DFC})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 9
+        Me.RibbonControl.MaxItemId = 10
         Me.RibbonControl.Name = "RibbonControl"
-        Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_Home, Me.rp_Settings})
+        Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_Home, Me.rp_Reports, Me.rp_Settings})
         Me.RibbonControl.Size = New System.Drawing.Size(617, 143)
         Me.RibbonControl.StatusBar = Me.RibbonStatusBar
         '
@@ -118,6 +121,14 @@ Partial Class frm_Main
         Me.btn_BillPrinter.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources.print_invoice
         Me.btn_BillPrinter.Name = "btn_BillPrinter"
         '
+        'btn_DFC
+        '
+        Me.btn_DFC.Caption = "Admission Fees - DFC"
+        Me.btn_DFC.Id = 9
+        Me.btn_DFC.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources.admission_fees_report
+        Me.btn_DFC.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources.admission_fees_report
+        Me.btn_DFC.Name = "btn_DFC"
+        '
         'rp_Home
         '
         Me.rp_Home.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Admission, Me.rpg_Billing, Me.rpg_Settings})
@@ -145,6 +156,19 @@ Partial Class frm_Main
         Me.rpg_Settings.Name = "rpg_Settings"
         Me.rpg_Settings.ShowCaptionButton = False
         Me.rpg_Settings.Text = "Others"
+        '
+        'rp_Reports
+        '
+        Me.rp_Reports.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Accounts})
+        Me.rp_Reports.Name = "rp_Reports"
+        Me.rp_Reports.Text = "Reports"
+        '
+        'rpg_Accounts
+        '
+        Me.rpg_Accounts.ItemLinks.Add(Me.btn_DFC)
+        Me.rpg_Accounts.Name = "rpg_Accounts"
+        Me.rpg_Accounts.ShowCaptionButton = False
+        Me.rpg_Accounts.Text = "Accounts / Billing"
         '
         'rp_Settings
         '
@@ -201,4 +225,7 @@ Partial Class frm_Main
     Friend WithEvents btn_BillPrinter As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents rp_Settings As DevExpress.XtraBars.Ribbon.RibbonPage
     Friend WithEvents rpg_Printing As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents btn_DFC As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents rp_Reports As DevExpress.XtraBars.Ribbon.RibbonPage
+    Friend WithEvents rpg_Accounts As DevExpress.XtraBars.Ribbon.RibbonPageGroup
 End Class

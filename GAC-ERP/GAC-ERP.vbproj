@@ -136,6 +136,12 @@
     <Compile Include="Dialogs\Billing\AdmissionFees\frm_AdmissionFees.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Dialogs\Billing\frm_AdmissionFeesDFC.Designer.vb">
+      <DependentUpon>frm_AdmissionFeesDFC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Billing\frm_AdmissionFeesDFC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Dialogs\Course\frm_Courses_View.Designer.vb">
       <DependentUpon>frm_Courses_View.vb</DependentUpon>
     </Compile>
@@ -241,6 +247,9 @@
       <DependentUpon>frm_AdmissionFees.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Billing\frm_AdmissionFeesDFC.resx">
+      <DependentUpon>frm_AdmissionFeesDFC.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Course\frm_Courses_View.resx">
       <DependentUpon>frm_Courses_View.vb</DependentUpon>
     </EmbeddedResource>
@@ -332,6 +341,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\admission_fees_report.ico" />
     <None Include="Resources\Next.png" />
     <None Include="Resources\Logout.png" />
     <None Include="Resources\Last.png" />

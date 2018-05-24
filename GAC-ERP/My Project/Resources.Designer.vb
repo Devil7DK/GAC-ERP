@@ -63,46 +63,6 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property _100_percent_zoom_symbol_318_57674() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("100-percent-zoom-symbol_318-57674", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property _2page() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("2page", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property _exit() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("exit", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property _Next() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("Next", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
         Friend ReadOnly Property admission() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("admission", resourceCulture)
@@ -126,6 +86,16 @@ Namespace My.Resources
         Friend ReadOnly Property admission_fees() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("admission_fees", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property admission_fees_report() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("admission_fees_report", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -216,6 +186,16 @@ Namespace My.Resources
         Friend ReadOnly Property edit_entry() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("edit_entry", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property exit_app() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("exit_app", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -326,6 +306,16 @@ Namespace My.Resources
         Friend ReadOnly Property new_entry() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("new_entry", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property next_page() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("next_page", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -456,6 +446,26 @@ Namespace My.Resources
         Friend ReadOnly Property splash() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("splash", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property zoom_100() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("zoom_100", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property zoom_2page() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("zoom_2page", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

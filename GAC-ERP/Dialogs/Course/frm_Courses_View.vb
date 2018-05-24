@@ -43,7 +43,7 @@ Public Class frm_Courses_View
                         Dim d As New frm_FeesStructure("Edit Course Fees Details", course.GetFeesStructure)
                         If d.ShowDialog = DialogResult.OK Then
                             If MsgBox("Are you sure to update fees details...?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Sure?") = MsgBoxResult.Yes Then
-                                Dim NewFeesStructureXML As String = FeesStructureIO.Write2XML(d.FeesStructure)
+                                Dim NewFeesStructureXML As String = FeesStructure.Write2XML(d.FeesStructure)
                                 Dim r As Integer = UpdateCourseFeesDetails(course.ID, NewFeesStructureXML)
                                 If r > 0 Then
                                     course.SetFeesStructure(d.FeesStructure)
@@ -72,7 +72,7 @@ Public Class frm_Courses_View
                     If fi.Exists Then
                         Dim FS As FeesStructure = Nothing
                         Try
-                            FS = FeesStructureIO.ReadXML(My.Computer.FileSystem.ReadAllText(fi.FullName))
+                            FS = FeesStructure.ReadXML(My.Computer.FileSystem.ReadAllText(fi.FullName))
                         Catch ex As Exception
 
                         End Try
@@ -81,7 +81,7 @@ Public Class frm_Courses_View
                                 Try
                                     Dim course As Course = gv_Courses.GetRow(gv_Courses.GetSelectedRows(0))
 
-                                    Dim NewFeesStructureXML As String = FeesStructureIO.Write2XML(FS)
+                                    Dim NewFeesStructureXML As String = FeesStructure.Write2XML(FS)
                                     Dim r As Integer = UpdateCourseFeesDetails(course.ID, NewFeesStructureXML)
                                     If r > 0 Then
                                         course.SetFeesStructure(FS)

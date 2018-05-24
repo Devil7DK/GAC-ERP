@@ -20,7 +20,7 @@
         Me.Course = Course
         Me.ReceiptNumber = ReceiptNumber
         If AmountDetailsXML <> "" Then
-            Me.AmountDetails = FeesStructureIO.ReadXML(AmountDetailsXML)
+            Me.AmountDetails = FeesStructure.ReadXML(AmountDetailsXML)
         End If
         If AdmissionEntryXML <> "" Then
             Me.AdmissionEntry = AdmissionEntry.ReadXML(AdmissionEntryXML)

@@ -10,7 +10,6 @@ Public Class frm_FeesStructure
     Private Sub frm_DefaultFeesStructure_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If FeesStructure IsNot Nothing Then
             gc_FeesGroup.DataSource = FeesStructure.PrimaryFeesGroups
-            gc_AdditionalHeads.DataSource = FeesStructure.AdditionalFeesHeads
             For Each i As FeesGroup In gc_FeesGroup.DataSource
                 i.CalculateTotal()
             Next
@@ -18,12 +17,8 @@ Public Class frm_FeesStructure
         If gc_FeesGroup.DataSource Is Nothing Then
             gc_FeesGroup.DataSource = New List(Of FeesGroup)
         End If
-        If gc_AdditionalHeads.DataSource Is Nothing Then
-            gc_AdditionalHeads.DataSource = New List(Of FeesHead)
-        End If
         Try
             gc_FeesGroup.RefreshDataSource()
-            gc_AdditionalHeads.RefreshDataSource()
         Catch ex As Exception
 
         End Try
@@ -109,30 +104,11 @@ Public Class frm_FeesStructure
     Private Sub btn_Save_Click(sender As Object, e As EventArgs) Handles btn_Save.Click
         Try
             Dim g As List(Of FeesGroup) = gc_FeesGroup.DataSource
-            Dim a As List(Of FeesHead) = gc_AdditionalHeads.DataSource
-            Me.FeesStructure = New FeesStructure(g, a)
+            Me.FeesStructure = New FeesStructure(g)
             Me.DialogResult = DialogResult.OK
             Me.Close()
         Catch ex As Exception
             MsgBox("Error while saving." & vbNewLine & ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Error")
         End Try
-    End Sub
-
-    Private Sub btn_AddAdditionalHead_Click(sender As Object, e As EventArgs) Handles btn_AddAdditionalHead.Click
-        Dim d As New frm_InputBox("New Head", "Enter name for head :")
-        If d.ShowDialog = DialogResult.OK Then
-            CType(gc_AdditionalHeads.DataSource, List(Of FeesHead)).Add(New FeesHead(d.Value, 0))
-            gc_AdditionalHeads.RefreshDataSource()
-        End If
-    End Sub
-
-    Private Sub btn_RemoveAdditionalHead_Click(sender As Object, e As EventArgs) Handles btn_RemoveAdditionalHead.Click
-        If gv_AdditionalHeads.SelectedRowsCount = 1 Then
-            Dim g As Object = gv_AdditionalHeads.GetRow(gv_AdditionalHeads.GetSelectedRows(0))
-            If TypeOf g Is FeesHead Then
-                CType(gc_AdditionalHeads.DataSource, List(Of FeesHead)).Remove(g)
-                gc_AdditionalHeads.RefreshDataSource()
-            End If
-        End If
     End Sub
 End Class

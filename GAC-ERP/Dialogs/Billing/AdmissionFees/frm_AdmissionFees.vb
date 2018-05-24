@@ -177,7 +177,15 @@ Public Class frm_AdmissionFees
                 CurrentCourse = Course
                 Try
                     gc_FeesGroup.DataSource = Course.GetFeesStructure.PrimaryFeesGroups
-                    gc_OptionalFees.DataSource = Course.GetFeesStructure.AdditionalFeesHeads
+                    Dim OptionalFeesHeads As New List(Of FeesHead)
+                    For Each g As FeesGroup In Course.GetFeesStructure.PrimaryFeesGroups
+                        For Each h As FeesHead In g.FeesHeads
+                            If h.isOptional Then
+                                OptionalFeesHeads.Add(h)
+                            End If
+                        Next
+                    Next
+                    gc_OptionalFees.DataSource = OptionalFeesHeads
                     gc_OptionalFees.RefreshDataSource()
                     gv_OptionalFees.Columns.Item("isOptional").Visible = False
                 Catch ex As Exception
@@ -191,14 +199,18 @@ Public Class frm_AdmissionFees
                     btn_MarkUnpaid.Enabled = True
                     btn_PrintBill.Enabled = True
                     gc_OptionalFees.Enabled = False
-                    If CurrentReceipt.AmountDetails IsNot Nothing AndAlso CurrentReceipt.AmountDetails.AdditionalFeesHeads IsNot Nothing Then
-                        For Each i As FeesHead In CurrentReceipt.AmountDetails.AdditionalFeesHeads
-                            If gc_OptionalFees.DataSource IsNot Nothing Then
-                                Dim RH As Integer = gv_OptionalFees.LocateByValue("Name", i.Name)
-                                If RH <> DevExpress.XtraGrid.GridControl.InvalidRowHandle Then
-                                    gv_OptionalFees.SelectRow(RH)
+                    If CurrentReceipt.AmountDetails IsNot Nothing Then
+                        For Each g As FeesGroup In CurrentReceipt.AmountDetails.PrimaryFeesGroups
+                            For Each i As FeesHead In g.FeesHeads
+                                If i.isOptional Then
+                                    If gc_OptionalFees.DataSource IsNot Nothing Then
+                                        Dim RH As Integer = gv_OptionalFees.LocateByValue("Name", i.Name)
+                                        If RH <> DevExpress.XtraGrid.GridControl.InvalidRowHandle Then
+                                            gv_OptionalFees.SelectRow(RH)
+                                        End If
+                                    End If
                                 End If
-                            End If
+                            Next
                         Next
                     End If
                 Else
@@ -227,10 +239,27 @@ Public Class frm_AdmissionFees
     Private Sub btn_MarkPaid_Click(sender As Object, e As EventArgs) Handles btn_MarkPaid.Click
         Dim FS As New FeesStructure
         FS.PrimaryFeesGroups = gc_FeesGroup.DataSource
-        For Each i As Integer In gv_OptionalFees.GetSelectedRows
-            FS.AdditionalFeesHeads.Add(gv_OptionalFees.GetRow(i))
+        For Each i As FeesGroup In FS.PrimaryFeesGroups
+            Dim Heads2Remove As New List(Of FeesHead)
+            For Each h As FeesHead In i.FeesHeads
+                If h.isOptional Then
+                    Dim isSelected As Boolean = False
+                    For Each s As Integer In gv_OptionalFees.GetSelectedRows
+                        Dim SelectedItem As FeesHead = gv_OptionalFees.GetRow(s)
+                        If Not (h.Name = SelectedItem.Name AndAlso h.Value1 = SelectedItem.Value1 AndAlso h.Value2 = SelectedItem.Value2) Then
+                            isSelected = True
+                        End If
+                    Next
+                    If Not isSelected Then
+                        Heads2Remove.Add(h)
+                    End If
+                End If
+            Next
+            For Each h As FeesHead In Heads2Remove
+                i.FeesHeads.Remove(h)
+            Next
         Next
-        Dim XML As String = FeesStructureIO.Write2XML(FS)
+        Dim XML As String = FeesStructure.Write2XML(FS)
         Dim Receipt As AdmissionReceipt = NewAdmissionReceipt(FS, CurrentEntry, CurrentCourse)
         CurrentReceipt = Receipt
         If Receipt IsNot Nothing Then
@@ -259,12 +288,6 @@ Public Class frm_AdmissionFees
     End Sub
 
     Private Sub btn_MarkUnpaid_Click(sender As Object, e As EventArgs) Handles btn_MarkUnpaid.Click
-        Dim FS As New FeesStructure
-        FS.PrimaryFeesGroups = gc_FeesGroup.DataSource
-        For Each i As Integer In gv_OptionalFees.GetSelectedRows
-            FS.AdditionalFeesHeads.Add(gv_OptionalFees.GetRow(i))
-        Next
-        Dim XML As String = FeesStructureIO.Write2XML(FS)
         Dim r As Integer = DeleteAdmissionReceipt(CurrentReceipt.ID, False)
         If r > 0 Then
             txt_FeesStatus.Text = "Unpaid"
@@ -286,8 +309,17 @@ Public Class frm_AdmissionFees
     Private Sub btn_PrintBill_Click(sender As Object, e As EventArgs) Handles btn_PrintBill.Click
         Dim FS As New FeesStructure
         FS.PrimaryFeesGroups = gc_FeesGroup.DataSource
-        For Each i As Integer In gv_OptionalFees.GetSelectedRows
-            FS.AdditionalFeesHeads.Add(gv_OptionalFees.GetRow(i))
+        For Each i As FeesGroup In FS.PrimaryFeesGroups
+            For Each h As FeesHead In i.FeesHeads
+                If h.isOptional Then
+                    For Each s As Integer In gv_OptionalFees.GetSelectedRows
+                        Dim Selected As FeesHead = gv_OptionalFees.GetRow(s)
+                        If Not (h.Name = Selected.Name AndAlso h.Value1 = Selected.Value1 AndAlso h.Value2 = Selected.Value2) Then
+                            i.FeesHeads.Remove(h)
+                        End If
+                    Next
+                End If
+            Next
         Next
         BillPrinter_LaserJet.Receipt = CurrentReceipt
         BillPrinter_LaserJet.Settings = BillPrinerSetting
@@ -299,8 +331,17 @@ Public Class frm_AdmissionFees
     Private Sub btn_PrintPreview_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btn_PrintPreview.ItemClick
         Dim FS As New FeesStructure
         FS.PrimaryFeesGroups = gc_FeesGroup.DataSource
-        For Each i As Integer In gv_OptionalFees.GetSelectedRows
-            FS.AdditionalFeesHeads.Add(gv_OptionalFees.GetRow(i))
+        For Each i As FeesGroup In FS.PrimaryFeesGroups
+            For Each h As FeesHead In i.FeesHeads
+                If h.isOptional Then
+                    For Each s As Integer In gv_OptionalFees.GetSelectedRows
+                        Dim Selected As FeesHead = gv_OptionalFees.GetRow(s)
+                        If Not (h.Name = Selected.Name AndAlso h.Value1 = Selected.Value1 AndAlso h.Value2 = Selected.Value2) Then
+                            i.FeesHeads.Remove(h)
+                        End If
+                    Next
+                End If
+            Next
         Next
         BillPrinter_LaserJet.Receipt = CurrentReceipt
         BillPrinter_LaserJet.Settings = BillPrinerSetting

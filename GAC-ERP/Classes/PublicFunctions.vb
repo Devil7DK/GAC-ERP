@@ -64,10 +64,10 @@ Module PublicFunctions
     Function GetDates(ByVal FromDate As Date, ByVal ToDate As Date) As List(Of Date)
         Dim Dates As New List(Of Date)
         Dim CurrentDate As Date = FromDate
-        Do While (CurrentDate <= ToDate)
-            CurrentDate = CurrentDate.AddDays(1)
+        While (CurrentDate <= ToDate)
             Dates.Add(CurrentDate)
-        Loop
+            CurrentDate = CurrentDate.AddDays(1)
+        End While
         Return Dates
     End Function
 End Module

@@ -428,7 +428,7 @@ Public Module Database
             If (conn.State = ConnectionState.Closed) Then
                 conn.Open()
             End If
-            Using cmd As New SqlCommand("SELECT *  FROM AdmissionReceipts WHERE Date = @Date", conn)
+            Using cmd As New SqlCommand("SELECT *  FROM AdmissionReceipts WHERE Date = @Date ORDERBY ID", conn)
                 cmd.Parameters.Add("@Date", SqlDbType.Date).Value = Date2Search
                 Using dr As SqlDataReader = cmd.ExecuteReader
                     While dr.Read
@@ -467,7 +467,7 @@ Public Module Database
                     .CommandType = CommandType.Text
                     .CommandText = query
                     .Parameters.AddWithValue("@Date", Now)
-                    .Parameters.AddWithValue("@AmountDetails", FeesStructureIO.Write2XML(AmountDetails))
+                    .Parameters.AddWithValue("@AmountDetails", FeesStructure.Write2XML(AmountDetails))
                     .Parameters.AddWithValue("@AdmissionEntry", AdmissionEntry.ID)
                     .Parameters.AddWithValue("@AdmissionEntryXML", AdmissionEntry.WriteToXML(AdmissionEntry))
                     .Parameters.AddWithValue("@CourseXML", Course.WriteToXML(Course))

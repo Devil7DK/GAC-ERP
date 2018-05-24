@@ -88,8 +88,8 @@ Partial Class PrintPreviewDialogEx
         '
         Me.btn_100Percent.Caption = "100%"
         Me.btn_100Percent.Id = 4
-        Me.btn_100Percent.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources._100_percent_zoom_symbol_318_57674
-        Me.btn_100Percent.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources._100_percent_zoom_symbol_318_57674
+        Me.btn_100Percent.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources.zoom_100
+        Me.btn_100Percent.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources.zoom_100
         Me.btn_100Percent.Name = "btn_100Percent"
         '
         'btn_FullPage
@@ -110,7 +110,7 @@ Partial Class PrintPreviewDialogEx
         '
         Me.btn_TwoPages.Caption = "Two Pages"
         Me.btn_TwoPages.Id = 7
-        Me.btn_TwoPages.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources._2page
+        Me.btn_TwoPages.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources.zoom_2page
         Me.btn_TwoPages.Name = "btn_TwoPages"
         '
         'btn_First
@@ -133,8 +133,8 @@ Partial Class PrintPreviewDialogEx
         '
         Me.btn_Next.Caption = "Next"
         Me.btn_Next.Id = 10
-        Me.btn_Next.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources._Next
-        Me.btn_Next.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources._Next
+        Me.btn_Next.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources.next_page
+        Me.btn_Next.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources.next_page
         Me.btn_Next.Name = "btn_Next"
         '
         'btn_Last
