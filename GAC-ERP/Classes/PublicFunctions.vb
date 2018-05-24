@@ -59,7 +59,7 @@ Module PublicFunctions
         Return IO.Path.Combine(Application.StartupPath, "Settings", "BillPrinter.xml")
     End Function
     Function GetReceiptNumber(ByVal ID As Int64)
-        Return "ADM" & Now.ToString("yy") & ID.ToString("00000")
+        Return ID.ToString("000000")
     End Function
     Function GetDates(ByVal FromDate As Date, ByVal ToDate As Date) As List(Of Date)
         Dim Dates As New List(Of Date)
