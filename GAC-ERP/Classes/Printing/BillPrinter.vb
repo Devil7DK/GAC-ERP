@@ -98,6 +98,8 @@ Public Class BillPrinter : Inherits PrintDocument
         Details.Add("Reg. No.", Receipt.AdmissionEntry.Registration)
         Details.Add("Course", Receipt.Course.Name)
         Details.Add("Department / Branch", Receipt.Course.Department)
+        Details.Add("Shift", Receipt.Course.Shift & " Shift")
+        Details.Add("Medium", Receipt.Course.Medium)
 
         For i As Integer = 0 To Details.Count - 1 Step 2
             Dim size As Size = g.MeasureString(Details.GetKey(i), FieldFont).ToSize
