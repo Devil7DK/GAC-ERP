@@ -25,8 +25,8 @@ Partial Class frm_PropertyEditor
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_PropertyEditor))
         Me.PropertyGrid = New DevExpress.XtraVerticalGrid.PropertyGridControl()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.btn_Cancel = New DevExpress.XtraEditors.SimpleButton()
         Me.btn_Save = New DevExpress.XtraEditors.SimpleButton()
+        Me.btn_Cancel = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PropertyGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
@@ -50,21 +50,23 @@ Partial Class frm_PropertyEditor
         Me.PanelControl1.Size = New System.Drawing.Size(290, 38)
         Me.PanelControl1.TabIndex = 1
         '
-        'btn_Cancel
-        '
-        Me.btn_Cancel.Location = New System.Drawing.Point(5, 6)
-        Me.btn_Cancel.Name = "btn_Cancel"
-        Me.btn_Cancel.Size = New System.Drawing.Size(75, 27)
-        Me.btn_Cancel.TabIndex = 0
-        Me.btn_Cancel.Text = "Cancel"
-        '
         'btn_Save
         '
+        Me.btn_Save.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btn_Save.Location = New System.Drawing.Point(210, 6)
         Me.btn_Save.Name = "btn_Save"
         Me.btn_Save.Size = New System.Drawing.Size(75, 27)
         Me.btn_Save.TabIndex = 0
         Me.btn_Save.Text = "Save"
+        '
+        'btn_Cancel
+        '
+        Me.btn_Cancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btn_Cancel.Location = New System.Drawing.Point(5, 6)
+        Me.btn_Cancel.Name = "btn_Cancel"
+        Me.btn_Cancel.Size = New System.Drawing.Size(75, 27)
+        Me.btn_Cancel.TabIndex = 0
+        Me.btn_Cancel.Text = "Cancel"
         '
         'frm_PropertyEditor
         '
