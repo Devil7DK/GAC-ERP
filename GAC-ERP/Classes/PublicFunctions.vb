@@ -55,8 +55,11 @@ Module PublicFunctions
     Function GetDefaultFeesStructureXMLPath() As String
         Return IO.Path.Combine(Application.StartupPath, "Templates", "DefaultFeesStructure.xml")
     End Function
-    Function GetBillPrinterSettingsXMLPath() As String
-        Return IO.Path.Combine(Application.StartupPath, "Settings", "BillPrinter.xml")
+    Function GetBillPrinterSettingsPath() As String
+        Return IO.Path.Combine(Application.StartupPath, "Settings", "BillPrinter.settings")
+    End Function
+    Function GetProvisionalSlipPrinterSettingsPath() As String
+        Return IO.Path.Combine(Application.StartupPath, "Settings", "ProvisionalSlipPrinter.settings")
     End Function
     Function GetReceiptNumber(ByVal ID As Int64)
         Return ID.ToString("000000")

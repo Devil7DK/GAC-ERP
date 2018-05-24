@@ -94,7 +94,7 @@ Public Class frm_AdmissionFees
         Cursor = Cursors.WaitCursor
         LoadingData = True
         Try
-            Dim XML_Path As String = GetBillPrinterSettingsXMLPath()
+            Dim XML_Path As String = GetBillPrinterSettingsPath()
             Dim fi As New System.IO.FileInfo(XML_Path)
             If fi.Exists Then
                 Try

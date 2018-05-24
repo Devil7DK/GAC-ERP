@@ -4,7 +4,6 @@ Public Class frm_AdmissionList_View
     Private LoadingData As Boolean = False
     Private Loaded As Boolean = False
     Private Courses As List(Of Course)
-    Private Printer As Printing.ProvisionalSlip
     Private Sub btn_Reload_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btn_Reload.ItemClick
         If Not Worker_LoadData.IsBusy Then
             Worker_LoadData.RunWorkerAsync()
@@ -13,9 +12,6 @@ Public Class frm_AdmissionList_View
 
     Private Sub frm_AdmissionList_View_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CheckForIllegalCrossThreadCalls = False
-        If Printer Is Nothing Then
-            Printer = New Printing.ProvisionalSlip
-        End If
     End Sub
 
     Private Sub Worker_LoadData_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles Worker_LoadData.DoWork
@@ -34,6 +30,21 @@ Public Class frm_AdmissionList_View
         Catch ex As Exception
             If t.IsRunning Then t.Stop()
             MsgBox(ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Error!")
+        End Try
+        Try
+            Dim XML_Path As String = GetProvisionalSlipPrinterSettingsPath()
+            Dim fi As New System.IO.FileInfo(XML_Path)
+            If fi.Exists Then
+                Try
+                    ProvisionalSlip_Printer.Settings = ProvisionalAdmissionSlipPrinterSettings.ReadFile(XML_Path)
+                Catch ex As Exception
+
+                End Try
+            Else
+                ProvisionalSlip_Printer.Settings = New ProvisionalAdmissionSlipPrinterSettings
+            End If
+        Catch ex As Exception
+
         End Try
         Me.Cursor = Cursors.Arrow
         LoadingData = False
@@ -69,24 +80,30 @@ Public Class frm_AdmissionList_View
     End Sub
 
     Private Sub btn_Print_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btn_Print.ItemClick
-        If gv_AdmissionEntries.SelectedRowsCount = 1 Then
-            Dim AdmissionEntry As AdmissionEntry = gv_AdmissionEntries.GetRow(gv_AdmissionEntries.GetSelectedRows(0))
-            Dim Course As Course = GetCourse(AdmissionEntry.CourseID, Courses)
-            Printer.Print(AdmissionEntry, Course)
-        ElseIf gv_AdmissionEntries.SelectedRowsCount > 1 Then
+        If gv_AdmissionEntries.SelectedRowsCount > 0 Then
             Dim AdmissionEntries As New List(Of AdmissionEntry)
             For Each i As Integer In gv_AdmissionEntries.GetSelectedRows
                 AdmissionEntries.Add(gv_AdmissionEntries.GetRow(i))
             Next
-            Printer.Print(AdmissionEntries, Courses)
+            ProvisionalSlip_Printer.Courses = Courses
+            ProvisionalSlip_Printer.AdmissionEntries = AdmissionEntries
+            If ProvisionalSlip_PrintDialog.ShowDialog = DialogResult.OK Then
+                ProvisionalSlip_Printer.Print()
+            End If
         End If
     End Sub
 
     Private Sub btn_PrintPreview_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_PrintPreview.ItemClick
         If gv_AdmissionEntries.SelectedRowsCount > 0 Then
-            Dim AdmissionEntry As AdmissionEntry = gv_AdmissionEntries.GetRow(gv_AdmissionEntries.GetSelectedRows(0))
-            Dim Course As Course = GetCourse(AdmissionEntry.CourseID, Courses)
-            Printer.PrintPreview(AdmissionEntry, Course)
+            Dim AdmissionEntries As New List(Of AdmissionEntry)
+            For Each i As Integer In gv_AdmissionEntries.GetSelectedRows
+                AdmissionEntries.Add(gv_AdmissionEntries.GetRow(i))
+            Next
+            ProvisionalSlip_Printer.Courses = Courses
+            ProvisionalSlip_Printer.AdmissionEntries = AdmissionEntries
+            Dim d As New PrintPreviewDialogEx(Me)
+            d.Document = ProvisionalSlip_Printer
+            d.ShowDialog()
         End If
     End Sub
 

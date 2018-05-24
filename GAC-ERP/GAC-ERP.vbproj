@@ -69,6 +69,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -92,6 +93,9 @@
     <Compile Include="Classes\Currency.vb" />
     <Compile Include="Classes\Database.vb" />
     <Compile Include="Classes\DFC.vb" />
+    <Compile Include="Classes\Printing\ProvisionalAdmissionSlipPrinter.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Classes\Printing\BillPrinter.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -105,12 +109,8 @@
     <Compile Include="Classes\Printing\PrintPreviewDialogEx.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Classes\Printing\ProvisionalSlip.vb" />
     <Compile Include="Classes\PublicFunctions.vb" />
     <Compile Include="Classes\PublicSubs.vb" />
-    <Compile Include="Classes\RichTextBoxPrintCtrl.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Classes\TripleDES.vb" />
     <Compile Include="Dialogs\AdmissionList\frm_AdmissionList_Add_Edit.Designer.vb">
       <DependentUpon>frm_AdmissionList_Add_Edit.vb</DependentUpon>
@@ -231,14 +231,12 @@
     <EmbeddedResource Include="Classes\Printing\PrintPreviewDialogEx.resx">
       <DependentUpon>PrintPreviewDialogEx.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Classes\Printing\ProvisionalSlip.resx">
-      <DependentUpon>ProvisionalSlip.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AdmissionList\frm_AdmissionList_Add_Edit.resx">
       <DependentUpon>frm_AdmissionList_Add_Edit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AdmissionList\frm_AdmissionList_View.resx">
       <DependentUpon>frm_AdmissionList_View.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Billing\AdmissionFees\frm_AdmissionEntries_SearchResult.resx">
       <DependentUpon>frm_AdmissionEntries_SearchResult.vb</DependentUpon>

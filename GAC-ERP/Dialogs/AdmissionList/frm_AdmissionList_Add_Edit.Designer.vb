@@ -99,6 +99,8 @@ Partial Class frm_AdmissionList_Add_Edit
         Me.LabelControl39 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl40 = New DevExpress.XtraEditors.LabelControl()
         Me.txt_State = New DevExpress.XtraEditors.ComboBoxEdit()
+        Me.ProvisionalSlip_Printer = New GAC_ERP.ProvisionalAdmissionSlipPrinter()
+        Me.ProvisionalSlip_PrintDialog = New System.Windows.Forms.PrintDialog()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_Data.SuspendLayout()
@@ -240,6 +242,9 @@ Partial Class frm_AdmissionList_Add_Edit
         Me.RibbonStatusBar.Name = "RibbonStatusBar"
         Me.RibbonStatusBar.Ribbon = Me.RibbonControl
         Me.RibbonStatusBar.Size = New System.Drawing.Size(672, 31)
+        '
+        'Worker_LoadData
+        '
         '
         'panel_Data
         '
@@ -940,6 +945,18 @@ Partial Class frm_AdmissionList_Add_Edit
         Me.txt_State.Size = New System.Drawing.Size(526, 20)
         Me.txt_State.TabIndex = 7
         '
+        'ProvisionalSlip_Printer
+        '
+        Me.ProvisionalSlip_Printer.AdmissionEntries = Nothing
+        Me.ProvisionalSlip_Printer.Courses = Nothing
+        Me.ProvisionalSlip_Printer.DocumentName = "Provisional Admission Slip"
+        Me.ProvisionalSlip_Printer.Settings = Nothing
+        '
+        'ProvisionalSlip_PrintDialog
+        '
+        Me.ProvisionalSlip_PrintDialog.Document = Me.ProvisionalSlip_Printer
+        Me.ProvisionalSlip_PrintDialog.UseEXDialog = True
+        '
         'frm_AdmissionList_Add_Edit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1066,4 +1083,6 @@ Partial Class frm_AdmissionList_Add_Edit
     Friend WithEvents txt_State As DevExpress.XtraEditors.ComboBoxEdit
     Friend WithEvents lbl_Status As DevExpress.XtraBars.BarStaticItem
     Friend WithEvents txt_Status As DevExpress.XtraBars.BarStaticItem
+    Friend WithEvents ProvisionalSlip_Printer As ProvisionalAdmissionSlipPrinter
+    Friend WithEvents ProvisionalSlip_PrintDialog As PrintDialog
 End Class

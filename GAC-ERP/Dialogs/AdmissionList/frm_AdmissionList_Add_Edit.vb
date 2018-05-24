@@ -4,7 +4,6 @@ Public Class frm_AdmissionList_Add_Edit
     Dim EditEntry As AdmissionEntry
     Dim ValStatus As Status
     Dim Loading As Boolean = False
-    Private Printer As Printing.ProvisionalSlip
     Private Property Status_ As Status
         Get
             Return ValStatus
@@ -250,25 +249,53 @@ Public Class frm_AdmissionList_Add_Edit
     Private Sub btn_Print_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_Print.ItemClick
         If EditEntry IsNot Nothing AndAlso txt_CourseID.Properties.DataSource IsNot Nothing Then
             Dim Course As Course = GetCourse(EditEntry.CourseID, txt_CourseID.Properties.DataSource)
-            Printer.Print(EditEntry, Course)
+            Dim AdmissionEntries As New List(Of AdmissionEntry)
+            Dim Courses As New List(Of Course)
+            AdmissionEntries.Add(EditEntry)
+            Courses.Add(Course)
+            If ProvisionalSlip_PrintDialog.ShowDialog = DialogResult.OK Then
+                ProvisionalSlip_Printer.Print()
+            End If
         End If
     End Sub
 
     Private Sub frm_AdmissionList_Add_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If Printer Is Nothing Then
-            Printer = New Printing.ProvisionalSlip
-        End If
+        Worker_LoadData.RunWorkerAsync()
     End Sub
 
     Private Sub btn_PrintPreview_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_PrintPreview.ItemClick
         If EditEntry IsNot Nothing AndAlso txt_CourseID.Properties.DataSource IsNot Nothing Then
             Dim Course As Course = GetCourse(EditEntry.CourseID, txt_CourseID.Properties.DataSource)
-            Printer.PrintPreview(EditEntry, Course)
+            Dim AdmissionEntries As New List(Of AdmissionEntry)
+            Dim Courses As New List(Of Course)
+            AdmissionEntries.Add(EditEntry)
+            Courses.Add(Course)
+            Dim d As New PrintPreviewDialogEx(Me)
+            d.Document = ProvisionalSlip_Printer
+            d.ShowDialog()
         End If
     End Sub
 
     Private Sub btn_MarginSettings_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_MarginSettings.ItemClick
         Dim d As New frm_PageSettings
         d.ShowDialog()
+    End Sub
+
+    Private Sub Worker_LoadData_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles Worker_LoadData.DoWork
+        Try
+            Dim XML_Path As String = GetProvisionalSlipPrinterSettingsPath()
+            Dim fi As New System.IO.FileInfo(XML_Path)
+            If fi.Exists Then
+                Try
+                    ProvisionalSlip_Printer.Settings = ProvisionalAdmissionSlipPrinterSettings.ReadFile(XML_Path)
+                Catch ex As Exception
+
+                End Try
+            Else
+                ProvisionalSlip_Printer.Settings = New ProvisionalAdmissionSlipPrinterSettings
+            End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class

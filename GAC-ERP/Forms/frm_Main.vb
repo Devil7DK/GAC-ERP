@@ -93,7 +93,7 @@ Public Class frm_Main
     End Sub
 
     Private Sub btn_BillPrinter_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_BillPrinter.ItemClick
-        Dim XML_Path As String = GetBillPrinterSettingsXMLPath()
+        Dim XML_Path As String = GetBillPrinterSettingsPath()
         Dim BillPrinerSetting As New BillPrinterSettings
         Dim fi As New IO.FileInfo(XML_Path)
         If Not fi.Directory.Exists Then
@@ -123,6 +123,26 @@ Public Class frm_Main
         If CurrentUser.HasPermission(Permission.Billing) Then
             Dim d As New frm_AdmissionFeesDFC
             d.ShowDialog()
+        End If
+    End Sub
+
+    Private Sub btn_ProvisionalSlipPrinter_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_ProvisionalSlipPrinter.ItemClick
+        Dim XML_Path As String = GetProvisionalSlipPrinterSettingsPath()
+        Dim ProvisionalSlipPrinerSetting As New ProvisionalAdmissionSlipPrinterSettings
+        Dim fi As New IO.FileInfo(XML_Path)
+        If Not fi.Directory.Exists Then
+            fi.Directory.Create()
+        End If
+        If fi.Exists Then
+            Try
+                ProvisionalSlipPrinerSetting = ProvisionalAdmissionSlipPrinterSettings.ReadFile(XML_Path)
+            Catch ex As Exception
+
+            End Try
+        End If
+        Dim d As New frm_PropertyEditor(ProvisionalSlipPrinerSetting)
+        If d.ShowDialog = DialogResult.OK Then
+            ProvisionalAdmissionSlipPrinterSettings.Write2File(d.SelectedObject, XML_Path)
         End If
     End Sub
 End Class

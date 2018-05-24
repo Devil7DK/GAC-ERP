@@ -20,7 +20,7 @@ Partial Class frm_AdmissionList_View
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_Courses_View))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_AdmissionList_View))
         Me.RibbonControl = New DevExpress.XtraBars.Ribbon.RibbonControl()
         Me.btn_Reload = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_Edit = New DevExpress.XtraBars.BarButtonItem()
@@ -37,6 +37,8 @@ Partial Class frm_AdmissionList_View
         Me.gc_AdmissionEntries = New DevExpress.XtraGrid.GridControl()
         Me.gv_AdmissionEntries = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.Worker_LoadData = New System.ComponentModel.BackgroundWorker()
+        Me.ProvisionalSlip_Printer = New GAC_ERP.ProvisionalAdmissionSlipPrinter()
+        Me.ProvisionalSlip_PrintDialog = New System.Windows.Forms.PrintDialog()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gc_AdmissionEntries, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -173,6 +175,18 @@ Partial Class frm_AdmissionList_View
         'Worker_LoadData
         '
         '
+        'ProvisionalSlip_Printer
+        '
+        Me.ProvisionalSlip_Printer.AdmissionEntries = Nothing
+        Me.ProvisionalSlip_Printer.Courses = Nothing
+        Me.ProvisionalSlip_Printer.DocumentName = "Provisional Admission Slip"
+        Me.ProvisionalSlip_Printer.Settings = Nothing
+        '
+        'ProvisionalSlip_PrintDialog
+        '
+        Me.ProvisionalSlip_PrintDialog.Document = Me.ProvisionalSlip_Printer
+        Me.ProvisionalSlip_PrintDialog.UseEXDialog = True
+        '
         'frm_AdmissionList_View
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -215,4 +229,6 @@ Partial Class frm_AdmissionList_View
     Friend WithEvents PopupMenu1 As DevExpress.XtraBars.PopupMenu
     Friend WithEvents btn_PrintPreview As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents btn_MarginSettings As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents ProvisionalSlip_Printer As ProvisionalAdmissionSlipPrinter
+    Friend WithEvents ProvisionalSlip_PrintDialog As PrintDialog
 End Class
