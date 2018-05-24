@@ -105,9 +105,6 @@ Public Class FeesStructure
     Sub New(ByVal PrimaryFeesGroups As List(Of FeesGroup))
         Me.PrimaryFeesGroups = PrimaryFeesGroups
     End Sub
-    Sub New(ByVal PrimaryFeesGroups As List(Of FeesGroup), ByVal AdditionalFeesHeads As List(Of FeesHead))
-        Me.PrimaryFeesGroups = PrimaryFeesGroups
-    End Sub
     Public Shared Function Write2XML(ByVal FeesStructure As FeesStructure) As String
         Dim r As String = ""
         Try
