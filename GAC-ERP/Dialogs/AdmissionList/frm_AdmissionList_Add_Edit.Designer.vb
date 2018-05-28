@@ -711,6 +711,7 @@ Partial Class frm_AdmissionList_Add_Edit
         Me.txt_RegistrationNumber.Properties.ReadOnly = True
         Me.txt_RegistrationNumber.Size = New System.Drawing.Size(526, 20)
         Me.txt_RegistrationNumber.TabIndex = 1
+        Me.txt_RegistrationNumber.TabStop = False
         '
         'txt_ApplicationNumber
         '
