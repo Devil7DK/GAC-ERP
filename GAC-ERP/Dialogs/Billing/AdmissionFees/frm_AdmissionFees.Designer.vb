@@ -1125,6 +1125,7 @@ Partial Class frm_AdmissionFees
         Me.gv_FeesGroup.OptionsBehavior.AllowFixedGroups = DevExpress.Utils.DefaultBoolean.[False]
         Me.gv_FeesGroup.OptionsBehavior.AllowGroupExpandAnimation = DevExpress.Utils.DefaultBoolean.[False]
         Me.gv_FeesGroup.OptionsBehavior.AllowPartialGroups = DevExpress.Utils.DefaultBoolean.[False]
+        Me.gv_FeesGroup.OptionsBehavior.Editable = False
         Me.gv_FeesGroup.OptionsDetail.EnableMasterViewMode = False
         Me.gv_FeesGroup.OptionsView.BestFitMode = DevExpress.XtraGrid.Views.Grid.GridBestFitMode.Full
         Me.gv_FeesGroup.OptionsView.ColumnAutoWidth = False
@@ -1141,6 +1142,7 @@ Partial Class frm_AdmissionFees
         '
         Me.BillPrinter_LaserJet.DocumentName = "Admission Receipt"
         Me.BillPrinter_LaserJet.OriginAtMargins = True
+        Me.BillPrinter_LaserJet.Receipt = Nothing
         Me.BillPrinter_LaserJet.Settings = Nothing
         '
         'ReceiptPrintDialog

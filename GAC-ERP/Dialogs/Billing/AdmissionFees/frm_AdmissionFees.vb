@@ -116,6 +116,10 @@ Public Class frm_AdmissionFees
 
     Private Sub frm_AdmissionFees_Load(sender As Object, e As EventArgs) Handles Me.Load
         CheckForIllegalCrossThreadCalls = False
+        gv_OptionalFees.Columns("TamilName").AppearanceCell.Font = New Font("Bamini", 12)
+        btn_MarkPaid.Enabled = False
+        btn_MarkUnpaid.Enabled = False
+        btn_PrintBill.Enabled = False
     End Sub
     Sub CalculateTotal(ByVal Entry As AdmissionEntry)
         Dim total As Integer = 0
