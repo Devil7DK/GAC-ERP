@@ -139,6 +139,7 @@ Public Class ProvisionalAdmissionSlipPrinter : Inherits PrintDocument
         DefaultPageSettings.Margins.Top = Settings.TopAndBottomMargin
         DefaultPageSettings.Margins.Bottom = Settings.TopAndBottomMargin
         CurrentIndex = 0
+        Settings.Heading2 = String.Format(Settings.Heading2, Now.Year & "-" & Now.Year - 1)
     End Sub
 
 End Class
