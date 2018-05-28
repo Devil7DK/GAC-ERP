@@ -742,7 +742,7 @@ Partial Class frm_AdmissionList_Add_Edit
         Me.txt_Community.Location = New System.Drawing.Point(126, 128)
         Me.txt_Community.Name = "txt_Community"
         Me.txt_Community.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.txt_Community.Properties.Items.AddRange(New Object() {"-", "BC", "BCM", "MBC", "OC", "SC", "SCA", "ST", "ZD"})
+        Me.txt_Community.Properties.Items.AddRange(New Object() {"BC", "BCM", "MBC", "OC", "SC", "SCA", "ST"})
         Me.txt_Community.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor
         Me.txt_Community.Size = New System.Drawing.Size(526, 20)
         Me.txt_Community.TabIndex = 5
