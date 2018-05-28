@@ -1168,6 +1168,7 @@ Partial Class frm_AdmissionFees
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Admission Fees"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.grp_Fetch, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grp_Fetch.ResumeLayout(False)
         Me.grp_Fetch.PerformLayout()

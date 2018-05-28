@@ -26,10 +26,11 @@ Partial Class frm_Courses_View
         Me.btn_Edit = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_Remove = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_FeesStructure = New DevExpress.XtraBars.BarButtonItem()
+        Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu(Me.components)
+        Me.btn_DefaultFeesStructure = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_PrintPreview = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_MarginSettings = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_New = New DevExpress.XtraBars.BarButtonItem()
-        Me.btn_DefaultFeesStructure = New DevExpress.XtraBars.BarButtonItem()
         Me.rp_Edit = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.rpg_Data = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rpg_Edit = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -37,12 +38,11 @@ Partial Class frm_Courses_View
         Me.RibbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
         Me.gc_Courses = New DevExpress.XtraGrid.GridControl()
         Me.gv_Courses = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu(Me.components)
         Me.Worker_LoadCourses = New System.ComponentModel.BackgroundWorker()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gc_Courses, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gv_Courses, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RibbonControl
@@ -96,6 +96,18 @@ Partial Class frm_Courses_View
         Me.btn_FeesStructure.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources.feesstructure_edit
         Me.btn_FeesStructure.Name = "btn_FeesStructure"
         '
+        'PopupMenu1
+        '
+        Me.PopupMenu1.ItemLinks.Add(Me.btn_DefaultFeesStructure)
+        Me.PopupMenu1.Name = "PopupMenu1"
+        Me.PopupMenu1.Ribbon = Me.RibbonControl
+        '
+        'btn_DefaultFeesStructure
+        '
+        Me.btn_DefaultFeesStructure.Caption = "Reset Fees Structure to Default"
+        Me.btn_DefaultFeesStructure.Id = 8
+        Me.btn_DefaultFeesStructure.Name = "btn_DefaultFeesStructure"
+        '
         'btn_PrintPreview
         '
         Me.btn_PrintPreview.Caption = "PrintPreview"
@@ -115,12 +127,6 @@ Partial Class frm_Courses_View
         Me.btn_New.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources.courses_add
         Me.btn_New.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources.courses_add
         Me.btn_New.Name = "btn_New"
-        '
-        'btn_DefaultFeesStructure
-        '
-        Me.btn_DefaultFeesStructure.Caption = "Reset Fees Structure to Default"
-        Me.btn_DefaultFeesStructure.Id = 8
-        Me.btn_DefaultFeesStructure.Name = "btn_DefaultFeesStructure"
         '
         'rp_Edit
         '
@@ -176,12 +182,6 @@ Partial Class frm_Courses_View
         Me.gv_Courses.OptionsBehavior.Editable = False
         Me.gv_Courses.OptionsView.ShowGroupPanel = False
         '
-        'PopupMenu1
-        '
-        Me.PopupMenu1.ItemLinks.Add(Me.btn_DefaultFeesStructure)
-        Me.PopupMenu1.Name = "PopupMenu1"
-        Me.PopupMenu1.Ribbon = Me.RibbonControl
-        '
         'Worker_LoadCourses
         '
         '
@@ -202,10 +202,11 @@ Partial Class frm_Courses_View
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.StatusBar = Me.RibbonStatusBar
         Me.Text = "Courses"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gc_Courses, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gv_Courses, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

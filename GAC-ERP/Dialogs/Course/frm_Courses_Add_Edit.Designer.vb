@@ -67,9 +67,9 @@ Partial Class frm_Courses_Add_Edit
         Me.PanelControl1.Controls.Add(Me.btn_Cancel)
         Me.PanelControl1.Controls.Add(Me.btn_OK)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 203)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 199)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(338, 37)
+        Me.PanelControl1.Size = New System.Drawing.Size(334, 37)
         Me.PanelControl1.TabIndex = 0
         '
         'btn_Cancel
@@ -84,7 +84,7 @@ Partial Class frm_Courses_Add_Edit
         'btn_OK
         '
         Me.btn_OK.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btn_OK.Location = New System.Drawing.Point(258, 6)
+        Me.btn_OK.Location = New System.Drawing.Point(254, 6)
         Me.btn_OK.Name = "btn_OK"
         Me.btn_OK.Size = New System.Drawing.Size(75, 26)
         Me.btn_OK.TabIndex = 0
@@ -97,7 +97,7 @@ Partial Class frm_Courses_Add_Edit
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(338, 203)
+        Me.Panel1.Size = New System.Drawing.Size(334, 199)
         Me.Panel1.TabIndex = 1
         '
         'TableLayoutPanel1
@@ -141,7 +141,7 @@ Partial Class frm_Courses_Add_Edit
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(338, 200)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(317, 200)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'LabelControl1
@@ -283,7 +283,7 @@ Partial Class frm_Courses_Add_Edit
         Me.txt_CourseID.EnterMoveNextControl = True
         Me.txt_CourseID.Location = New System.Drawing.Point(119, 3)
         Me.txt_CourseID.Name = "txt_CourseID"
-        Me.txt_CourseID.Size = New System.Drawing.Size(216, 20)
+        Me.txt_CourseID.Size = New System.Drawing.Size(195, 20)
         Me.txt_CourseID.TabIndex = 8
         '
         'txt_CourseName
@@ -292,7 +292,7 @@ Partial Class frm_Courses_Add_Edit
         Me.txt_CourseName.EnterMoveNextControl = True
         Me.txt_CourseName.Location = New System.Drawing.Point(119, 28)
         Me.txt_CourseName.Name = "txt_CourseName"
-        Me.txt_CourseName.Size = New System.Drawing.Size(216, 20)
+        Me.txt_CourseName.Size = New System.Drawing.Size(195, 20)
         Me.txt_CourseName.TabIndex = 8
         '
         'txt_Medium
@@ -304,7 +304,7 @@ Partial Class frm_Courses_Add_Edit
         Me.txt_Medium.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.txt_Medium.Properties.Items.AddRange(New Object() {"Tamil", "English"})
         Me.txt_Medium.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor
-        Me.txt_Medium.Size = New System.Drawing.Size(216, 20)
+        Me.txt_Medium.Size = New System.Drawing.Size(195, 20)
         Me.txt_Medium.TabIndex = 9
         '
         'txt_Shift
@@ -316,7 +316,7 @@ Partial Class frm_Courses_Add_Edit
         Me.txt_Shift.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.txt_Shift.Properties.Items.AddRange(New Object() {"I", "II"})
         Me.txt_Shift.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor
-        Me.txt_Shift.Size = New System.Drawing.Size(216, 20)
+        Me.txt_Shift.Size = New System.Drawing.Size(195, 20)
         Me.txt_Shift.TabIndex = 10
         '
         'txt_Department
@@ -328,7 +328,7 @@ Partial Class frm_Courses_Add_Edit
         Me.txt_Department.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.txt_Department.Properties.Items.AddRange(New Object() {"Botany", "Business Administration", "Chemistry", "Commerce", "Commerce with Computer Applications", "Computer Science", "Economics", "English Literature", "Geography", "History", "Information Technology", "Mathematics", "Physics", "Political Science", "Psychology", "Public Administration", "Statistics", "Tamil Literature", "Tourism & Travel Management", "Zoology"})
         Me.txt_Department.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor
-        Me.txt_Department.Size = New System.Drawing.Size(216, 20)
+        Me.txt_Department.Size = New System.Drawing.Size(195, 20)
         Me.txt_Department.TabIndex = 11
         '
         'txt_Duration
@@ -341,7 +341,7 @@ Partial Class frm_Courses_Add_Edit
         Me.txt_Duration.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.txt_Duration.Properties.MaxValue = New Decimal(New Integer() {6, 0, 0, 0})
         Me.txt_Duration.Properties.MinValue = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.txt_Duration.Size = New System.Drawing.Size(216, 20)
+        Me.txt_Duration.Size = New System.Drawing.Size(195, 20)
         Me.txt_Duration.TabIndex = 12
         '
         'txt_MaxSeats
@@ -354,14 +354,14 @@ Partial Class frm_Courses_Add_Edit
         Me.txt_MaxSeats.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.txt_MaxSeats.Properties.MaxValue = New Decimal(New Integer() {500, 0, 0, 0})
         Me.txt_MaxSeats.Properties.MinValue = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.txt_MaxSeats.Size = New System.Drawing.Size(216, 20)
+        Me.txt_MaxSeats.Size = New System.Drawing.Size(195, 20)
         Me.txt_MaxSeats.TabIndex = 13
         '
         'frm_Courses_Add_Edit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(338, 240)
+        Me.ClientSize = New System.Drawing.Size(334, 236)
         Me.ControlBox = False
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.PanelControl1)

@@ -204,6 +204,7 @@ Partial Class frm_AdmissionList_View
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.StatusBar = Me.RibbonStatusBar
         Me.Text = "Admission List"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gc_AdmissionEntries, System.ComponentModel.ISupportInitialize).EndInit()

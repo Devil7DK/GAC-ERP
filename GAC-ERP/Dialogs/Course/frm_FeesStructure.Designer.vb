@@ -234,6 +234,7 @@ Partial Class frm_FeesStructure
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Default Fees Structure"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.gc_FeesGroup, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gv_FeesGroup, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gc_FeesHeads, System.ComponentModel.ISupportInitialize).EndInit()

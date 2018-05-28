@@ -116,7 +116,6 @@ Public Class frm_AdmissionFees
 
     Private Sub frm_AdmissionFees_Load(sender As Object, e As EventArgs) Handles Me.Load
         CheckForIllegalCrossThreadCalls = False
-        gv_OptionalFees.Columns("TamilName").AppearanceCell.Font = New Font("Bamini", 12)
         btn_MarkPaid.Enabled = False
         btn_MarkUnpaid.Enabled = False
         btn_PrintBill.Enabled = False
@@ -192,6 +191,7 @@ Public Class frm_AdmissionFees
                     gc_OptionalFees.DataSource = OptionalFeesHeads
                     gc_OptionalFees.RefreshDataSource()
                     gv_OptionalFees.Columns.Item("isOptional").Visible = False
+                    gv_OptionalFees.Columns.Item("TamilName").AppearanceCell.Font = New Font("Bamini", 12)
                 Catch ex As Exception
 
                 End Try

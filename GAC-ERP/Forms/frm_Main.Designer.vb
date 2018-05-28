@@ -214,6 +214,7 @@ Partial Class frm_Main
         Me.Ribbon = Me.RibbonControl
         Me.StatusBar = Me.RibbonStatusBar
         Me.Text = "Government Arts College (Autonomous)"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ApplicationMenu1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
