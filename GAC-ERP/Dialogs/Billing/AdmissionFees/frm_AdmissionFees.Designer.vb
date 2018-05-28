@@ -74,7 +74,7 @@ Partial Class frm_AdmissionFees
         Me.txt_Gender = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.txt_Community = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.txt_CutOff = New DevExpress.XtraEditors.TextEdit()
-        Me.txt_CourseID = New DevExpress.XtraEditors.LookUpEdit()
+        Me.txt_CourseID = New DevExpress.XtraEditors.TextEdit()
         Me.txt_Course = New DevExpress.XtraEditors.TextEdit()
         Me.txt_Shift = New DevExpress.XtraEditors.TextEdit()
         Me.txt_Medium = New DevExpress.XtraEditors.TextEdit()
@@ -728,7 +728,6 @@ Partial Class frm_AdmissionFees
         Me.txt_CourseID.EnterMoveNextControl = True
         Me.txt_CourseID.Location = New System.Drawing.Point(126, 203)
         Me.txt_CourseID.Name = "txt_CourseID"
-        Me.txt_CourseID.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.txt_CourseID.Size = New System.Drawing.Size(487, 20)
         Me.txt_CourseID.TabIndex = 8
         '
@@ -1268,7 +1267,7 @@ Partial Class frm_AdmissionFees
     Friend WithEvents txt_Gender As DevExpress.XtraEditors.ComboBoxEdit
     Friend WithEvents txt_Community As DevExpress.XtraEditors.ComboBoxEdit
     Friend WithEvents txt_CutOff As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents txt_CourseID As DevExpress.XtraEditors.LookUpEdit
+    Friend WithEvents txt_CourseID As DevExpress.XtraEditors.TextEdit
     Friend WithEvents txt_Course As DevExpress.XtraEditors.TextEdit
     Friend WithEvents txt_Shift As DevExpress.XtraEditors.TextEdit
     Friend WithEvents txt_Medium As DevExpress.XtraEditors.TextEdit

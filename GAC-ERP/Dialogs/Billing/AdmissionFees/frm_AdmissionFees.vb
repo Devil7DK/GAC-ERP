@@ -36,7 +36,7 @@ Public Class frm_AdmissionFees
         txt_Gender.SelectedIndex = -1
         txt_Community.SelectedIndex = -1
         txt_CutOff.Text = ""
-        txt_CourseID.EditValue = Nothing
+        txt_CourseID.EditValue = ""
         txt_Stream.SelectedIndex = -1
         txt_Quota.SelectedIndex = -1
         txt_AllottedGender.SelectedIndex = -1
@@ -91,7 +91,10 @@ Public Class frm_AdmissionFees
     End Sub
 
     Private Sub Worker_LoadCourses_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles Worker_LoadCourses.DoWork
-        Cursor = Cursors.WaitCursor
+        Me.Invoke(Sub()
+                      Cursor = Cursors.WaitCursor
+                  End Sub)
+
         LoadingData = True
         Try
             Dim XML_Path As String = GetBillPrinterSettingsPath()
@@ -107,11 +110,10 @@ Public Class frm_AdmissionFees
 
         End Try
         Courses = GetCoureses(False)
-        txt_CourseID.Properties.DataSource = Courses
-        txt_CourseID.Properties.ValueMember = "Code"
-        txt_CourseID.Properties.DisplayMember = "Code"
         LoadingData = False
-        Cursor = Cursors.Default
+        Me.Invoke(Sub()
+                      Cursor = Cursors.Default
+                  End Sub)
     End Sub
 
     Private Sub frm_AdmissionFees_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -242,7 +244,11 @@ Public Class frm_AdmissionFees
 
     Private Sub btn_MarkPaid_Click(sender As Object, e As EventArgs) Handles btn_MarkPaid.Click
         Dim FS As New FeesStructure
-        FS.PrimaryFeesGroups = gc_FeesGroup.DataSource
+
+        For Each i As FeesGroup In CType(gc_FeesGroup.DataSource, List(Of FeesGroup))
+            FS.PrimaryFeesGroups.Add(i.Clone)
+        Next
+
         For Each i As FeesGroup In FS.PrimaryFeesGroups
             Dim Heads2Remove As New List(Of FeesHead)
             For Each h As FeesHead In i.FeesHeads
@@ -250,7 +256,7 @@ Public Class frm_AdmissionFees
                     Dim isSelected As Boolean = False
                     For Each s As Integer In gv_OptionalFees.GetSelectedRows
                         Dim SelectedItem As FeesHead = gv_OptionalFees.GetRow(s)
-                        If Not (h.Name = SelectedItem.Name AndAlso h.Value1 = SelectedItem.Value1 AndAlso h.Value2 = SelectedItem.Value2) Then
+                        If (h.Name = SelectedItem.Name AndAlso h.Value1 = SelectedItem.Value1 AndAlso h.Value2 = SelectedItem.Value2) Then
                             isSelected = True
                         End If
                     Next

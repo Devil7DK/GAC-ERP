@@ -98,6 +98,9 @@ Public Class FeesGroup
 
         End Try
     End Sub
+    Function Clone() As FeesGroup
+        Return New FeesGroup(Me.Name, Me.FeesHeads.ToList)
+    End Function
 End Class
 Public Class FeesStructure
     Property PrimaryFeesGroups As List(Of FeesGroup)
