@@ -2,6 +2,7 @@
 
 Public Class frm_Login
     Dim Staffs As New List(Of Staff)
+    Dim Loading As Boolean = False
     Private Sub btn_ServerSettings_Click(sender As Object, e As EventArgs) Handles btn_ServerSettings.Click
         Dim d As New frm_ServerSettings
         d.ShowDialog()
@@ -58,8 +59,8 @@ Public Class frm_Login
                     Dim count2 As Integer = cmd2.ExecuteScalar
                     If count2 = 1 Then
                         Try
-
                             Me.Invoke(Sub()
+                                          Loading = True
                                           Dim d As New frm_Main(Staff)
                                           d.Show()
                                           Me.Close()
@@ -97,6 +98,6 @@ Public Class frm_Login
     End Sub
 
     Private Sub frm_Login_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        End
+        If Not Loading Then End
     End Sub
 End Class
