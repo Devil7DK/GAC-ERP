@@ -107,10 +107,6 @@ Public Class frm_AdmissionList_View
         End If
     End Sub
 
-    Private Sub btn_MarginSettings_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_MarginSettings.ItemClick
-        Dim d As New frm_PageSettings
-        d.ShowDialog()
-    End Sub
     Private Sub frm_AdmissionList_View_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         If Not Loaded Then
             Loaded = True

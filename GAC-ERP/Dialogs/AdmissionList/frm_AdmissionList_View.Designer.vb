@@ -28,7 +28,6 @@ Partial Class frm_AdmissionList_View
         Me.btn_Print = New DevExpress.XtraBars.BarButtonItem()
         Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu(Me.components)
         Me.btn_PrintPreview = New DevExpress.XtraBars.BarButtonItem()
-        Me.btn_MarginSettings = New DevExpress.XtraBars.BarButtonItem()
         Me.rp_Edit = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.rpg_Data = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rpg_Edit = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -48,7 +47,7 @@ Partial Class frm_AdmissionList_View
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_Reload, Me.btn_Edit, Me.btn_Remove, Me.btn_Print, Me.btn_PrintPreview, Me.btn_MarginSettings})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_Reload, Me.btn_Edit, Me.btn_Remove, Me.btn_Print, Me.btn_PrintPreview})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
         Me.RibbonControl.MaxItemId = 7
         Me.RibbonControl.Name = "RibbonControl"
@@ -98,7 +97,6 @@ Partial Class frm_AdmissionList_View
         'PopupMenu1
         '
         Me.PopupMenu1.ItemLinks.Add(Me.btn_PrintPreview)
-        Me.PopupMenu1.ItemLinks.Add(Me.btn_MarginSettings)
         Me.PopupMenu1.Name = "PopupMenu1"
         Me.PopupMenu1.Ribbon = Me.RibbonControl
         '
@@ -107,12 +105,6 @@ Partial Class frm_AdmissionList_View
         Me.btn_PrintPreview.Caption = "PrintPreview"
         Me.btn_PrintPreview.Id = 5
         Me.btn_PrintPreview.Name = "btn_PrintPreview"
-        '
-        'btn_MarginSettings
-        '
-        Me.btn_MarginSettings.Caption = "Margin Settings"
-        Me.btn_MarginSettings.Id = 6
-        Me.btn_MarginSettings.Name = "btn_MarginSettings"
         '
         'rp_Edit
         '
@@ -229,7 +221,6 @@ Partial Class frm_AdmissionList_View
     Friend WithEvents RibbonPageGroup1 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents PopupMenu1 As DevExpress.XtraBars.PopupMenu
     Friend WithEvents btn_PrintPreview As DevExpress.XtraBars.BarButtonItem
-    Friend WithEvents btn_MarginSettings As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents ProvisionalSlip_Printer As ProvisionalAdmissionSlipPrinter
     Friend WithEvents ProvisionalSlip_PrintDialog As PrintDialog
 End Class

@@ -166,12 +166,6 @@
     <Compile Include="Dialogs\Misc\frm_InputBox.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\Settings\frm_PageSettings.Designer.vb">
-      <DependentUpon>frm_PageSettings.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\Settings\frm_PageSettings.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Dialogs\Settings\frm_PropertyEditor.Designer.vb">
       <DependentUpon>frm_PropertyEditor.vb</DependentUpon>
     </Compile>
@@ -259,9 +253,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Misc\frm_InputBox.resx">
       <DependentUpon>frm_InputBox.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Settings\frm_PageSettings.resx">
-      <DependentUpon>frm_PageSettings.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Settings\frm_PropertyEditor.resx">
       <DependentUpon>frm_PropertyEditor.vb</DependentUpon>

@@ -27,7 +27,6 @@ Partial Class frm_AdmissionList_Add_Edit
         Me.btn_Print = New DevExpress.XtraBars.BarButtonItem()
         Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu(Me.components)
         Me.btn_PrintPreview = New DevExpress.XtraBars.BarButtonItem()
-        Me.btn_MarginSettings = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_New = New DevExpress.XtraBars.BarButtonItem()
         Me.lbl_Status = New DevExpress.XtraBars.BarStaticItem()
         Me.txt_Status = New DevExpress.XtraBars.BarStaticItem()
@@ -130,7 +129,7 @@ Partial Class frm_AdmissionList_Add_Edit
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_Save, Me.btn_Cancel, Me.btn_Print, Me.btn_PrintPreview, Me.btn_MarginSettings, Me.btn_New, Me.lbl_Status, Me.txt_Status})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.btn_Save, Me.btn_Cancel, Me.btn_Print, Me.btn_PrintPreview, Me.btn_New, Me.lbl_Status, Me.txt_Status})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
         Me.RibbonControl.MaxItemId = 11
         Me.RibbonControl.Name = "RibbonControl"
@@ -171,7 +170,6 @@ Partial Class frm_AdmissionList_Add_Edit
         'PopupMenu1
         '
         Me.PopupMenu1.ItemLinks.Add(Me.btn_PrintPreview)
-        Me.PopupMenu1.ItemLinks.Add(Me.btn_MarginSettings)
         Me.PopupMenu1.Name = "PopupMenu1"
         Me.PopupMenu1.Ribbon = Me.RibbonControl
         '
@@ -180,12 +178,6 @@ Partial Class frm_AdmissionList_Add_Edit
         Me.btn_PrintPreview.Caption = "PrintPreview"
         Me.btn_PrintPreview.Id = 5
         Me.btn_PrintPreview.Name = "btn_PrintPreview"
-        '
-        'btn_MarginSettings
-        '
-        Me.btn_MarginSettings.Caption = "Margin Settings"
-        Me.btn_MarginSettings.Id = 6
-        Me.btn_MarginSettings.Name = "btn_MarginSettings"
         '
         'btn_New
         '
@@ -1020,7 +1012,6 @@ Partial Class frm_AdmissionList_Add_Edit
     Friend WithEvents rpg_Print As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents PopupMenu1 As DevExpress.XtraBars.PopupMenu
     Friend WithEvents btn_PrintPreview As DevExpress.XtraBars.BarButtonItem
-    Friend WithEvents btn_MarginSettings As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents btn_New As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents panel_Data As Panel
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel

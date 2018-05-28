@@ -279,11 +279,6 @@ Public Class frm_AdmissionList_Add_Edit
         End If
     End Sub
 
-    Private Sub btn_MarginSettings_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_MarginSettings.ItemClick
-        Dim d As New frm_PageSettings
-        d.ShowDialog()
-    End Sub
-
     Private Sub Worker_LoadData_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles Worker_LoadData.DoWork
         Try
             Dim XML_Path As String = GetProvisionalSlipPrinterSettingsPath()
