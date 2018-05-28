@@ -49,7 +49,7 @@ Public Class frm_FeesStructure
             If TypeOf g Is FeesGroup Then
                 Dim d As New frm_InputBox("New Head", "Enter name for head :")
                 If d.ShowDialog = DialogResult.OK Then
-                    CType(g, FeesGroup).FeesHeads.Add(New FeesHead(d.Value, 0))
+                    CType(g, FeesGroup).FeesHeads.Add(New FeesHead(d.Value, ""))
                     gc_FeesGroup.RefreshDataSource()
                     gc_FeesHeads.RefreshDataSource()
                 End If
@@ -76,6 +76,7 @@ Public Class frm_FeesStructure
                 gc_FeesHeads.DataSource = CType(g, FeesGroup).FeesHeads
                 gc_FeesHeads.Tag = g
                 gc_FeesHeads.RefreshDataSource()
+                gv_FeesHeads.Columns("TamilName").AppearanceCell.Font = New Font("Bamini", 12)
             End If
         End If
     End Sub

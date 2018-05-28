@@ -92,8 +92,8 @@ Public Module Database
                 Connection.Open()
             End If
             Dim query As String = "INSERT INTO Admission "
-            query &= "(Name, Gender, Registration, Rank, Application, Community, CutOff, Course, Shift, Medium, Stream, Quota, AllottedGender, AllottedStream, AllottedCommunity, Remarks, AdmissionDate, FeesPaid, FeesPaidAmount, SpecialQuota, CourseID,State)  "
-            query &= "VALUES (@Name,@Gender,@Registration,@Rank,@Application,@Community,@CutOff,@Course,@Shift,@Medium,@Stream,@Quota,@AllottedGender,@AllottedStream,@AllottedCommunity,@Remarks,@AdmissionDate,@FeesPaid,@FeesPaidAmount,@SpecialQuota,@CourseID,@State);SELECT SCOPE_IDENTITY()"
+            query &= "(Name, Gender, Registration, Rank, Application, Community, CutOff, Course, Shift, Medium, Stream, Quota, AllottedGender, AllottedStream, AllottedCommunity, Remarks, AdmissionDate, SpecialQuota, CourseID,State)  "
+            query &= "VALUES (@Name,@Gender,@Registration,@Rank,@Application,@Community,@CutOff,@Course,@Shift,@Medium,@Stream,@Quota,@AllottedGender,@AllottedStream,@AllottedCommunity,@Remarks,@AdmissionDate,@SpecialQuota,@CourseID,@State);SELECT SCOPE_IDENTITY()"
 
 
             Using comm As New SqlCommand()
@@ -118,8 +118,6 @@ Public Module Database
                     .Parameters.AddWithValue("@AllottedCommunity", AllottedCommunity)
                     .Parameters.AddWithValue("@Remarks", Remarks)
                     .Parameters.AddWithValue("@AdmissionDate", DateOfAdmission)
-                    .Parameters.AddWithValue("@FeesPaid", 0)
-                    .Parameters.AddWithValue("@FeesPaidAmount", 0)
                     .Parameters.AddWithValue("@SpecialQuota", SpecialQuota)
                     .Parameters.AddWithValue("@CourseID", CourseID)
                     .Parameters.AddWithValue("@State", State)

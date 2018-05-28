@@ -3,7 +3,8 @@ Imports System.Xml.Serialization
 
 Public Class FeesHead
     Property Name As String
-
+    <System.ComponentModel.DisplayName("Name in Tamil")>
+    Property TamilName As String
     <System.ComponentModel.DisplayName("Value")>
     Property Value1 As Double
     <System.ComponentModel.DisplayName("Value (Other State)")>
@@ -17,25 +18,26 @@ Public Class FeesHead
         Value2 = 0
         isOptional = False
     End Sub
-    Sub New(Name As String)
+    Sub New(Name As String, TamilName As String)
         Me.Name = Name
+        Me.TamilName = TamilName
         Me.Value1 = 0
         Me.Value2 = 0
         Me.isOptional = False
     End Sub
-    Sub New(Name As String, Value As Double)
+    Sub New(Name As String, TamilName As String, Value As Double)
         Me.Name = Name
         Me.Value1 = Value
         Me.Value2 = Value
         Me.isOptional = False
     End Sub
-    Sub New(Name As String, Value1 As Double, Value2 As Double)
+    Sub New(Name As String, TamilName As String, Value1 As Double, Value2 As Double)
         Me.Name = Name
         Me.Value1 = Value1
         Me.Value2 = Value2
         Me.isOptional = False
     End Sub
-    Sub New(Name As String, Value1 As Double, Value2 As Double, isOptional As Boolean)
+    Sub New(Name As String, TamilName As String, Value1 As Double, Value2 As Double, isOptional As Boolean)
         Me.Name = Name
         Me.Value1 = Value1
         Me.Value2 = Value2

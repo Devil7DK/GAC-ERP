@@ -8,7 +8,7 @@ Public Class ProvisionalAdmissionSlipPrinter : Inherits PrintDocument
     Property AdmissionEntries As List(Of AdmissionEntry)
     Property Courses As List(Of Course)
     Property Settings As New ProvisionalAdmissionSlipPrinterSettings
-    Private Sub BillPrinter_PrintPage(sender As Object, e As PrintPageEventArgs) Handles Me.PrintPage
+    Private Sub ProvisionalAdmissionSlipPrinter_PrintPage(sender As Object, e As PrintPageEventArgs) Handles Me.PrintPage
         Dim AdmissionEntry As AdmissionEntry = AdmissionEntries(CurrentIndex)
         Dim Course As Course = GetCourse(AdmissionEntry.CourseID, Courses)
 
@@ -95,6 +95,13 @@ Public Class ProvisionalAdmissionSlipPrinter : Inherits PrintDocument
         Dim Items As New List(Of String)
         Items.AddRange(Settings.DescriptionDocumentsList.Trim.Split(vbNewLine))
         Items.Add(Settings.FeesLine & " " & If(AdmissionEntry.State = "Tamil Nadu", Course.Fees1, Course.Fees2))
+        For Each i As FeesGroup In Course.GetFeesStructure.PrimaryFeesGroups
+            For Each h As FeesHead In i.FeesHeads
+                If h.isOptional AndAlso h.TamilName.Trim <> "" Then
+                    Items.Add(h.TamilName.Trim & " &gha; " & If(AdmissionEntry.State = "Tamil Nadu", h.Value1, h.Value2))
+                End If
+            Next
+        Next
         For Each i As String In Items
             Dim DocumentSize As Size = e.Graphics.MeasureString(i.Trim, Settings.DescriptionFont, e.MarginBounds.Width).ToSize
             Dim DocumentRect As New Rectangle(CurrentX + 20, CurrentY, e.MarginBounds.Width, DocumentSize.Height)
@@ -125,7 +132,7 @@ Public Class ProvisionalAdmissionSlipPrinter : Inherits PrintDocument
             e.HasMorePages = False
         End If
     End Sub
-    Private Sub BillPrinter_BeginPrint(sender As Object, e As PrintEventArgs) Handles Me.BeginPrint
+    Private Sub ProvisionalAdmissionSlipPrinter_BeginPrint(sender As Object, e As PrintEventArgs) Handles Me.BeginPrint
         If Settings Is Nothing Then Settings = New ProvisionalAdmissionSlipPrinterSettings
         DefaultPageSettings.Margins.Left = Settings.LeftAndRightMargin
         DefaultPageSettings.Margins.Right = Settings.LeftAndRightMargin
