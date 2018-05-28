@@ -220,7 +220,7 @@ Public Module Database
     End Function
 #End Region
 #Region "Staffs"
-    Function GetStaff(ByVal Username As String) As Staff
+    Function GetStaff(ByVal Username As String, ByVal CloseConnectionOnExit As Boolean) As Staff
         Dim staff As Staff = Nothing
 
         Dim Connection As SqlConnection = GetConnection()
@@ -244,34 +244,38 @@ Public Module Database
             End Using
         End Using
 
-        Connection.Close()
+        If CloseConnectionOnExit Then Connection.Close()
 
         Return staff
     End Function
-    Function GetStaff(ByVal Username As String, ByVal Connection As SqlConnection) As Staff
-        Dim staff As Staff = Nothing
+    Function GetStaffs(ByVal CloseConnectionOnExit As Boolean) As List(Of Staff)
+        Dim Staffs As New List(Of Staff)
 
+        Dim Connection As SqlConnection = GetConnection()
         If Connection.State = ConnectionState.Closed Then
             Connection.Open()
         End If
-        Using cmd1 As New SqlCommand("SELECT * FROM Staffs WHERE Username = @Username", Connection)
-            cmd1.Parameters.Add(New SqlParameter("@Username", Username))
+        Using cmd1 As New SqlCommand("SELECT * FROM Staffs", Connection)
             Using Reader As SqlDataReader = cmd1.ExecuteReader
+
                 While Reader.Read
                     Dim Name As String = Reader.Item("Name")
+                    Dim username As String = Reader.Item("Username")
                     Dim Permissions As New List(Of Permission)
                     If Reader.Item("Permissions") IsNot Nothing Then
                         For Each i As Integer In Reader.Item("Permissions").ToString.Split(",")
                             Permissions.Add(i)
                         Next
                     End If
-                    staff = New Staff(Name, Username, Permissions)
+                    Staffs.Add(New Staff(Name, Username, Permissions))
                 End While
             End Using
         End Using
-
-        Return staff
+        If CloseConnectionOnExit Then Connection.Close()
+        Return Staffs
     End Function
+
+
 #End Region
 #Region "Courses"
     Function GetCoureses(ByVal CloseConnectionOnFinish As Boolean) As List(Of Course)

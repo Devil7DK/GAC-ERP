@@ -1,15 +1,7 @@
 ﻿Imports System.Data.SqlClient
 
 Public Class frm_Login
-
-    Private Sub OK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Me.Close()
-    End Sub
-
-    Private Sub Cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Me.Close()
-    End Sub
-
+    Dim Staffs As New List(Of Staff)
     Private Sub btn_ServerSettings_Click(sender As Object, e As EventArgs) Handles btn_ServerSettings.Click
         Dim d As New frm_ServerSettings
         d.ShowDialog()
@@ -54,36 +46,37 @@ Public Class frm_Login
         DisableControls()
         Me.Cursor = Cursors.WaitCursor
         Try
-            ErrorProvider.ClearErrors()
-            Dim connection As SqlConnection = GetConnection()
-            If (connection.State = ConnectionState.Closed) Then connection.Open()
+            If txt_Username.SelectedIndex > -1 Then
+                ErrorProvider.ClearErrors()
+                Dim connection As SqlConnection = GetConnection()
+                If (connection.State = ConnectionState.Closed) Then connection.Open()
+                Dim Staff As Staff = Staffs.Find(Function(c) c.Username = txt_Username.Text)
+                If Staff IsNot Nothing Then
+                    Dim cmd2 As New SqlCommand("SELECT COUNT(*) FROM Staffs WHERE Username = @Username AND Password = @Password", connection)
+                    cmd2.Parameters.Add(New SqlParameter("@Username", txt_Username.Text.Trim.ToLower))
+                    cmd2.Parameters.Add(New SqlParameter("@Password", EncryptString(txt_Password.Text)))
+                    Dim count2 As Integer = cmd2.ExecuteScalar
+                    If count2 = 1 Then
+                        Try
 
-            Dim cmd1 As New SqlCommand("SELECT COUNT(*) FROM Staffs WHERE Username = @Username", connection)
-            cmd1.Parameters.Add(New SqlParameter("@Username", txt_Username.Text.Trim.ToLower))
-            Dim count1 As Integer = cmd1.ExecuteScalar
+                            Me.Invoke(Sub()
+                                          Dim d As New frm_Main(Staff)
+                                          d.Show()
+                                          Me.Close()
+                                      End Sub)
+                        Catch ex As Exception
 
-            If count1 = 1 Then
-                Dim cmd2 As New SqlCommand("SELECT COUNT(*) FROM Staffs WHERE Username = @Username AND Password = @Password", connection)
-                cmd2.Parameters.Add(New SqlParameter("@Username", txt_Username.Text.Trim.ToLower))
-                cmd2.Parameters.Add(New SqlParameter("@Password", EncryptString(txt_Password.Text)))
-                Dim count2 As Integer = cmd2.ExecuteScalar
-                If count2 = 1 Then
-                    Dim Staff As Staff = GetStaff(txt_Username.Text.Trim.ToLower, connection)
-                    Me.Invoke(Sub()
-                                  Dim d As New frm_Main(Staff)
-                                  d.Show()
-                                  Me.Close()
-                              End Sub)
+                        End Try
+                    Else
+                        ErrorProvider.SetIconAlignment(txt_Password, ErrorIconAlignment.MiddleRight)
+                        ErrorProvider.SetError(txt_Password, "Invalid password!")
+                    End If
                 Else
-                    ErrorProvider.SetIconAlignment(txt_Password, ErrorIconAlignment.MiddleRight)
-                    ErrorProvider.SetError(txt_Password, "Invalid password!")
+                    ErrorProvider.SetIconAlignment(txt_Username, ErrorIconAlignment.MiddleRight)
+                    ErrorProvider.SetError(txt_Username, "Invalid username!")
                 End If
-            Else
-                ErrorProvider.SetIconAlignment(txt_Username, ErrorIconAlignment.MiddleRight)
-                ErrorProvider.SetError(txt_Username, "Invalid username!")
+                connection.Close()
             End If
-
-            connection.Close()
         Catch ex As Exception
             ShowError(ex)
         End Try
@@ -93,5 +86,17 @@ Public Class frm_Login
 
     Private Sub frm_Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CheckForIllegalCrossThreadCalls = False
+        Try
+            Staffs = GetStaffs(False)
+            For Each i As Staff In Staffs
+                txt_Username.Properties.Items.Add(i.Username)
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Error")
+        End Try
+    End Sub
+
+    Private Sub frm_Login_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        End
     End Sub
 End Class
