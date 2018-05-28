@@ -13,7 +13,7 @@ Public Module Database
                 Using dr As SqlDataReader = cmd.ExecuteReader
                     While dr.Read
                         Dim ID As Int64 = dr.Item("ID")
-                        Dim RegNo As Integer = dr.Item("Registration")
+                        Dim RegNo As Integer = ID
                         Dim ApplicationNo As Integer = dr.Item("Application")
                         Dim NameofCandidate As String = dr.Item("Name").ToString
                         Dim Gender As String = dr.Item("Gender").ToString
@@ -50,12 +50,12 @@ Public Module Database
             If (conn.State = ConnectionState.Closed) Then
                 conn.Open()
             End If
-            Using cmd As New SqlCommand("SELECT *  FROM Admission WHERE Registration = @Registration", conn)
+            Using cmd As New SqlCommand("SELECT *  FROM Admission WHERE ID = @Registration", conn)
                 cmd.Parameters.AddWithValue("@Registration", RegNo2Search)
                 Using dr As SqlDataReader = cmd.ExecuteReader
                     While dr.Read
                         Dim ID As Int64 = dr.Item("ID")
-                        Dim RegNo As Integer = dr.Item("Registration")
+                        Dim RegNo As Integer = ID
                         Dim ApplicationNo As Integer = dr.Item("Application")
                         Dim NameofCandidate As String = dr.Item("Name").ToString
                         Dim Gender As String = dr.Item("Gender").ToString
@@ -85,15 +85,16 @@ Public Module Database
         End Try
         Return r
     End Function
-    Function NewAdmissionEntry(ByVal RegNo As Integer, ByVal ApplicationNo As Integer, ByVal NameofCandidate As String, ByVal Gender As String, ByVal Stream As String, ByVal Rank As Integer, ByVal Community As String, ByVal CutOff As Integer, ByVal Course As String, ByVal Shift As String, ByVal Medium As String, ByVal Quota As String, ByVal SpecialQuota As String, ByVal DateOfAdmission As Date, ByVal CourseID As String, ByVal AllottedGender As String, ByVal AllottedStream As String, ByVal AllottedCommunity As String, ByVal Remarks As String, ByVal State As String)
+    Function NewAdmissionEntry(ByVal ApplicationNo As Integer, ByVal NameofCandidate As String, ByVal Gender As String, ByVal Stream As String, ByVal Rank As Integer, ByVal Community As String, ByVal CutOff As Integer, ByVal Course As String, ByVal Shift As String, ByVal Medium As String, ByVal Quota As String, ByVal SpecialQuota As String, ByVal DateOfAdmission As Date, ByVal CourseID As String, ByVal AllottedGender As String, ByVal AllottedStream As String, ByVal AllottedCommunity As String, ByVal Remarks As String, ByVal State As String) As Integer
+        Dim ID As Integer = 0
         Try
             Dim Connection As SqlConnection = GetConnection()
             If Connection.State = ConnectionState.Closed Then
                 Connection.Open()
             End If
             Dim query As String = "INSERT INTO Admission "
-            query &= "(Name, Gender, Registration, Rank, Application, Community, CutOff, Course, Shift, Medium, Stream, Quota, AllottedGender, AllottedStream, AllottedCommunity, Remarks, AdmissionDate, SpecialQuota, CourseID,State)  "
-            query &= "VALUES (@Name,@Gender,@Registration,@Rank,@Application,@Community,@CutOff,@Course,@Shift,@Medium,@Stream,@Quota,@AllottedGender,@AllottedStream,@AllottedCommunity,@Remarks,@AdmissionDate,@SpecialQuota,@CourseID,@State);SELECT SCOPE_IDENTITY()"
+            query &= "(Name, Gender, Rank, Application, Community, CutOff, Course, Shift, Medium, Stream, Quota, AllottedGender, AllottedStream, AllottedCommunity, Remarks, AdmissionDate, SpecialQuota, CourseID,State)  "
+            query &= "VALUES (@Name,@Gender,@Rank,@Application,@Community,@CutOff,@Course,@Shift,@Medium,@Stream,@Quota,@AllottedGender,@AllottedStream,@AllottedCommunity,@Remarks,@AdmissionDate,@SpecialQuota,@CourseID,@State);SELECT SCOPE_IDENTITY()"
 
 
             Using comm As New SqlCommand()
@@ -103,7 +104,6 @@ Public Module Database
                     .CommandText = query
                     .Parameters.AddWithValue("@Name", NameofCandidate)
                     .Parameters.AddWithValue("@Gender", Gender)
-                    .Parameters.AddWithValue("@Registration", RegNo)
                     .Parameters.AddWithValue("@Rank", Rank)
                     .Parameters.AddWithValue("@Application", ApplicationNo)
                     .Parameters.AddWithValue("@Community", Community)
@@ -123,18 +123,33 @@ Public Module Database
                     .Parameters.AddWithValue("@State", State)
                 End With
                 Try
-                    Return comm.ExecuteScalar
+                    ID = comm.ExecuteScalar
                 Catch ex As SqlException
                     MsgBox("Error when executing sql command " & vbNewLine & vbNewLine & ex.Message.ToString(), MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Error")
                 End Try
             End Using
+            If ID > 0 Then
+                Using comm As New SqlCommand()
+                    With comm
+                        .Connection = Connection
+                        .CommandType = CommandType.Text
+                        .CommandText = "UPDATE Admission SET Registration = @ID WHERE ID = @ID"
+                        .Parameters.AddWithValue("@ID", ID)
+                    End With
+                    Try
+                        comm.ExecuteNonQuery()
+                    Catch ex As SqlException
+
+                    End Try
+                End Using
+            End If
             Connection.Close()
         Catch ex As Exception
             MsgBox(ex.Message.ToString(), MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Error")
         End Try
-        Return 0
+        Return ID
     End Function
-    Function EditAdmissionEntry(ByVal ID As Int64, ByVal RegNo As Integer, ByVal ApplicationNo As Integer, ByVal NameofCandidate As String, ByVal Gender As String, ByVal Stream As String, ByVal Rank As Integer, ByVal Community As String, ByVal CutOff As Integer, ByVal Course As String, ByVal Shift As String, ByVal Medium As String, ByVal Quota As String, ByVal SpecialQuota As String, ByVal CourseID As String, ByVal AllottedGender As String, ByVal AllottedStream As String, ByVal AllottedCommunity As String, ByVal Remarks As String, ByVal State As String)
+    Function EditAdmissionEntry(ByVal ID As Int64, ByVal ApplicationNo As Integer, ByVal NameofCandidate As String, ByVal Gender As String, ByVal Stream As String, ByVal Rank As Integer, ByVal Community As String, ByVal CutOff As Integer, ByVal Course As String, ByVal Shift As String, ByVal Medium As String, ByVal Quota As String, ByVal SpecialQuota As String, ByVal CourseID As String, ByVal AllottedGender As String, ByVal AllottedStream As String, ByVal AllottedCommunity As String, ByVal Remarks As String, ByVal State As String)
         Dim r As Integer = 0
         Try
             Dim Connection As SqlConnection = GetConnection()
@@ -142,7 +157,7 @@ Public Module Database
                 Connection.Open()
             End If
             Dim query As String = "UPDATE Admission SET "
-            query &= "Name = @Name, Gender = @Gender, Registration = @Registration, Rank = @Rank, Application = @Application, Community = @Community, CutOff = @CutOff, Course = @Course, Shift = @Shift, Medium = @Medium, Stream = @Stream, Quota = @Quota, AllottedGender = @AllottedGender, AllottedStream = @AllottedStream, AllottedCommunity = @AllottedCommunity, Remarks = @Remarks, SpecialQuota = @SpecialQuota, CourseID = @CourseID, State = @State"
+            query &= "Name = @Name, Gender = @Gender, Rank = @Rank, Application = @Application, Community = @Community, CutOff = @CutOff, Course = @Course, Shift = @Shift, Medium = @Medium, Stream = @Stream, Quota = @Quota, AllottedGender = @AllottedGender, AllottedStream = @AllottedStream, AllottedCommunity = @AllottedCommunity, Remarks = @Remarks, SpecialQuota = @SpecialQuota, CourseID = @CourseID, State = @State"
             query &= " WHERE ID = @ID"
 
 
@@ -153,7 +168,6 @@ Public Module Database
                     .CommandText = query
                     .Parameters.AddWithValue("@Name", NameofCandidate)
                     .Parameters.AddWithValue("@Gender", Gender)
-                    .Parameters.AddWithValue("@Registration", RegNo)
                     .Parameters.AddWithValue("@Rank", Rank)
                     .Parameters.AddWithValue("@Application", ApplicationNo)
                     .Parameters.AddWithValue("@Community", Community)

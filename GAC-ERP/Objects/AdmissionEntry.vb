@@ -73,7 +73,7 @@ Public Class AdmissionEntry
         Me.Stream = Stream
         Me.State = State
     End Sub
-    Sub Update(ByVal Name As String, ByVal Gender As String, ByVal Registration As String, ByVal Rank As Integer, ByVal Application As String, ByVal Community As String, ByVal CutOff As Integer, ByVal Course As String, ByVal Shift As String, ByVal Medium As String, ByVal Stream As String, ByVal Quota As String, ByVal AllottedGender As String, ByVal AllottedStream As String, ByVal AllottedCommunity As String, ByVal Remarks As String, ByVal SpecialQuota As String, ByVal CourseID As String, ByVal State As String)
+    Sub Update(ByVal Name As String, ByVal Gender As String, ByVal Rank As Integer, ByVal Application As String, ByVal Community As String, ByVal CutOff As Integer, ByVal Course As String, ByVal Shift As String, ByVal Medium As String, ByVal Stream As String, ByVal Quota As String, ByVal AllottedGender As String, ByVal AllottedStream As String, ByVal AllottedCommunity As String, ByVal Remarks As String, ByVal SpecialQuota As String, ByVal CourseID As String, ByVal State As String)
         Me.AllottedCommunity = AllottedCommunity
         Me.AllottedGender = AllottedGender
         Me.AllottedStream = AllottedStream

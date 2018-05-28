@@ -708,6 +708,7 @@ Partial Class frm_AdmissionList_Add_Edit
         Me.txt_RegistrationNumber.EnterMoveNextControl = True
         Me.txt_RegistrationNumber.Location = New System.Drawing.Point(126, 28)
         Me.txt_RegistrationNumber.Name = "txt_RegistrationNumber"
+        Me.txt_RegistrationNumber.Properties.ReadOnly = True
         Me.txt_RegistrationNumber.Size = New System.Drawing.Size(526, 20)
         Me.txt_RegistrationNumber.TabIndex = 1
         '

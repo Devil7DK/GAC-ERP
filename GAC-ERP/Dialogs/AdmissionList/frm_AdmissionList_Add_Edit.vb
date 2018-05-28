@@ -43,7 +43,6 @@ Public Class frm_AdmissionList_Add_Edit
         ControlBox = True
 
         txt_Name.ReadOnly = True
-        txt_RegistrationNumber.ReadOnly = True
         txt_ApplicationNumber.ReadOnly = True
         txt_Rank.ReadOnly = True
         txt_Gender.ReadOnly = True
@@ -63,7 +62,6 @@ Public Class frm_AdmissionList_Add_Edit
         ControlBox = False
 
         txt_Name.ReadOnly = False
-        txt_RegistrationNumber.ReadOnly = False
         txt_ApplicationNumber.ReadOnly = False
         txt_Rank.ReadOnly = False
         txt_Gender.ReadOnly = False
@@ -221,18 +219,19 @@ Public Class frm_AdmissionList_Add_Edit
     Private Sub btn_Save_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_Save.ItemClick
         If Status_ = Status.AddingNew Then
             Dim DOA As Date = Now
-            Dim r As Integer = NewAdmissionEntry(txt_RegistrationNumber.Text, txt_ApplicationNumber.Text, txt_Name.Text, txt_Gender.EditValue, txt_Stream.EditValue, txt_Rank.Text, txt_Community.EditValue, txt_CutOff.Text, txt_Course.Text, txt_Shift.Text, txt_Medium.Text, txt_Quota.EditValue, GetString(cb_SpecialQuota.CheckedItems), DOA, txt_CourseID.EditValue, txt_AllottedGender.EditValue, txt_AllottedStream.EditValue, txt_AllottedCommunity.EditValue, txt_Remarks.EditValue, txt_State.EditValue)
+            Dim r As Integer = NewAdmissionEntry(txt_ApplicationNumber.Text, txt_Name.Text, txt_Gender.EditValue, txt_Stream.EditValue, txt_Rank.Text, txt_Community.EditValue, txt_CutOff.Text, txt_Course.Text, txt_Shift.Text, txt_Medium.Text, txt_Quota.EditValue, GetString(cb_SpecialQuota.CheckedItems), DOA, txt_CourseID.EditValue, txt_AllottedGender.EditValue, txt_AllottedStream.EditValue, txt_AllottedCommunity.EditValue, txt_Remarks.EditValue, txt_State.EditValue)
             If r > 0 Then
                 Status_ = Status.Saved
-                Me.EditEntry = New AdmissionEntry(r, txt_Name.Text, txt_Gender.EditValue, txt_RegistrationNumber.Text, txt_Rank.Text, txt_ApplicationNumber.Text, txt_Community.EditValue, txt_CutOff.Text, txt_Course.Text, txt_Shift.Text, txt_Medium.Text, txt_Stream.EditValue, txt_Quota.EditValue, txt_AllottedGender.EditValue, txt_AllottedStream.EditValue, txt_AllottedCommunity.EditValue, txt_Remarks.EditValue, DOA, GetString(cb_SpecialQuota.CheckedItems), txt_CourseID.EditValue, txt_State.EditValue)
+                txt_RegistrationNumber.EditValue = r
+                Me.EditEntry = New AdmissionEntry(r, txt_Name.Text, txt_Gender.EditValue, r, txt_Rank.Text, txt_ApplicationNumber.Text, txt_Community.EditValue, txt_CutOff.Text, txt_Course.Text, txt_Shift.Text, txt_Medium.Text, txt_Stream.EditValue, txt_Quota.EditValue, txt_AllottedGender.EditValue, txt_AllottedStream.EditValue, txt_AllottedCommunity.EditValue, txt_Remarks.EditValue, DOA, GetString(cb_SpecialQuota.CheckedItems), txt_CourseID.EditValue, txt_State.EditValue)
             Else
                 MsgBox("Unknown error in adding entry.", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Error")
             End If
         ElseIf Status_ = Status.Editing
-            Dim r As Integer = EditAdmissionEntry(EditEntry.ID, txt_RegistrationNumber.Text, txt_ApplicationNumber.Text, txt_Name.Text, txt_Gender.EditValue, txt_Stream.EditValue, txt_Rank.Text, txt_Community.EditValue, txt_CutOff.Text, txt_Course.Text, txt_Shift.Text, txt_Medium.Text, txt_Quota.EditValue, GetString(cb_SpecialQuota.CheckedItems), txt_CourseID.EditValue, txt_AllottedGender.EditValue, txt_AllottedStream.EditValue, txt_AllottedCommunity.EditValue, txt_Remarks.EditValue, txt_State.EditValue)
+            Dim r As Integer = EditAdmissionEntry(EditEntry.ID, txt_ApplicationNumber.Text, txt_Name.Text, txt_Gender.EditValue, txt_Stream.EditValue, txt_Rank.Text, txt_Community.EditValue, txt_CutOff.Text, txt_Course.Text, txt_Shift.Text, txt_Medium.Text, txt_Quota.EditValue, GetString(cb_SpecialQuota.CheckedItems), txt_CourseID.EditValue, txt_AllottedGender.EditValue, txt_AllottedStream.EditValue, txt_AllottedCommunity.EditValue, txt_Remarks.EditValue, txt_State.EditValue)
             If r > 0 Then
                 If EditEntry IsNot Nothing Then
-                    EditEntry.Update(txt_Name.Text, txt_Gender.EditValue, txt_RegistrationNumber.Text, txt_Rank.Text, txt_ApplicationNumber.Text, txt_Community.EditValue, txt_CutOff.Text, txt_Course.Text, txt_Shift.Text, txt_Medium.Text, txt_Stream.EditValue, txt_Quota.EditValue, txt_AllottedGender.EditValue, txt_AllottedStream.EditValue, txt_AllottedCommunity.EditValue, txt_Remarks.EditValue, GetString(cb_SpecialQuota.CheckedItems), txt_CourseID.EditValue, txt_State.EditValue)
+                    EditEntry.Update(txt_Name.Text, txt_Gender.EditValue, txt_Rank.Text, txt_ApplicationNumber.Text, txt_Community.EditValue, txt_CutOff.Text, txt_Course.Text, txt_Shift.Text, txt_Medium.Text, txt_Stream.EditValue, txt_Quota.EditValue, txt_AllottedGender.EditValue, txt_AllottedStream.EditValue, txt_AllottedCommunity.EditValue, txt_Remarks.EditValue, GetString(cb_SpecialQuota.CheckedItems), txt_CourseID.EditValue, txt_State.EditValue)
                     Status_ = Status.Saved
                 End If
             Else
@@ -253,6 +252,8 @@ Public Class frm_AdmissionList_Add_Edit
             Dim Courses As New List(Of Course)
             AdmissionEntries.Add(EditEntry)
             Courses.Add(Course)
+            ProvisionalSlip_Printer.AdmissionEntries = AdmissionEntries
+            ProvisionalSlip_Printer.Courses = Courses
             If ProvisionalSlip_PrintDialog.ShowDialog = DialogResult.OK Then
                 ProvisionalSlip_Printer.Print()
             End If
@@ -270,6 +271,8 @@ Public Class frm_AdmissionList_Add_Edit
             Dim Courses As New List(Of Course)
             AdmissionEntries.Add(EditEntry)
             Courses.Add(Course)
+            ProvisionalSlip_Printer.AdmissionEntries = AdmissionEntries
+            ProvisionalSlip_Printer.Courses = Courses
             Dim d As New PrintPreviewDialogEx(Me)
             d.Document = ProvisionalSlip_Printer
             d.ShowDialog()
