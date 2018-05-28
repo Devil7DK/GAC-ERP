@@ -4,8 +4,10 @@ Public Class frm_Login
     Dim Staffs As New List(Of Staff)
     Dim Loading As Boolean = False
     Private Sub btn_ServerSettings_Click(sender As Object, e As EventArgs) Handles btn_ServerSettings.Click
+        TopMost = False
         Dim d As New frm_ServerSettings
         d.ShowDialog()
+        TopMost = True
     End Sub
 
     Private Sub txt_Username_KeyUp(sender As Object, e As KeyEventArgs) Handles txt_Username.KeyUp
