@@ -31,6 +31,7 @@ Partial Class frm_Main
         Me.btn_AdmissionFees = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_BillPrinter = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_DFC = New DevExpress.XtraBars.BarButtonItem()
+        Me.btn_ProvisionalSlipPrinter = New DevExpress.XtraBars.BarButtonItem()
         Me.rp_Home = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.rpg_Admission = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rpg_Billing = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -40,7 +41,6 @@ Partial Class frm_Main
         Me.rp_Settings = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.rpg_Printing = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
-        Me.btn_ProvisionalSlipPrinter = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ApplicationMenu1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -54,8 +54,10 @@ Partial Class frm_Main
         Me.RibbonControl.MaxItemId = 11
         Me.RibbonControl.Name = "RibbonControl"
         Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.rp_Home, Me.rp_Reports, Me.rp_Settings})
+        Me.RibbonControl.ShowToolbarCustomizeItem = False
         Me.RibbonControl.Size = New System.Drawing.Size(617, 143)
         Me.RibbonControl.StatusBar = Me.RibbonStatusBar
+        Me.RibbonControl.Toolbar.ShowCustomizeItem = False
         '
         'ApplicationMenu1
         '
@@ -130,6 +132,14 @@ Partial Class frm_Main
         Me.btn_DFC.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources.admission_fees_report
         Me.btn_DFC.Name = "btn_DFC"
         '
+        'btn_ProvisionalSlipPrinter
+        '
+        Me.btn_ProvisionalSlipPrinter.Caption = "Provisional Slip Printer"
+        Me.btn_ProvisionalSlipPrinter.Id = 10
+        Me.btn_ProvisionalSlipPrinter.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources.print
+        Me.btn_ProvisionalSlipPrinter.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources.print
+        Me.btn_ProvisionalSlipPrinter.Name = "btn_ProvisionalSlipPrinter"
+        '
         'rp_Home
         '
         Me.rp_Home.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.rpg_Admission, Me.rpg_Billing, Me.rpg_Settings})
@@ -191,14 +201,6 @@ Partial Class frm_Main
         Me.RibbonStatusBar.Name = "RibbonStatusBar"
         Me.RibbonStatusBar.Ribbon = Me.RibbonControl
         Me.RibbonStatusBar.Size = New System.Drawing.Size(617, 31)
-        '
-        'btn_ProvisionalSlipPrinter
-        '
-        Me.btn_ProvisionalSlipPrinter.Caption = "Provisional Slip Printer"
-        Me.btn_ProvisionalSlipPrinter.Id = 10
-        Me.btn_ProvisionalSlipPrinter.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources.print
-        Me.btn_ProvisionalSlipPrinter.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources.print
-        Me.btn_ProvisionalSlipPrinter.Name = "btn_ProvisionalSlipPrinter"
         '
         'frm_Main
         '
