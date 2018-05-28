@@ -3,6 +3,9 @@ Imports DevExpress.XtraBars
 
 Public Class frm_Main
     Private CurrentUser As Staff
+    Dim NewAdmitListForm As frm_AdmissionList_Add_Edit
+    Dim ViewCoursesForm As frm_Courses_View
+    Dim ViewAdmitList As frm_AdmissionList_View
     Sub New(ByVal User As Staff)
         InitializeComponent()
         CurrentUser = User
@@ -10,9 +13,10 @@ Public Class frm_Main
     Private Sub btn_AdmissionList_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btn_AdmissionList.ItemClick
         If CurrentUser.HasPermission(Permission.Admission) Then
             Try
-                frm_AdmissionList_Add_Edit.Show()
+                If NewAdmitListForm Is Nothing Then NewAdmitListForm = New frm_AdmissionList_Add_Edit
+                NewAdmitListForm.ShowDialog()
             Catch ex As Exception
-
+                NewAdmitListForm = Nothing
             End Try
         Else
             ShowPermissionErrorMessage()
@@ -56,10 +60,11 @@ Public Class frm_Main
     Private Sub btn_Courses_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btn_Courses.ItemClick
         If CurrentUser.HasPermission(Permission.Billing) Or CurrentUser.HasPermission(Permission.Courses) Then
             Try
-                frm_Courses_View.User = CurrentUser
-                frm_Courses_View.ShowDialog()
+                If ViewCoursesForm Is Nothing Then ViewCoursesForm = New frm_Courses_View
+                ViewCoursesForm.User = CurrentUser
+                ViewCoursesForm.ShowDialog()
             Catch ex As Exception
-
+                ViewCoursesForm = Nothing
             End Try
         Else
             ShowPermissionErrorMessage()
@@ -73,9 +78,10 @@ Public Class frm_Main
     Private Sub btn_AdmissionList_View_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_AdmissionList_View.ItemClick
         If CurrentUser.HasPermission(Permission.Admission) Then
             Try
-                frm_AdmissionList_View.ShowDialog()
+                If ViewAdmitList Is Nothing Then ViewAdmitList = New frm_AdmissionList_View
+                ViewAdmitList.ShowDialog()
             Catch ex As Exception
-
+                ViewAdmitList = Nothing
             End Try
         Else
             ShowPermissionErrorMessage()
@@ -85,7 +91,8 @@ Public Class frm_Main
     Private Sub btn_AdmissionFees_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btn_AdmissionFees.ItemClick
         If CurrentUser.HasPermission(Permission.Billing) Then
             Try
-                frm_AdmissionFees.ShowDialog()
+                Dim d As New frm_AdmissionFees
+                d.ShowDialog()
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Error")
             End Try
