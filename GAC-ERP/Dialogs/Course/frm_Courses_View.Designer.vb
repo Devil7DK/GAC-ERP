@@ -74,8 +74,8 @@ Partial Class frm_Courses_View
         '
         Me.btn_Edit.Caption = "Edit"
         Me.btn_Edit.Id = 2
-        Me.btn_Edit.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources.feesstructure_reset
-        Me.btn_Edit.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources.feesstructure_reset
+        Me.btn_Edit.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources.courses_edit
+        Me.btn_Edit.ImageOptions.LargeImage = Global.GAC_ERP.My.Resources.Resources.courses_edit
         Me.btn_Edit.Name = "btn_Edit"
         '
         'btn_Remove
