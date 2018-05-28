@@ -6,6 +6,13 @@ Public Class DFC
     Dim SavePath As String = ""
     Dim WorkSheetHeader As String = "GOVERNMENT ARTS COLLEGE (AUTONOMOUS)  COIMBATORE  -  641 018"
     Dim WorkSheetTableTitle As String = "ADMISSION      {0}      DFC  DATE - {1}"
+
+    Event StatusChanged(ByVal e As EventArgs, ByVal StatusText As String, ByVal Progress As Integer, ByVal isIndeterminate As Boolean)
+    Event Completed(ByVal e As EventArgs, ByVal Status As Status)
+    Enum Status
+        Success
+        NoData
+    End Enum
     Sub New(ByVal FromDate As Date, ByVal ToDate As Date, ByVal SavePath As String)
         Me.FromDate = FromDate
         Me.ToDate = ToDate
@@ -13,8 +20,10 @@ Public Class DFC
         Me.SavePath = SavePath
     End Sub
     Sub GenerateReport()
+        RaiseEvent StatusChanged(New EventArgs, "Initializing...", 0, True)
         Dim WorkBook As New Workbook
         Dim Dates As List(Of Date) = GetDates(FromDate, ToDate)
+        RaiseEvent StatusChanged(New EventArgs, "Listing Columns...", 0, True)
         Dim Columns As List(Of ColumnObject) = GetColumns()
 
         Dim ColumnIndex As Integer = 8
@@ -44,16 +53,18 @@ Public Class DFC
         Next
         Dim RowStart As Integer = 5
 
-        For Each CurrentDate As Date In Dates
+        For date_index As Integer = 0 To Dates.Count - 1
+            Dim CurrentDate As Date = Dates(date_index)
+            RaiseEvent StatusChanged(New EventArgs, "Fetching bills of " & CurrentDate.ToString("dd/MM/yyyy"), 0, True)
             Dim Bills As List(Of AdmissionReceipt) = GetAdmissionReceipts(CurrentDate, False)
             If Bills.Count > 0 Then
                 Dim WorkSheet As Worksheet = WorkBook.Worksheets.Add(CurrentDate.ToString("dd-MM-yyyy"))
-
                 Dim RowIndex As Integer = RowStart
 
+                RaiseEvent StatusChanged(New EventArgs, "Writing Columns...", 0, True)
                 For Each i As ColumnObject In Columns
                     If i.Group = "" Then
-                        Dim R As Range = WorkSheet.Range(String.Format("{0}3:{0}4", ColumnIndexToColumnLetter(i.Index)))
+                        Dim R As Range = WorkSheet.Range(String.Format("{0}3: {0}4", ColumnIndexToColumnLetter(i.Index)))
                         WorkSheet.MergeCells(R)
                         Dim Cell As Cell = WorkSheet.Cells(ColumnIndexToColumnLetter(i.Index) & "3")
                         Cell.SetValue(i.Name)
@@ -94,6 +105,7 @@ Public Class DFC
                     R.Borders.RightBorder.LineStyle = BorderLineStyle.Medium
                 Next
 
+                RaiseEvent StatusChanged(New EventArgs, "Preparing Sheet...", 0, True)
                 WorkSheet.MergeCells(WorkSheet.Range(String.Format("A1:{0}1", ColumnIndexToColumnLetter(Columns.Count))))
                 Dim Cell_CollegeName As Cell = WorkSheet.Cells("A1")
                 Cell_CollegeName.SetValue(WorkSheetHeader)
@@ -108,7 +120,9 @@ Public Class DFC
                 Cell_Header.Alignment.Vertical = SpreadsheetHorizontalAlignment.Center
 
                 Dim GrandTotalColumn As ColumnObject = Columns.Find(Function(c) c.Group = "" And c.Name = "Grand Total")
-                For Each Receipt As AdmissionReceipt In Bills
+                For receipt_index As Integer = 0 To Bills.Count - 1
+                    Dim Receipt As AdmissionReceipt = Bills(receipt_index)
+                    RaiseEvent StatusChanged(New EventArgs, "Writing Entries...", (((receipt_index + 1) / Bills.Count) * 100), False)
                     Dim GrandTotal As Integer = 0
                     WorkSheet.Cells("A" & RowIndex).SetValue(RowIndex - (RowStart - 1))
                     WorkSheet.Cells("B" & RowIndex).SetValue(Receipt.ReceiptNumber)
@@ -151,6 +165,7 @@ Public Class DFC
                     RowIndex += 1
                 Next
 
+                RaiseEvent StatusChanged(New EventArgs, "Finalizing Sheet...", 0, True)
                 Dim Cell_ColumnTotal As Cell = WorkSheet.Cells("C" & RowIndex)
                 Cell_ColumnTotal.SetValue("Total")
                 For i As Integer = 8 To GrandTotalColumn.Index
@@ -182,11 +197,13 @@ Public Class DFC
                 WorkSheet.FreezeRows(3)
             End If
         Next
-        If WorkBook.Worksheets.Count > 0 Then
+        RaiseEvent StatusChanged(New EventArgs, "Saving Workbook...", 0, True)
+        If WorkBook.Worksheets.Count > 1 Then
+            WorkBook.Worksheets.RemoveAt(0)
             WorkBook.SaveDocument(SavePath, DevExpress.Spreadsheet.DocumentFormat.Xlsx)
-            MsgBox("Report successfully saved to selected path.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
+            RaiseEvent Completed(New EventArgs, Status.Success)
         Else
-            MsgBox("There is no data found between given dates.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+            RaiseEvent Completed(New EventArgs, Status.NoData)
         End If
     End Sub
     Private Function GetColumns() As List(Of ColumnObject)

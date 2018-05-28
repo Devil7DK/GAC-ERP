@@ -31,11 +31,17 @@ Partial Class frm_AdmissionFeesDFC
         Me.txt_FilePath = New DevExpress.XtraEditors.ButtonEdit()
         Me.btn_Generate = New DevExpress.XtraEditors.SimpleButton()
         Me.dlg_Save = New System.Windows.Forms.SaveFileDialog()
+        Me.txt_Progress_Determidiate = New DevExpress.XtraEditors.ProgressBarControl()
+        Me.txt_Status = New DevExpress.XtraEditors.LabelControl()
+        Me.txt_Progress_Indermidiate = New DevExpress.XtraEditors.MarqueeProgressBarControl()
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         CType(Me.txt_FromDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_FromDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_ToDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_ToDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_FilePath.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txt_Progress_Determidiate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txt_Progress_Indermidiate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LabelControl1
@@ -93,9 +99,12 @@ Partial Class frm_AdmissionFeesDFC
         '
         'btn_Generate
         '
+        Me.btn_Generate.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btn_Generate.Location = New System.Drawing.Point(338, 87)
         Me.btn_Generate.Name = "btn_Generate"
-        Me.btn_Generate.Size = New System.Drawing.Size(75, 23)
+        Me.btn_Generate.Size = New System.Drawing.Size(75, 37)
         Me.btn_Generate.TabIndex = 5
         Me.btn_Generate.Text = "Generate"
         '
@@ -105,11 +114,43 @@ Partial Class frm_AdmissionFeesDFC
         Me.dlg_Save.FileName = "Admission Fees DFC.xlsx"
         Me.dlg_Save.Filter = "Excel Spreadsheet Files (*.xlsx)|*.xlsx"
         '
+        'txt_Progress_Determidiate
+        '
+        Me.txt_Progress_Determidiate.Location = New System.Drawing.Point(12, 106)
+        Me.txt_Progress_Determidiate.Name = "txt_Progress_Determidiate"
+        Me.txt_Progress_Determidiate.Size = New System.Drawing.Size(320, 18)
+        Me.txt_Progress_Determidiate.TabIndex = 6
+        Me.txt_Progress_Determidiate.Visible = False
+        '
+        'txt_Status
+        '
+        Me.txt_Status.Location = New System.Drawing.Point(14, 87)
+        Me.txt_Status.Name = "txt_Status"
+        Me.txt_Status.Size = New System.Drawing.Size(4, 13)
+        Me.txt_Status.TabIndex = 7
+        Me.txt_Status.Text = "-"
+        Me.txt_Status.Visible = False
+        '
+        'txt_Progress_Indermidiate
+        '
+        Me.txt_Progress_Indermidiate.EditValue = 0
+        Me.txt_Progress_Indermidiate.Location = New System.Drawing.Point(12, 106)
+        Me.txt_Progress_Indermidiate.Name = "txt_Progress_Indermidiate"
+        Me.txt_Progress_Indermidiate.Size = New System.Drawing.Size(320, 18)
+        Me.txt_Progress_Indermidiate.TabIndex = 8
+        Me.txt_Progress_Indermidiate.Visible = False
+        '
+        'BackgroundWorker1
+        '
+        '
         'frm_AdmissionFeesDFC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(425, 116)
+        Me.ClientSize = New System.Drawing.Size(425, 131)
+        Me.Controls.Add(Me.txt_Progress_Indermidiate)
+        Me.Controls.Add(Me.txt_Status)
+        Me.Controls.Add(Me.txt_Progress_Determidiate)
         Me.Controls.Add(Me.btn_Generate)
         Me.Controls.Add(Me.txt_FilePath)
         Me.Controls.Add(Me.txt_ToDate)
@@ -130,6 +171,8 @@ Partial Class frm_AdmissionFeesDFC
         CType(Me.txt_ToDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_ToDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_FilePath.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txt_Progress_Determidiate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txt_Progress_Indermidiate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -143,4 +186,8 @@ Partial Class frm_AdmissionFeesDFC
     Friend WithEvents txt_FilePath As DevExpress.XtraEditors.ButtonEdit
     Friend WithEvents btn_Generate As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents dlg_Save As SaveFileDialog
+    Friend WithEvents txt_Progress_Determidiate As DevExpress.XtraEditors.ProgressBarControl
+    Friend WithEvents txt_Status As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents txt_Progress_Indermidiate As DevExpress.XtraEditors.MarqueeProgressBarControl
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
 End Class
