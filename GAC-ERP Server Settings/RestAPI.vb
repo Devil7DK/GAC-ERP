@@ -15,7 +15,7 @@ Public Class RestAPI
             client.DefaultRequestHeaders.Accept.Add(New MediaTypeWithQualityHeaderValue("application/json"))
             client.DefaultRequestHeaders.CacheControl = New CacheControlHeaderValue With {.NoCache = True}
             client.DefaultRequestHeaders.Add("x-apikey", API_KEY)
-            Dim response = client.PostAsync("rest/" & CollectionName, New StringContent(New DataVariable(ValueName, Encryption.Encrypt(New ServerSettings(ServerAddress, DatabaseName, UserName, Password).ToJSon)).ToJSon, System.Text.Encoding.UTF8, "application/json")).Result
+            Dim response = client.PostAsync("rest/" & CollectionName, New StringContent(New DataVariable(ValueName, Encryption.Encrypt(New ServerSettings(ServerAddress, DatabaseName, UserName, Encryption.Encrypt(Password)).ToJSon)).ToJSon, System.Text.Encoding.UTF8, "application/json")).Result
             If response.IsSuccessStatusCode Then
                 MsgBox("Server Settings Successfully Added", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
             Else
@@ -32,7 +32,7 @@ Public Class RestAPI
             client.DefaultRequestHeaders.Accept.Add(New MediaTypeWithQualityHeaderValue("application/json"))
             client.DefaultRequestHeaders.CacheControl = New CacheControlHeaderValue With {.NoCache = True}
             client.DefaultRequestHeaders.Add("x-apikey", API_KEY)
-            Dim response = client.PutAsync(String.Format("rest/{0}/{1}", CollectionName, ValueID), New StringContent(New DataVariable(ValueName, Encryption.Encrypt(New ServerSettings(ServerAddress, DatabaseName, UserName, Password).ToJSon)).ToJSon, System.Text.Encoding.UTF8, "application/json")).Result
+            Dim response = client.PutAsync(String.Format("rest/{0}/{1}", CollectionName, ValueID), New StringContent(New DataVariable(ValueName, Encryption.Encrypt(New ServerSettings(ServerAddress, DatabaseName, UserName, Encryption.Encrypt(Password)).ToJSon)).ToJSon, System.Text.Encoding.UTF8, "application/json")).Result
             If response.IsSuccessStatusCode Then
                 MsgBox("Server Settings Successfully Updated", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done")
                 Return True

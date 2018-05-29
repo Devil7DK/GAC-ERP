@@ -24,7 +24,7 @@
             txt_ServerAddress.EditValue = Settings.ServerAddress
             txt_DatabaseName.EditValue = Settings.DatabaseName
             txt_Username.EditValue = Settings.UserName
-            txt_Password.EditValue = Settings.Password
+            txt_Password.EditValue = Encryption.Decrypt(Settings.Password)
         Catch ex As Exception
             MsgBox(ex.Message & vbNewLine & vbNewLine & ex.StackTrace, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Error")
         End Try
