@@ -152,4 +152,8 @@ Public Class frm_Main
             ProvisionalAdmissionSlipPrinterSettings.Write2File(d.SelectedObject, XML_Path)
         End If
     End Sub
+
+    Private Sub frm_Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        End
+    End Sub
 End Class
