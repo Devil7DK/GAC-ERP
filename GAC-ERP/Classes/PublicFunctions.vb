@@ -3,20 +3,13 @@
 Module PublicFunctions
     Private ReadOnly Key() As Byte = {68, 101, 118, 105, 108, 55, 68, 75, 64, 71, 65, 67, 45, 69, 82, 80, 45, 50, 48, 49, 56, 95, 49, 57}
     Private ReadOnly IV() As Byte = {8, 7, 6, 5, 4, 3, 2, 1}
-    Private ReadOnly crypt As New TripleDES(Key, IV)
     Private MySqlConnection As SqlConnection
 
     Private Declare Function SetProcessWorkingSetSize Lib "kernel32.dll" (ByVal hProcess As IntPtr, ByVal dwMinimumWorkingSetSize As Int32, ByVal dwMaximumWorkingSetSize As Int32) As Int32
-    Public Function EncryptString(ByVal Text As String) As String
-        Return System.Text.Encoding.Unicode.GetString(crypt.Encrypt(System.Text.Encoding.Unicode.GetBytes(Text)))
-    End Function
-    Public Function DecryptString(ByVal Text As String) As String
-        Return System.Text.Encoding.Unicode.GetString(crypt.Decrypt(System.Text.Encoding.Unicode.GetBytes(Text)))
-    End Function
 
     Public Function GetConnection() As SqlConnection
         If MySqlConnection Is Nothing Then
-            MySqlConnection = New SqlConnection(String.Format("Server={0};Initial Catalog={1};User ID={2};Password={3};Pooling={4};", My.Settings.Server, My.Settings.Database, My.Settings.Username, DecryptString(My.Settings.Password), If(My.Settings.Pooling, "true", "false")))
+            MySqlConnection = New SqlConnection(String.Format("Server={0};Initial Catalog={1};User ID={2};Password={3};Pooling={4};", My.Settings.Server, My.Settings.Database, My.Settings.Username, Encryption.Decrypt(My.Settings.Password), If(My.Settings.Pooling, "true", "false")))
         End If
         Return MySqlConnection
     End Function

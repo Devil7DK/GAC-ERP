@@ -4,7 +4,7 @@ Public Class frm_ServerSettings
     Private Sub frm_ServerSettings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txt_Server.Text = My.Settings.Server
         txt_Username.Text = My.Settings.Username
-        txt_Password.Text = If(My.Settings.Password <> "", DecryptString(My.Settings.Password), "")
+        txt_Password.Text = If(My.Settings.Password <> "", Encryption.Decrypt(My.Settings.Password), "")
         txt_Database.Text = My.Settings.Database
         cb_Pooling.Checked = My.Settings.Pooling
     End Sub
@@ -12,7 +12,7 @@ Public Class frm_ServerSettings
     Private Sub btn_Save_Click(sender As Object, e As EventArgs) Handles btn_Save.Click
         My.Settings.Server = txt_Server.Text
         My.Settings.Username = txt_Username.Text
-        My.Settings.Password = EncryptString(txt_Password.Text)
+        My.Settings.Password = Encryption.Encrypt(txt_Password.Text)
         My.Settings.Database = txt_Database.Text
         My.Settings.Pooling = cb_Pooling.Checked
         My.Settings.Save()

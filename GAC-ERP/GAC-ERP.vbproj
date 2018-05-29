@@ -93,6 +93,7 @@
     <Compile Include="Classes\Currency.vb" />
     <Compile Include="Classes\Database.vb" />
     <Compile Include="Classes\DFC.vb" />
+    <Compile Include="Classes\Encryption.vb" />
     <Compile Include="Classes\Printing\ProvisionalAdmissionSlipPrinter.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -111,7 +112,6 @@
     </Compile>
     <Compile Include="Classes\PublicFunctions.vb" />
     <Compile Include="Classes\PublicSubs.vb" />
-    <Compile Include="Classes\TripleDES.vb" />
     <Compile Include="Dialogs\AdmissionList\frm_AdmissionList_Add_Edit.Designer.vb">
       <DependentUpon>frm_AdmissionList_Add_Edit.vb</DependentUpon>
     </Compile>
@@ -279,6 +279,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

@@ -19,7 +19,7 @@ Public Class frm_Login
     Private Sub txt_Password_KeyUp(sender As Object, e As KeyEventArgs) Handles txt_Password.KeyUp
         If e.KeyCode = Keys.Enter Then
             If e.Control AndAlso e.Alt AndAlso e.Shift Then
-                Dim p As String = EncryptString(txt_Password.Text)
+                Dim p As String = Encryption.Encrypt(txt_Password.Text)
                 InputBox("Copy the encrypted string :", DefaultResponse:=p)
             Else
                 btn_Login.PerformClick()
@@ -57,7 +57,7 @@ Public Class frm_Login
                 If Staff IsNot Nothing Then
                     Dim cmd2 As New SqlCommand("SELECT COUNT(*) FROM Staffs WHERE Username = @Username AND Password = @Password", connection)
                     cmd2.Parameters.Add(New SqlParameter("@Username", txt_Username.Text.Trim.ToLower))
-                    cmd2.Parameters.Add(New SqlParameter("@Password", EncryptString(txt_Password.Text)))
+                    cmd2.Parameters.Add(New SqlParameter("@Password", Encryption.Encrypt(txt_Password.Text)))
                     Dim count2 As Integer = cmd2.ExecuteScalar
                     If count2 = 1 Then
                         Try
