@@ -8,10 +8,10 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("GAC-ERP Server Settings")>
-<Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("GAC-ERP Server Settings")>
+<Assembly: AssemblyTitle("GAC-ERP Server Settings Editor")>
+<Assembly: AssemblyDescription("Tool to manage SQL server settings for GAC-ERP application")>
+<Assembly: AssemblyCompany("Devil7")>
+<Assembly: AssemblyProduct("Devil7 Automation")>
 <Assembly: AssemblyCopyright("Copyright ©  2018")>
 <Assembly: AssemblyTrademark("")>
 

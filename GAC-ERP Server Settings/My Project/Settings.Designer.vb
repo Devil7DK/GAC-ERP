@@ -76,9 +76,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.GAC_ERP_Server_Settings.My.MySettings
+        Friend ReadOnly Property Settings() As Global.D7Automation.My.MySettings
             Get
-                Return Global.GAC_ERP_Server_Settings.My.MySettings.Default
+                Return Global.D7Automation.My.MySettings.Default
             End Get
         End Property
     End Module
