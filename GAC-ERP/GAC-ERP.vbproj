@@ -71,6 +71,35 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -90,10 +119,10 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Currency.vb" />
-    <Compile Include="Classes\Database.vb" />
-    <Compile Include="Classes\DFC.vb" />
-    <Compile Include="Classes\Encryption.vb" />
+    <Compile Include="Classes\Misc\Currency.vb" />
+    <Compile Include="Classes\Misc\Database.vb" />
+    <Compile Include="Classes\Reports\DFC.vb" />
+    <Compile Include="Classes\Security\Encryption.vb" />
     <Compile Include="Classes\Printing\ProvisionalAdmissionSlipPrinter.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -110,8 +139,10 @@
     <Compile Include="Classes\Printing\PrintPreviewDialogEx.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Classes\PublicFunctions.vb" />
-    <Compile Include="Classes\PublicSubs.vb" />
+    <Compile Include="Classes\Misc\PublicFunctions.vb" />
+    <Compile Include="Classes\Misc\PublicSubs.vb" />
+    <Compile Include="Classes\Security\RestAPI.vb" />
+    <Compile Include="Classes\Security\ServerSettings.vb" />
     <Compile Include="Dialogs\AdmissionList\frm_AdmissionList_Add_Edit.Designer.vb">
       <DependentUpon>frm_AdmissionList_Add_Edit.vb</DependentUpon>
     </Compile>
@@ -172,12 +203,6 @@
     <Compile Include="Dialogs\Settings\frm_PropertyEditor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\Settings\frm_ServerSettings.Designer.vb">
-      <DependentUpon>frm_ServerSettings.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\Settings\frm_ServerSettings.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\frm_Main.Designer.vb">
       <DependentUpon>frm_Main.vb</DependentUpon>
     </Compile>
@@ -211,7 +236,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Classes\XtraFormTmp.vb">
+    <Compile Include="Classes\Misc\XtraFormTmp.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Objects\AdmissionEntry.vb" />
@@ -257,9 +282,6 @@
     <EmbeddedResource Include="Dialogs\Settings\frm_PropertyEditor.resx">
       <DependentUpon>frm_PropertyEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Settings\frm_ServerSettings.resx">
-      <DependentUpon>frm_ServerSettings.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frm_Main.resx">
       <DependentUpon>frm_Main.vb</DependentUpon>
     </EmbeddedResource>
@@ -289,6 +311,7 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="packages.config" />
     <None Include="Templates\Admission_Slip_Template.rtf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -365,6 +388,11 @@
     <None Include="Resources\refresh_data.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

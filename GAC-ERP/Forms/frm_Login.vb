@@ -3,13 +3,6 @@
 Public Class frm_Login
     Dim Staffs As New List(Of Staff)
     Dim Loading As Boolean = False
-    Private Sub btn_ServerSettings_Click(sender As Object, e As EventArgs) Handles btn_ServerSettings.Click
-        TopMost = False
-        Dim d As New frm_ServerSettings
-        d.ShowDialog()
-        TopMost = True
-    End Sub
-
     Private Sub txt_Username_KeyUp(sender As Object, e As KeyEventArgs) Handles txt_Username.KeyUp
         If e.KeyCode = Keys.Enter Then
             txt_Password.Focus()
@@ -35,14 +28,12 @@ Public Class frm_Login
         txt_Username.Enabled = True
         txt_Password.Enabled = True
         btn_Login.Enabled = True
-        btn_ServerSettings.Enabled = True
         ControlBox = True
     End Sub
     Sub DisableControls()
         txt_Username.Enabled = False
         txt_Password.Enabled = False
         btn_Login.Enabled = False
-        btn_ServerSettings.Enabled = False
         ControlBox = False
     End Sub
     Private Sub Worker_Login_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles Worker_Login.DoWork

@@ -24,14 +24,12 @@ Partial Class frm_Login
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_Login))
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.txt_Password = New DevExpress.XtraEditors.TextEdit()
-        Me.ErrorProvider = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
+        Me.ErrorProvider = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider()
         Me.Worker_Login = New System.ComponentModel.BackgroundWorker()
-        Me.btn_ServerSettings = New DevExpress.XtraEditors.SimpleButton()
         Me.btn_Login = New DevExpress.XtraEditors.SimpleButton()
         Me.LogoPictureBox = New System.Windows.Forms.PictureBox()
         Me.txt_Username = New DevExpress.XtraEditors.ComboBoxEdit()
@@ -75,15 +73,6 @@ Partial Class frm_Login
         'Worker_Login
         '
         '
-        'btn_ServerSettings
-        '
-        Me.btn_ServerSettings.ImageOptions.Image = Global.GAC_ERP.My.Resources.Resources.server_settings
-        Me.btn_ServerSettings.Location = New System.Drawing.Point(155, 118)
-        Me.btn_ServerSettings.Name = "btn_ServerSettings"
-        Me.btn_ServerSettings.Size = New System.Drawing.Size(39, 32)
-        Me.btn_ServerSettings.TabIndex = 4
-        Me.btn_ServerSettings.TabStop = False
-        '
         'btn_Login
         '
         Me.btn_Login.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -121,7 +110,6 @@ Partial Class frm_Login
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(415, 162)
         Me.Controls.Add(Me.txt_Username)
-        Me.Controls.Add(Me.btn_ServerSettings)
         Me.Controls.Add(Me.btn_Login)
         Me.Controls.Add(Me.txt_Password)
         Me.Controls.Add(Me.LabelControl2)
@@ -149,7 +137,6 @@ Partial Class frm_Login
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents txt_Password As DevExpress.XtraEditors.TextEdit
     Friend WithEvents btn_Login As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents btn_ServerSettings As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents ErrorProvider As DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider
     Friend WithEvents Worker_Login As System.ComponentModel.BackgroundWorker
     Friend WithEvents txt_Username As DevExpress.XtraEditors.ComboBoxEdit

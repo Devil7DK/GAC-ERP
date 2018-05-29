@@ -4,13 +4,21 @@ Module PublicFunctions
     Private ReadOnly Key() As Byte = {68, 101, 118, 105, 108, 55, 68, 75, 64, 71, 65, 67, 45, 69, 82, 80, 45, 50, 48, 49, 56, 95, 49, 57}
     Private ReadOnly IV() As Byte = {8, 7, 6, 5, 4, 3, 2, 1}
     Private MySqlConnection As SqlConnection
+    Private ServerSettings As ServerSettings
 
     Private Declare Function SetProcessWorkingSetSize Lib "kernel32.dll" (ByVal hProcess As IntPtr, ByVal dwMinimumWorkingSetSize As Int32, ByVal dwMaximumWorkingSetSize As Int32) As Int32
 
     Public Function GetConnection() As SqlConnection
-        If MySqlConnection Is Nothing Then
-            MySqlConnection = New SqlConnection(String.Format("Server={0};Initial Catalog={1};User ID={2};Password={3};Pooling={4};", My.Settings.Server, My.Settings.Database, My.Settings.Username, Encryption.Decrypt(My.Settings.Password), If(My.Settings.Pooling, "true", "false")))
-        End If
+        Try
+            If ServerSettings Is Nothing Then
+                ServerSettings = New RestAPI().GetSettings
+            End If
+            If MySqlConnection Is Nothing Then
+                MySqlConnection = New SqlConnection(String.Format("Server={0};Initial Catalog={1};User ID={2};Password={3};Pooling={4};", ServerSettings.ServerAddress, ServerSettings.DatabaseName, ServerSettings.UserName, Encryption.Decrypt(ServerSettings.Password), "true"))
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & vbNewLine & vbNewLine & ex.StackTrace, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Error")
+        End Try
         Return MySqlConnection
     End Function
     Sub ReleaseMemory()
