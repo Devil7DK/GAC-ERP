@@ -25,7 +25,7 @@ Public Class RestAPI
             MsgBox(ex.Message & vbNewLine & vbNewLine & ex.StackTrace, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Error")
         End Try
     End Sub
-    Function UpdateSettings(ServerAddress As String, DatabaseName As String, UserName As String, Password As String)
+    Function UpdateSettings(ServerAddress As String, DatabaseName As String, UserName As String, Password As String) As Boolean
         Try
             Dim client As HttpClient = New HttpClient()
             client.BaseAddress = New Uri(BaseURL)
