@@ -61,7 +61,7 @@ Partial Class frm_Splash
         'pictureEdit2
         '
         Me.pictureEdit2.Cursor = System.Windows.Forms.Cursors.Default
-        Me.pictureEdit2.EditValue = Global.GAC_ERP.My.Resources.Resources.splash
+        Me.pictureEdit2.EditValue = Global.D7Automation.My.Resources.Resources.splash
         Me.pictureEdit2.Location = New System.Drawing.Point(12, 12)
         Me.pictureEdit2.Name = "pictureEdit2"
         Me.pictureEdit2.Properties.AllowFocused = False
